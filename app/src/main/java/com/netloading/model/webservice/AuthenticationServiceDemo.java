@@ -1,5 +1,6 @@
 package com.netloading.model.webservice;
 
+import com.google.gson.JsonElement;
 import com.netloading.model.pojo.LoginPOJO;
 
 import okhttp3.Response;
@@ -11,7 +12,7 @@ import retrofit2.http.POST;
 /**
  * Created by Dandoh on 2/10/16.
  */
-public interface AuthenticationService {
+public interface AuthenticationServiceDemo {
 
     @POST("/customers/sessions")
     Call<ResponseBody> loginAndGetToken(@Body LoginPOJO info);

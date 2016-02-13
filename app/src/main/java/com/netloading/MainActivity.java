@@ -2,8 +2,6 @@ package com.netloading;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,9 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
 import com.netloading.model.pojo.LoginPOJO;
-import com.netloading.model.webservice.AuthenticationService;
+import com.netloading.model.webservice.AuthenticationServiceDemo;
 import com.netloading.model.webservice.ServiceGenerator;
 
 import org.json.JSONException;
@@ -24,7 +21,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 String password = mPasswordEditText.getText().toString();
 
                 Log.i(TAG, "onClick");
-                AuthenticationService authenticationService = ServiceGenerator
-                        .createService(AuthenticationService.class);
+                AuthenticationServiceDemo authenticationService = ServiceGenerator
+                        .createService(AuthenticationServiceDemo.class);
 
 
                 authenticationService.loginAndGetToken(new LoginPOJO(username, password)).enqueue(
