@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 public interface AccountService {
 
     @POST("/customers/sessions")
-    Call<ResponseBody> loginAndGetToken(@Body LoginPOJO info);
+    Call<ResponseBody> loginAndSaveToken(@Body LoginPOJO info);
 
     @POST("/customers")
     Call<ResponseBody> registerAccount(@Body RegisterPOJO registerPOJO);
