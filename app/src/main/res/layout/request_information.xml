@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:id="@+id/request_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đơn hàng 1"
+            android:layout_gravity="center"
+            android:textColor="#ff8f00"
+            android:textSize="30sp"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/middle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top"
+        android:layout_above="@+id/cancel_request"
+        android:weightSum="7">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@id/cancel_request"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_guiyeucau"
+        android:text="Hủy đơn hàng (or yêu cầu)"
+        android:textColor="#ffffff"/>
+
+</RelativeLayout>

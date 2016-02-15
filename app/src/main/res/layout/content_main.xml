@@ -40,9 +40,9 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext"
             android:hint="Tên tài khoản"
 
+            android:background="@drawable/edittext"
             android:paddingBottom="3dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"

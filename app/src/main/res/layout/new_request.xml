@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_send_request"
+        android:weightSum="1"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/good_name"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Tên hàng"
+                android:paddingLeft="15dp"
+                android:background="@drawable/edittext"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/pickup_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="Ngày đóng hàng"
+                    android:paddingLeft="15dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edittext"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:src="@drawable/v"
+                    android:layout_gravity="center_vertical|right"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:paddingRight="5dp">
+
+                <EditText
+                    android:id="@+id/good_weight_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="Tải trọng"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edittext"/>
+
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:paddingLeft="5dp">
+                <EditText
+                    android:id="@+id/good_weight_dimension"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="Đơn vị"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edittext"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:gravity="center">
+            <EditText
+                android:id="@+id/expected_price"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:hint="Giá mong muốn"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@id/btn_send_request"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="GỬI YÊU CẦU"
+        android:textColor="#ffffff"
+        android:textSize="19sp"
+        android:background="@drawable/button_guiyeucau"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
