@@ -1,10 +1,15 @@
 package com.netloading.presenter;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.netloading.common.ConfigurableOps;
+import com.netloading.common.ContextView;
 import com.netloading.model.pojo.LoginPOJO;
 import com.netloading.model.pojo.RegisterPOJO;
 import com.netloading.model.webservice.AccountService;
 import com.netloading.model.webservice.ServiceGenerator;
+import com.netloading.utils.Constants;
 import com.netloading.utils.Utils;
 
 import org.json.JSONException;
@@ -27,11 +32,14 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
 
     private WeakReference<View> mView;
 
-    public interface View {
+    public interface View extends ContextView {
 
         // TODO - status failure
         int NETWORK_ERROR = 3;
+        int USERNAME_PASSWORD_ERROR = 1;
+
         void loginSucceed();
+
         void loginFailure(int status);
     }
 
@@ -58,20 +66,36 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
                 try {
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     String status = jsonObject.getString("status");
-                    String token = jsonObject.getJSONObject("message").getString("token");
-                    Utils.log(TAG, status);
-                    Utils.log(TAG, token);
-                    ServiceGenerator.initialize(token);
-
                     //TODO - check message and status
-                    mView.get().loginSucceed();
+                    if (status.equals("success")) {
 
+                        // Save id and initialize
+
+                        String token = jsonObject.getJSONObject("message").getString("token");
+                        int id = jsonObject.getJSONObject("message").getInt("id");
+
+                        Utils.log(TAG, status);
+                        Utils.log(TAG, token);
+
+                        ServiceGenerator.initialize(token);
+
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                                mView.get().getApplicationContext()
+                        );
+                        sharedPreferences.edit().putInt(Constants.SHARED_PREFERENCE_ID_TAG, id).apply();
+
+
+                        mView.get().loginSucceed();
+
+                    } else {
+                        mView.get().loginFailure(View.USERNAME_PASSWORD_ERROR);
+                    }
 
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
 
                     // TODO - status login
-                    mView.get().loginFailure(0);
+                    mView.get().loginFailure(View.NETWORK_ERROR);
                 }
 
             }

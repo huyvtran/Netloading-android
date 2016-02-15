@@ -132,4 +132,18 @@ public class ServiceGenerator {
     public static AccountService getAccountService() {
         return mAccountService;
     }
+
+
+    private static NetloadingService mNetloadingService;
+
+    public static NetloadingService getNetloadingService() {
+        if (mNetloadingService == null) {
+            mNetloadingService = createService(NetloadingService.class, builder(), getAuthenticatedHttpClient());
+        }
+        return  mNetloadingService;
+    }
+
+
+
+
 }

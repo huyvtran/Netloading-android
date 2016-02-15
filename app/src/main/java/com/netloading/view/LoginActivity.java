@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
+import com.netloading.model.gcm.RegistrationIntentService;
 import com.netloading.presenter.LoginPresenter;
 import com.netloading.utils.Utils;
 
@@ -36,6 +37,9 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
         super.onCreate(savedInstanceState, LoginPresenter.class, this);
 
+//        Intent intent = RegistrationIntentService.makeIntent(this);
+//        startService(intent);
+
     }
 
 
@@ -58,6 +62,11 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     @Override
     public void loginSucceed() {
         Utils.toast(this, "Login succeed");
+
+        // TODO - get GCM registration token and send to nodejs server
+        Intent intent = RegistrationIntentService.makeIntent(this);
+        startService(intent);
+
     }
 
     @Override
