@@ -2,4 +2,5 @@
     <string name="app_name">Netloading</string>
     <string name="action_settings">Settings</string>
     <string name="policy_title">Bằng cách nhấp vào đăng ký, bạn đồng ý với các điều khoản dịch vụ của chúng tôi</string>
+    <string name="gcm_defaultSenderId">1234</string>
 </resources>

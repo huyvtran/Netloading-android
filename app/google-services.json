@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_id": "netloading-d1d2",
+    "project_number": "369873559475",
+    "name": "Netloading"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369873559475:android:f6a82ee82b25af0b",
+        "client_id": "android:com.netloading",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.netloading"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
