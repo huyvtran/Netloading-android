@@ -25,9 +25,6 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     @Bind(R.id.password)
     EditText mPasswordEditText;
 
-    @Bind(R.id.login_button)
-    Button mLoginButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +56,16 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         getOps().login(username, password);
     }
 
+
+    @OnClick(R.id.login_forgot_password)
+    public void forgotPassword() {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void loginSucceed() {
-        Utils.toast(this, "Login succeed");
+//        Utils.toast(this, "");
 
         // TODO - get GCM registration token and send to nodejs server
         Intent intent = RegistrationIntentService.makeIntent(this);
@@ -71,6 +75,10 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
     @Override
     public void loginFailure(int status) {
-
+        if (status == NETWORK_ERROR) {
+            Utils.toast(this, "Vui lòng kiểm tra đường truyền");
+        } else if (status == USERNAME_PASSWORD_ERROR) {
+            Utils.toast(this, "Sai mật khẩu hoặc tên đăng nhập");
+        }
     }
 }

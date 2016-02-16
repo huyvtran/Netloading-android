@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quên mật khẩu?"
-            android:id="@+id/token"
+            android:id="@+id/login_forgot_password"
             android:layout_gravity="left"
             android:layout_marginTop="8dp"
             android:textColor="#0187d1"
