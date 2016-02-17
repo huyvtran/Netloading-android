@@ -1,5 +1,6 @@
 package com.netloading.model.webservice;
 
+import com.netloading.model.pojo.EmailSubmitPOJO;
 import com.netloading.model.pojo.LoginPOJO;
 import com.netloading.model.pojo.RegisterPOJO;
 
@@ -18,4 +19,7 @@ public interface AccountService {
 
     @POST("/customers")
     Call<ResponseBody> registerAccount(@Body RegisterPOJO registerPOJO);
+
+    @POST("/customers/forgot_password")
+    Call<ResponseBody> submitEmail(@Body EmailSubmitPOJO emailSubmitPOJO);
 }

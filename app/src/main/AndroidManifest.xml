@@ -29,7 +29,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.RegisterActivity"/>
+        <activity
+            android:name=".view.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".view.ForgotPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <service
             android:name="com.netloading.model.gcm.RegistrationIntentService"
@@ -39,7 +44,7 @@
             android:name="com.netloading.model.gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
 
@@ -47,17 +52,17 @@
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <category android:name="com.netloading.gcmquickstart" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
             </intent-filter>
         </receiver>
 
         <service
             android:name="com.netloading.model.gcm.GcmMessageHandler"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
