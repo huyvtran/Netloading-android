@@ -37,6 +37,10 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 //        Intent intent = RegistrationIntentService.makeIntent(this);
 //        startService(intent);
 
+
+        Intent intent = new Intent(getApplicationContext(), PickLocationActivity.class);
+        startActivity(intent);
+
     }
 
 

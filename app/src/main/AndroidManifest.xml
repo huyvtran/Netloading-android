@@ -12,6 +12,10 @@
         android:protectionLevel="signature" />
     <uses-permission android:name="com.netloading.permission.C2D_MESSAGE" />
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -31,10 +35,13 @@
 
         <activity
             android:name=".view.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
 
         <activity android:name=".view.ForgotPasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme"/>
+
+        <activity android:name=".view.PickLocationActivity"
+            android:theme="@style/AppTheme"/>
 
         <service
             android:name="com.netloading.model.gcm.RegistrationIntentService"
@@ -67,6 +74,11 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBW6wsZ0wQ4S0uwhNIUpFq9HQHThvwb81U"/>
+
     </application>
 
 </manifest>
