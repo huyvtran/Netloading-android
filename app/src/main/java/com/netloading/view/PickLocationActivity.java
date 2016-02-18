@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -59,11 +60,14 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
     List<String> viDoDi = new ArrayList<String>();
     List<String> viDoDen = new ArrayList<String>();
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.pick_location);
+
+
         ReadFileFromAssetsAndAddToList(tinhList, "ten_tinh.txt");
         ReadFileFromAssetsAndAddToList(allHuyenList, "ten_huyen.txt");
         ReadFileFromAssetsAndAddToList(maTinhList, "ma_tinh.txt");
