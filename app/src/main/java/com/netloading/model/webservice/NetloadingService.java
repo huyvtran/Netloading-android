@@ -15,5 +15,5 @@ public interface NetloadingService {
     Call<ResponseBody> sendRegistrationTokenToServer(@Body GCMTokenPOJO gcmTokenPOJO);
 
 
-    
+
 }
