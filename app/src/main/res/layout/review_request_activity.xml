@@ -14,7 +14,7 @@
             android:id="@+id/request_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yêu cầu 1"
+            android:text="Yêu cầu"
             android:layout_gravity="center"
             android:textColor="#ff8f00"
             android:textSize="30sp"/>

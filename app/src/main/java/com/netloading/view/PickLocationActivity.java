@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.netloading.R;
+import com.netloading.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,11 +30,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by AnhVu on 2/17/16.
  */
 public class PickLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private static final String TAG = "PickLocationActivity";
     private List<String> maTinhList = new ArrayList<String>();
     private List<String> allHuyenList = new ArrayList<String>();
     private List<String> maHuyenList = new ArrayList<String>();
@@ -65,6 +71,8 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.pick_location_activity);
+
+        ButterKnife.bind(this);
 
 
         ReadFileFromAssetsAndAddToList(tinhList, "ten_tinh.txt");
@@ -103,8 +111,8 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
                 View v = super.getView(position, convertView, parent);
                 if (position == getCount()) {
-                    ((TextView)v.findViewById(R.id.vText)).setText("Chọn Tỉnh");
-                    ((TextView)v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
+                    ((TextView) v.findViewById(R.id.vText)).setText("Chọn Tỉnh");
+                    ((TextView) v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
                 }
 
                 return v;
@@ -112,7 +120,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
             @Override
             public int getCount() {
-                return super.getCount()-1; // you dont display last item. It is used as hint.
+                return super.getCount() - 1; // you dont display last item. It is used as hint.
             }
         };
 
@@ -135,7 +143,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
         private String type;
 
-        public TinhSelectedEvent(String type){
+        public TinhSelectedEvent(String type) {
             this.type = type;
         }
 
@@ -154,7 +162,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
         private String type;
 
-        public HuyenSelectedEvent(String type){
+        public HuyenSelectedEvent(String type) {
             this.type = type;
         }
 
@@ -163,16 +171,15 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
 
             if (view != null) {
-                int tag = (int) ((TextView)view.findViewById(R.id.vText)).getTag();
+                int tag = (int) ((TextView) view.findViewById(R.id.vText)).getTag();
 
-                Log.i("TAG",  tag + "");
+                Log.i("TAG", tag + "");
 
                 if (tag != 100) {
                     if (type.equals("di")) {
                         huyenDiSelected = true;
                         huyenDiSelectedPosition = position;
-                    }
-                    else {
+                    } else {
                         huyenDenSelected = true;
                         huyenDenSelectedPosition = position;
                     }
@@ -183,6 +190,9 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
                 }
 
                 if (huyenDiSelected && huyenDenSelected) {
+
+                    View continueButton = findViewById(R.id.pick_continue);
+                    continueButton.setClickable(true);
 
                     double kDoDi = Double.parseDouble(kinhDoDi.get(huyenDiSelectedPosition));
                     double vDoDi = Double.parseDouble(viDoDi.get(huyenDiSelectedPosition));
@@ -245,18 +255,18 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         }
         huyenList.add("hehe");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, huyenList){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, huyenList) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
 
                 View v = super.getView(position, convertView, parent);
                 if (position == getCount()) {
-                    ((TextView)v.findViewById(R.id.vText)).setText("Chọn Huyện");
-                    ((TextView)v.findViewById(R.id.vText)).setTextSize(15);
-                    ((TextView)v.findViewById(R.id.vText)).setTag(100);
-                    ((TextView)v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
+                    ((TextView) v.findViewById(R.id.vText)).setText("Chọn Huyện");
+                    ((TextView) v.findViewById(R.id.vText)).setTextSize(15);
+                    ((TextView) v.findViewById(R.id.vText)).setTag(100);
+                    ((TextView) v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
                 } else {
-                    ((TextView)v.findViewById(R.id.vText)).setTag(999);
+                    ((TextView) v.findViewById(R.id.vText)).setTag(999);
                 }
 
                 return v;
@@ -264,7 +274,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
             @Override
             public int getCount() {
-                return super.getCount()-1; // you dont display last item. It is used as hint.
+                return super.getCount() - 1; // you dont display last item. It is used as hint.
             }
         };
 
@@ -278,8 +288,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
             viDoDi = new ArrayList<String>(viDoHuyen);
 
             huyenDiSpinner.setOnItemSelectedListener(new HuyenSelectedEvent("di"));
-        }
-        else {
+        } else {
             huyenDenSpinner.setAdapter(adapter);
             huyenDenSpinner.setSelection(adapter.getCount());
             kinhDoDen = new ArrayList<String>(kinhDoHuyen);
@@ -287,6 +296,14 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
             huyenDenSpinner.setOnItemSelectedListener(new HuyenSelectedEvent("den"));
         }
+    }
+
+
+    @OnClick(R.id.pick_continue)
+    public void pickContinue() {
+        Utils.log(TAG, "Den day roi" + maHuyenList.get(huyenDiSelectedPosition) +
+                " " + maHuyenList.get(huyenDenSelectedPosition));
+
     }
 
 

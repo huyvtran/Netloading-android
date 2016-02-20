@@ -322,7 +322,9 @@
             android:layout_weight="0.2"
             android:gravity="center_vertical|right">
             <ImageView
+                android:id="@+id/pick_continue"
                 android:layout_width="56dp"
+                android:clickable="false"
                 android:layout_height="56dp"
                 android:background="@drawable/next"
                 android:layout_marginRight="28dp"/>
