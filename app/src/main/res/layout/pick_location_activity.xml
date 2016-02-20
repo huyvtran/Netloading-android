@@ -326,6 +326,7 @@
                 android:layout_width="56dp"
                 android:clickable="false"
                 android:layout_height="56dp"
+                android:clickable="false"
                 android:background="@drawable/next"
                 android:layout_marginRight="28dp"/>
         </RelativeLayout>
