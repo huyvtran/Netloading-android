@@ -23,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/top"
-        android:layout_above="@+id/cancel_request"
         android:weightSum="7">
 
         <LinearLayout
@@ -72,8 +71,8 @@
                         android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
                         android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="20dp"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:layout_marginLeft="5dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -116,10 +115,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
+                        android:text="Can Lộc, Hà Tĩnh"
                         android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:singleLine="true"/>
                 </LinearLayout>
 
@@ -153,7 +152,7 @@
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:text="Điểm đến"
                         android:textSize="16sp"
@@ -163,10 +162,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
+                        android:text="Đống Đa, Hà Nội"
                         android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:singleLine="true"/>
                 </LinearLayout>
 
@@ -210,10 +209,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
+                        android:text="Đang chờ"
                         android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:singleLine="true"/>
                 </LinearLayout>
 
@@ -247,7 +246,7 @@
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:text="Tên hàng"
                         android:textSize="16sp"
@@ -257,10 +256,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
+                        android:text="Bánh kẹo"
                         android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:singleLine="true"/>
                 </LinearLayout>
 
@@ -294,7 +293,7 @@
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:text="Tải trọng"
                         android:textSize="16sp"
@@ -304,10 +303,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
+                        android:text="0.2 tấn"
                         android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:singleLine="true"/>
                 </LinearLayout>
 
@@ -341,7 +340,7 @@
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="75dp"
                         android:layout_height="wrap_content"
                         android:text="Giá"
                         android:textSize="16sp"
@@ -351,10 +350,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
+                        android:text="2.000.000 VNĐ"
                         android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="5dp"
                         android:singleLine="true"/>
                 </LinearLayout>
 
@@ -362,14 +361,5 @@
 
         </LinearLayout>
     </LinearLayout>
-
-    <Button
-        android:id="@id/cancel_request"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/button_guiyeucau"
-        android:text="Hủy đơn hàng (or yêu cầu)"
-        android:textColor="#ffffff"/>
 
 </RelativeLayout>
