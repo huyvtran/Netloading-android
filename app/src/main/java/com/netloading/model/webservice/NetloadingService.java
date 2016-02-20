@@ -13,4 +13,7 @@ import retrofit2.http.POST;
 public interface NetloadingService {
     @POST("/customers/notification")
     Call<ResponseBody> sendRegistrationTokenToServer(@Body GCMTokenPOJO gcmTokenPOJO);
+
+
+    
 }
