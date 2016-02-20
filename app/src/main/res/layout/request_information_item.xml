@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+    <TextView
+        android:id="@+id/request_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đang tìm nhà xe"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/vOrange"/>
+
+    <TextView
+        android:id="@+id/request_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3/10/2015"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="16sp"
+        android:textColor="@color/vBlue"/>
+
+    <TextView
+        android:id="@+id/company_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đơn hàng 1"
+        android:singleLine="true"
+        android:layout_centerVertical="true"
+        android:textSize="16sp"
+        android:textColor="@color/vBlue"
+        android:layout_marginLeft="24dp"
+        android:layout_toLeftOf="@id/request_status"
+        android:paddingRight="15dp"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/wait_other_btn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/vBlue"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_chodanhsachkhac"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Chờ danh sách khác"
+            android:textSize="18sp"
+            android:textColor="#ffffff"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/delete_request_btn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_above="@id/wait_other_btn"
+        android:background="@color/vOrange"
+        android:padding="8dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_huygiaodich"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Xóa yêu cầu"
+            android:textSize="18sp"
+            android:textColor="#ffffff"/>
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/delete_request_btn">
+
+    </ListView>
+
+</RelativeLayout>
