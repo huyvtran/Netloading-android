@@ -1,8 +1,6 @@
 package com.netloading.view;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -11,8 +9,6 @@ import com.netloading.common.GenericActivity;
 import com.netloading.presenter.RegisterPresenter;
 import com.netloading.utils.Utils;
 import com.netloading.utils.Validator;
-
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,7 +34,7 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
+        setContentView(R.layout.register_activity);
 
         ButterKnife.bind(this);
 
