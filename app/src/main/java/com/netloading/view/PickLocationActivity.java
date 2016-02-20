@@ -21,12 +21,16 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.netloading.R;
+import com.netloading.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by AnhVu on 2/17/16.
@@ -54,11 +58,8 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
     private int huyenDiSelectedPosition;
     private int huyenDenSelectedPosition;
 
-    List<String> kinhDoDi = new ArrayList<String>();
-    List<String> kinhDoDen = new ArrayList<String>();
-    List<String> viDoDi = new ArrayList<String>();
-    List<String> viDoDen = new ArrayList<String>();
-
+    List<Integer> diListPosition = new ArrayList<Integer>();
+    List<Integer> denListPosition = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
         setContentView(R.layout.pick_location_activity);
 
+        ButterKnife.bind(this);
 
         ReadFileFromAssetsAndAddToList(tinhList, "ten_tinh.txt");
         ReadFileFromAssetsAndAddToList(allHuyenList, "ten_huyen.txt");
@@ -125,6 +127,13 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         UpdateHuyenSpinner(0, type);
     }
 
+    @OnClick(R.id.pick_continue)
+    public void pickContinue() {
+        int maHuyenDi = Integer.parseInt(maHuyenList.get(huyenDiSelectedPosition));
+        int maHuyenDen = Integer.parseInt(maHuyenList.get(huyenDenSelectedPosition));
+        Utils.log("TAG", maHuyenDi + " " + maHuyenDen);
+    }
+
     @Override
     public void onMapReady(GoogleMap map) {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -170,11 +179,11 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
                 if (tag != 100) {
                     if (type.equals("di")) {
                         huyenDiSelected = true;
-                        huyenDiSelectedPosition = position;
+                        huyenDiSelectedPosition = diListPosition.get(position);
                     }
                     else {
                         huyenDenSelected = true;
-                        huyenDenSelectedPosition = position;
+                        huyenDenSelectedPosition = denListPosition.get(position);
                     }
                 } else {
                     if (type.equals("di"))
@@ -184,11 +193,13 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
                 if (huyenDiSelected && huyenDenSelected) {
 
-                    double kDoDi = Double.parseDouble(kinhDoDi.get(huyenDiSelectedPosition));
-                    double vDoDi = Double.parseDouble(viDoDi.get(huyenDiSelectedPosition));
+                    findViewById(R.id.pick_continue).setClickable(true);
 
-                    double kDoDen = Double.parseDouble(kinhDoDen.get(huyenDenSelectedPosition));
-                    double vDoDen = Double.parseDouble(viDoDen.get(huyenDenSelectedPosition));
+                    double kDoDi = Double.parseDouble(kinhDo.get(huyenDiSelectedPosition));//Double.parseDouble(kinhDoDi.get(huyenDiSelectedPosition));
+                    double vDoDi = Double.parseDouble(viDo.get(huyenDiSelectedPosition));//Double.parseDouble(viDoDi.get(huyenDiSelectedPosition));
+
+                    double kDoDen = Double.parseDouble(kinhDo.get(huyenDenSelectedPosition));//Double.parseDouble(kinhDoDen.get(huyenDenSelectedPosition));
+                    double vDoDen = Double.parseDouble(viDo.get(huyenDenSelectedPosition));//Double.parseDouble(viDoDen.get(huyenDenSelectedPosition));
 
                     Log.i("TAG", kDoDi + " " + vDoDi + " " + kDoDen + " " + vDoDen);
 
@@ -231,15 +242,20 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 //        Log.i("LOG", "den day roi " + tinhPosition);
 
         List<String> huyenList = new ArrayList<String>();
-        List<String> kinhDoHuyen = new ArrayList<String>();
-        List<String> viDoHuyen = new ArrayList<String>();
+//        List<String> kinhDoHuyen = new ArrayList<String>();
+//        List<String> viDoHuyen = new ArrayList<String>();
+
+        List<Integer> listPosition = new ArrayList<Integer>();
 
         for (int i = 0; i < allHuyenList.size(); i++) {
             if (maTinhCuaHuyenList.get(i).equals(maTinhList.get(tinhPosition))) {
 //                Log.i("Huyen", i + " " + allHuyenList.get(i));
                 huyenList.add(allHuyenList.get(i));
-                kinhDoHuyen.add(kinhDo.get(i));
-                viDoHuyen.add(viDo.get(i));
+//                kinhDoHuyen.add(kinhDo.get(i));
+//                viDoHuyen.add(viDo.get(i));
+
+                listPosition.add(i);
+
             }
 //            else if (huyenList.size() > 0) break;
         }
@@ -273,18 +289,13 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         if (type.equals("di")) {
             huyenDiSpinner.setAdapter(adapter);
             huyenDiSpinner.setSelection(adapter.getCount());
-
-            kinhDoDi = new ArrayList<String>(kinhDoHuyen);
-            viDoDi = new ArrayList<String>(viDoHuyen);
-
+            diListPosition = new ArrayList<Integer>(listPosition);
             huyenDiSpinner.setOnItemSelectedListener(new HuyenSelectedEvent("di"));
         }
         else {
             huyenDenSpinner.setAdapter(adapter);
             huyenDenSpinner.setSelection(adapter.getCount());
-            kinhDoDen = new ArrayList<String>(kinhDoHuyen);
-            viDoDen = new ArrayList<String>(viDoHuyen);
-
+            denListPosition = new ArrayList<Integer>(listPosition);
             huyenDenSpinner.setOnItemSelectedListener(new HuyenSelectedEvent("den"));
         }
     }
