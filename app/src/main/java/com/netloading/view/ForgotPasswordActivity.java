@@ -33,7 +33,7 @@ public class ForgotPasswordActivity extends GenericActivity<ForgotpassPresenter.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.forgot_password);
+        setContentView(R.layout.forgot_password_activity);
 
         ButterKnife.bind(this);
 
