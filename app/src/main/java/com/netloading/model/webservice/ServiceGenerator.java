@@ -19,6 +19,7 @@ public class ServiceGenerator {
 
 
     private static final String TAG = "ServiceGenerator";
+    private static int id;
 
     /**
      * LOG all http request through a generic OkHttpClient
@@ -77,9 +78,14 @@ public class ServiceGenerator {
     private static boolean isLoggedIn = false;
 
 
-    public static void initialize(String accessToken) {
+    public static void initialize(String accessToken, int id) {
         setAccessToken(accessToken);
+        setId(id);
         isLoggedIn = true;
+    }
+
+    private static void setId(int id) {
+        ServiceGenerator.id = id;
     }
 
     public static OkHttpClient getAuthenticatedHttpClient() {
@@ -99,7 +105,9 @@ public class ServiceGenerator {
 
                         Request modifiedRequest = request.newBuilder()
                                 .addHeader("token", getAccessToken())
+                                .addHeader("customer_id", id + "")
                                 .build();
+
 
                         return chain.proceed(modifiedRequest);
                     }

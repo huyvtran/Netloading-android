@@ -46,12 +46,12 @@ public class RegisterPresenter implements ConfigurableOps<RegisterPresenter.View
 
     public void register(String username, String password,
                          String phone, String email, String address,
-                         String socialId) {
+                         String socialId, String name) {
 
 
         // send register request
         RegisterPOJO registerPOJO = new RegisterPOJO(username, password, phone,
-                email, address, socialId);
+                email, address, socialId, name);
 
         mAccountService.registerAccount(registerPOJO).enqueue(new Callback<ResponseBody>() {
             @Override

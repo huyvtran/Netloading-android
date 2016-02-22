@@ -17,8 +17,9 @@ public class RegisterPOJO {
     private final String email;
     private final String address;
     private final String socialId;
+    private final String name;
 
-    public RegisterPOJO(String username, String password, String phone, String email, String address, String socialId) {
+    public RegisterPOJO(String username, String password, String phone, String email, String address, String socialId, String name) {
 
         this.username = username;
         this.password = password;
@@ -26,6 +27,7 @@ public class RegisterPOJO {
         this.email = email;
         this.address = address;
         this.socialId = socialId;
+        this.name = name;
     }
 
     public String getAddress() {
@@ -50,5 +52,9 @@ public class RegisterPOJO {
 
     public String getSocialId() {
         return socialId;
+    }
+
+    public String getName() {
+        return name;
     }
 }

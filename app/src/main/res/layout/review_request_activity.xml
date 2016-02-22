@@ -7,25 +7,26 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentTop="true">
+
         <TextView
             android:id="@+id/request_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yêu cầu 1"
             android:layout_gravity="center"
+            android:text="Yêu cầu"
             android:textColor="#ff8f00"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
     </FrameLayout>
 
     <LinearLayout
         android:id="@+id/middle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/send_request_wrapper"
         android:layout_below="@id/top"
-        android:layout_above="@+id/cancel_request"
         android:weightSum="7">
 
         <LinearLayout
@@ -38,21 +39,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
+                    android:layout_weight="0.2"
+                    android:padding="12dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_diemdi_info"/>
+                        android:src="@drawable/icon_diemdi_info" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -61,23 +63,25 @@
                     android:layout_weight="0.8"
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
+
                     <TextView
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text="Điểm đi"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/start_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:singleLine="true"
                         android:text="Can Lộc, Hà Tĩnh"
-                        android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -86,21 +90,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
+                    android:layout_weight="0.2"
+                    android:padding="12dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_diemden_info"/>
+                        android:src="@drawable/icon_diemden_info" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -109,23 +114,25 @@
                     android:layout_weight="0.8"
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
+
                     <TextView
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text="Điểm đến"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/arrive_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:singleLine="true"
                         android:text="Đống Đa, Hà Nội"
-                        android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -134,21 +141,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
+                    android:layout_weight="0.2"
+                    android:padding="12dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_calendar"/>
+                        android:src="@drawable/icon_calendar" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,23 +165,25 @@
                     android:layout_weight="0.8"
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text="Ngày đóng hàng"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/pickup_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:singleLine="true"
                         android:text="21-11-2016"
-                        android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"
-                        android:singleLine="true"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -182,21 +192,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
+                    android:layout_weight="0.2"
+                    android:padding="12dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_tenhang"/>
+                        android:src="@drawable/icon_tenhang" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -205,23 +216,25 @@
                     android:layout_weight="0.8"
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
+
                     <TextView
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text="Tên hàng"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/goods_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bánh kẹo"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
                         android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:text="Bánh kẹo"
+                        android:textColor="@color/vBlue"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -230,21 +243,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
+                    android:layout_weight="0.2"
+                    android:padding="12dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_taitrong"/>
+                        android:src="@drawable/icon_taitrong" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -253,23 +267,25 @@
                     android:layout_weight="0.8"
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
+
                     <TextView
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text="Tải trọng"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/goods_weight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.2 tấn"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
                         android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:text="0.2 tấn"
+                        android:textColor="@color/vBlue"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -278,21 +294,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
+                    android:layout_gravity="left"
                     android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
+                    android:layout_weight="0.2"
+                    android:padding="12dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_gia"/>
+                        android:src="@drawable/icon_gia" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -301,23 +318,25 @@
                     android:layout_weight="0.8"
                     android:gravity="center_vertical"
                     android:paddingRight="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Giá mong muốn"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2.000.000 VNĐ"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"
-                        android:singleLine="true"/>
+                        android:text="Giá mong muốn"
+                        android:textColor="@color/vBlue"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/expected_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:singleLine="true"
+                        android:text="2.000.000 VNĐ"
+                        android:textColor="@color/vBlue"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -325,13 +344,22 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/cancel_request"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/send_request_wrapper"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/button_guiyeucau"
-        android:text="Gửi yêu cầu"
-        android:textColor="#ffffff"/>
+        android:background="@drawable/button_guiyeucau">
+
+        <Button
+            android:id="@+id/send_request"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="Gửi yêu cầu"
+            android:textColor="#ffffff" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
 
 </RelativeLayout>

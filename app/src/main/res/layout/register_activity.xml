@@ -6,18 +6,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/register_btn"
-        android:weightSum="1"
+        android:layout_above="@+id/register_btn_wrapper"
+        android:orientation="vertical"
         android:paddingTop="10dp"
-        android:orientation="vertical">
+        android:weightSum="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.85"
-            android:weightSum="6"
+            android:orientation="vertical"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
-            android:orientation="vertical">
+            android:weightSum="6">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,12 +27,12 @@
                 android:gravity="center">
 
                 <EditText
-                    android:id="@+id/realname"
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
                     android:hint="Họ và tên"
-                    android:paddingLeft="15dp"
-                    android:background="@drawable/edittext"/>
+                    android:paddingLeft="15dp" />
 
             </LinearLayout>
 
@@ -45,71 +46,76 @@
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
                     android:hint="Tên tài khoản"
-                    android:paddingLeft="15dp"
-                    android:background="@drawable/edittext"/>
+                    android:paddingLeft="15dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
                     android:hint="Email"
-                    android:paddingLeft="15dp"
-                    android:background="@drawable/edittext"/>
+                    android:paddingLeft="15dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <EditText
                     android:id="@+id/phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
                     android:hint="Số điện thoại"
-                    android:paddingLeft="15dp"
-                    android:background="@drawable/edittext"/>
+                    android:paddingLeft="15dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
                     android:hint="Mật khẩu"
-                    android:paddingLeft="15dp"
-                    android:background="@drawable/edittext"/>
+                    android:paddingLeft="15dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <EditText
                     android:id="@+id/re_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/edittext"
                     android:hint="Nhập lại mật khẩu"
-                    android:paddingLeft="15dp"
-                    android:background="@drawable/edittext"/>
+                    android:paddingLeft="15dp" />
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -118,53 +124,67 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
                 android:orientation="horizontal"
-                android:weightSum="9"
-                android:gravity="center_vertical|right" >
-                <RadioButton android:id="@+id/nam_radio_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="Nam"
-                    android:checked="false"
-                    android:layout_marginLeft="20dp"
-                    android:paddingLeft="10dp"/>
+                android:weightSum="9">
 
-                <RadioButton android:id="@+id/nu_radio_btn"
+                <RadioButton
+                    android:id="@+id/nam_radio_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="4"
+                    android:checked="false"
+                    android:paddingLeft="10dp"
+                    android:text="Nam" />
+
+                <RadioButton
+                    android:id="@+id/nu_radio_btn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:text="Nữ"
                     android:checked="false"
-                    android:paddingLeft="10dp"/>
+                    android:paddingLeft="10dp"
+                    android:text="Nữ" />
 
             </RadioGroup>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.05"
             android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="@string/policy_title"
-                android:textSize="9sp"
                 android:textColor="@color/vBlue"
-                android:textStyle="italic"
-                android:layout_gravity="center"/>
+                android:textSize="9sp"
+                android:textStyle="italic" />
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@id/register_btn"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/register_btn_wrapper"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="Đăng ký"
-        android:textColor="#ffffff"
-        android:textSize="19sp"
         android:background="@drawable/button_dangky"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="Đăng ký"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
 
 </RelativeLayout>

@@ -31,6 +31,15 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
     private AccountService mAccountService;
 
     private WeakReference<View> mView;
+    private boolean processing;
+
+    public boolean isProcessing() {
+        return processing;
+    }
+
+    private void setProcessing(boolean processing) {
+        this.processing = processing;
+    }
 
     public interface View extends ContextView {
 
@@ -56,14 +65,16 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
     }
 
     public void login(String username, String password) {
-
+        setProcessing(true);
         final LoginPOJO loginPOJO = new LoginPOJO(username, password);
 
 
         mAccountService.loginAndSaveToken(loginPOJO).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                setProcessing(false);
                 try {
+
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     String status = jsonObject.getString("status");
                     //TODO - check message and status
@@ -77,7 +88,7 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
                         Utils.log(TAG, status);
                         Utils.log(TAG, token);
 
-                        ServiceGenerator.initialize(token);
+                        ServiceGenerator.initialize(token, id);
 
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
                                 mView.get().getApplicationContext()
@@ -102,7 +113,9 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                setProcessing(false);
 
+                mView.get().loginFailure(View.NETWORK_ERROR);
             }
         });
     }

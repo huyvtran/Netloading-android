@@ -108,7 +108,7 @@
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
                 android:id="@+id/login_button"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button_primary_selector"/>
         </LinearLayout>
 
         <LinearLayout
@@ -129,7 +129,7 @@
                 android:paddingBottom="20dp"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
-                android:background="@drawable/button"/>
+                android:background="@drawable/button_primary_selector"/>
 
         </LinearLayout>
 
