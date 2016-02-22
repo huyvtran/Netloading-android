@@ -162,7 +162,7 @@
                     android:weightSum="3">
 
                     <RadioButton
-                        android:id="@+id/btn1"
+                        android:id="@+id/radio_xe_tai"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="0dp"
@@ -173,7 +173,7 @@
                         android:gravity="center" />
 
                     <RadioButton
-                        android:id="@+id/btn2"
+                        android:id="@+id/radio_xe_bon"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="0dp"
@@ -184,7 +184,7 @@
                         android:gravity="center" />
 
                     <RadioButton
-                        android:id="@+id/btn3"
+                        android:id="@+id/radio_xe_dong_lanh"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_margin="0dp"
@@ -218,21 +218,21 @@
                             android:id="@+id/iv_xetai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_above="@+id/tv_xetai"
                             android:layout_gravity="center"
-                            android:src="@drawable/icon_xetai"
-                            android:layout_above="@+id/tv_xetai"/>
+                            android:src="@drawable/icon_xetai" />
 
                         <TextView
                             android:id="@id/tv_xetai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Xe Tải"
-                            android:layout_centerHorizontal="true"
                             android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
+                            android:text="Xe Tải"
                             android:textColor="#ffffff"
-                            android:textSize="12sp"
-                            android:layout_marginBottom="5dp"/>
+                            android:textSize="12sp" />
 
                     </RelativeLayout>
 
@@ -250,21 +250,21 @@
                             android:id="@+id/iv_xebon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_above="@+id/tv_xebon"
                             android:layout_gravity="center"
-                            android:src="@drawable/icon_xebon"
-                            android:layout_above="@+id/tv_xebon"/>
+                            android:src="@drawable/icon_xebon" />
 
                         <TextView
                             android:id="@id/tv_xebon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Xe Bồn"
-                            android:layout_centerHorizontal="true"
                             android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
+                            android:text="Xe Bồn"
                             android:textColor="#ffffff"
-                            android:textSize="12sp"
-                            android:layout_marginBottom="5dp"/>
+                            android:textSize="12sp" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -281,21 +281,21 @@
                             android:id="@+id/iv_xedonglanh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_above="@+id/tv_xedonglanh"
                             android:layout_gravity="center"
-                            android:src="@drawable/icon_xedonglanh"
-                            android:layout_above="@+id/tv_xedonglanh"/>
+                            android:src="@drawable/icon_xedonglanh" />
 
                         <TextView
                             android:id="@id/tv_xedonglanh"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Xe Đông Lạnh"
-                            android:layout_centerHorizontal="true"
                             android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
+                            android:text="Xe Đông Lạnh"
                             android:textColor="#ffffff"
-                            android:textSize="12sp"
-                            android:layout_marginBottom="5dp"/>
+                            android:textSize="12sp" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -309,26 +309,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
             android:layout_marginBottom="0dp"
-            android:padding="0dp">
-        </FrameLayout>
+            android:layout_weight="0.5"
+            android:padding="0dp"></FrameLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
             android:gravity="center_vertical|right">
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/pick_continue"
                 android:layout_width="56dp"
-                android:clickable="false"
                 android:layout_height="56dp"
-                android:clickable="false"
-                android:background="@drawable/next"
-                android:layout_marginRight="28dp"/>
+                android:layout_marginRight="28dp"
+                android:background="@drawable/next_dis"
+                />
         </RelativeLayout>
 
 

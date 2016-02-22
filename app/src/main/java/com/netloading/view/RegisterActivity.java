@@ -30,6 +30,8 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
     EditText mEmailEditText;
     @Bind(R.id.phone_number)
     EditText mPhoneEditText;
+    @Bind(R.id.name)
+    EditText mNameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,8 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
                 || TextUtils.isEmpty(mPasswordEditText.getText())
                 || TextUtils.isEmpty(mRepasswordEditText.getText())
                 || TextUtils.isEmpty(mPhoneEditText.getText())
-                || TextUtils.isEmpty(mEmailEditText.getText())) {
+                || TextUtils.isEmpty(mEmailEditText.getText())
+                || TextUtils.isEmpty(mNameEditText.getText())) {
             Utils.toast(this, "Xin quý khách vui lòng nhập đủ hết các thông tin");
             return;
         }
@@ -58,6 +61,7 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
         String repassword = mRepasswordEditText.getText().toString();
         String phone = mPhoneEditText.getText().toString();
         String email = mEmailEditText.getText().toString();
+        String name = mNameEditText.getText().toString();
 
 
         // Validate
@@ -88,7 +92,7 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
 
 
         // TODO - default social id and address
-        getOps().register(username, password, phone, email, "Default", "Default");
+        getOps().register(username, password, phone, email, "Default", "Default", name);
     }
 
     @Override

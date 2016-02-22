@@ -77,7 +77,7 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
                         Utils.log(TAG, status);
                         Utils.log(TAG, token);
 
-                        ServiceGenerator.initialize(token);
+                        ServiceGenerator.initialize(token, id);
 
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
                                 mView.get().getApplicationContext()

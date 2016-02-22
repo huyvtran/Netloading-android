@@ -36,11 +36,8 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
 //        Intent intent = RegistrationIntentService.makeIntent(this);
 //        startService(intent);
-
-
-        Intent intent = new Intent(getApplicationContext(), PickLocationActivity.class);
-        startActivity(intent);
-
+//        Intent intent = new Intent(getApplicationContext(), PickLocationActivity.class);
+//        startActivity(intent);
     }
 
 
@@ -55,7 +52,6 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     public void login() {
         String username = mUsernameEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
-
         // TODO - validate
         getOps().login(username, password);
     }
@@ -74,6 +70,8 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         // TODO - get GCM registration token and send to nodejs server
         Intent intent = RegistrationIntentService.makeIntent(this);
         startService(intent);
+
+        startActivity(PickLocationActivity.makeIntent(this));
 
     }
 

@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_send_request"
+        android:layout_above="@+id/btn_continue"
         android:weightSum="1"
         android:paddingTop="10dp"
         android:orientation="vertical"
@@ -20,7 +20,7 @@
             android:gravity="center">
 
             <EditText
-                android:id="@+id/good_name"
+                android:id="@+id/goods_name"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:hint="Tên hàng"
@@ -38,9 +38,10 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <EditText
-                    android:id="@+id/pickup_date"
+                <TextView
+                    android:id="@+id/pickup_date_textview"
                     android:layout_width="match_parent"
+                    android:textSize="18sp"
                     android:layout_height="56dp"
                     android:hint="Ngày đóng hàng"
                     android:paddingLeft="15dp"
@@ -48,6 +49,7 @@
                     android:background="@drawable/edittext"/>
 
                 <ImageView
+                    android:id="@+id/pickup_date_expand"
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
                     android:src="@drawable/v"
@@ -73,6 +75,7 @@
                     android:id="@+id/good_weight_number"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
+                    android:inputType="numberDecimal"
                     android:hint="Tải trọng"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
@@ -85,15 +88,22 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
                 android:paddingLeft="5dp">
-                <EditText
+                <TextView
                     android:id="@+id/good_weight_dimension"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:hint="Đơn vị"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:layout_gravity="center"
                     android:background="@drawable/edittext"/>
+                <Spinner
+                    android:id="@+id/dimension_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:paddingLeft="15dp"
+                    android:layout_gravity="center">
+
+                </Spinner>
             </FrameLayout>
 
         </LinearLayout>
@@ -117,7 +127,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@id/btn_send_request"
+        android:id="@id/btn_continue"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:text="TIẾP TỤC"
