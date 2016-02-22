@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+    <TextView
+        android:id="@+id/money_number_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10/10/2016"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/vOrange"/>
+
+    <TextView
+        android:id="@+id/order_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đơn hàng 1"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/vBlue"
+        android:layout_marginLeft="16dp"
+        android:layout_toLeftOf="@id/money_number_tv"
+        android:paddingRight="15dp"/>
+
+    <TextView
+        android:id="@+id/company_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Công ty TNHH Lương Anh Vũ Lương Anh Vũ "
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/vBlue"
+        android:layout_marginLeft="16dp"
+        android:layout_toLeftOf="@id/money_number_tv"
+        android:layout_alignParentBottom="true"
+        android:paddingRight="15dp"/>
+
+
+</RelativeLayout>
