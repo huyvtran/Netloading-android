@@ -99,6 +99,6 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     @OnClick(R.id.send_request)
     void sendRequest() {
         getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
-                startDistrictCode, arriveDistrictCode, vehicleType, expectedPrice);
+                startDistrictCode, arriveDistrictCode, vehicleType, expectedPrice, goodsName);
     }
 }

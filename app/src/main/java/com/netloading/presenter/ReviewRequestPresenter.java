@@ -5,6 +5,7 @@ import com.netloading.common.ContextView;
 import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.model.webservice.NetloadingService;
 import com.netloading.model.webservice.ServiceGenerator;
+import com.netloading.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ import retrofit2.Response;
  */
 public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPresenter.View> {
 
+    private static final String TAG = "ReviewRequestPresenter";
     private WeakReference<View> mView;
 
     @Override
@@ -32,12 +34,13 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
     public void sendRequest(String pickUpDate, String goodsWeightDimension,
                             String goodsWeightNumber, int startDistrictCode,
                             int arriveDistrictCode, String vehicleType,
-                            String expectedPrice) {
+                            String expectedPrice, String goodsName) {
         NetloadingService netloadingService = ServiceGenerator.getNetloadingService();
+
         RequestPOJO requestPOJO = new RequestPOJO(pickUpDate, goodsWeightDimension,
                 goodsWeightNumber, startDistrictCode,
                 arriveDistrictCode, vehicleType,
-                expectedPrice);
+                expectedPrice, goodsName);
 
         netloadingService.sendRequest(requestPOJO).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -45,6 +48,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                 try {
                     JSONObject result = new JSONObject(response.body().string());
 
+                    Utils.log(TAG, result.toString());
                     if (result.getString("status").equals("success")) {
 
                     } else {
@@ -62,7 +66,6 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
 
             }
         });
-
 
 
     }

@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -25,6 +26,8 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     @Bind(R.id.password)
     EditText mPasswordEditText;
 
+    private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,11 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         ButterKnife.bind(this);
 
         super.onCreate(savedInstanceState, LoginPresenter.class, this);
+
+        mProgressDialog = new ProgressDialog(this);
+        if (getOps().isProcessing()) {
+            showProgressDialog();
+        }
 
 //        Intent intent = RegistrationIntentService.makeIntent(this);
 //        startService(intent);
@@ -53,12 +61,25 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         String username = mUsernameEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
         // TODO - validate
+
+        showProgressDialog();
         getOps().login(username, password);
+    }
+
+    private void showProgressDialog() {
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle("Đang xử lí");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
+        mProgressDialog.show();
     }
 
 
     @OnClick(R.id.login_forgot_password)
     public void forgotPassword() {
+
+        // TODO - finish activity
+
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
@@ -66,6 +87,8 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     @Override
     public void loginSucceed() {
 //        Utils.toast(this, "");
+
+        mProgressDialog.dismiss();
 
         // TODO - get GCM registration token and send to nodejs server
         Intent intent = RegistrationIntentService.makeIntent(this);
@@ -77,6 +100,9 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
     @Override
     public void loginFailure(int status) {
+
+        mProgressDialog.dismiss();
+
         if (status == NETWORK_ERROR) {
             Utils.toast(this, "Vui lòng kiểm tra đường truyền");
         } else if (status == USERNAME_PASSWORD_ERROR) {
