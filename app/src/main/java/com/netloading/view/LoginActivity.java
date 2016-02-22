@@ -3,6 +3,7 @@ package com.netloading.view;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -11,6 +12,7 @@ import com.netloading.common.GenericActivity;
 import com.netloading.model.gcm.RegistrationIntentService;
 import com.netloading.presenter.LoginPresenter;
 import com.netloading.utils.Utils;
+import com.netloading.utils.Validator;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,11 +60,15 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
     @OnClick(R.id.login_button)
     public void login() {
+        // TODO - validate
+        if (TextUtils.isEmpty(mPasswordEditText.getText())
+                || TextUtils.isEmpty(mUsernameEditText.getText())) {
+            Utils.toast(this, "Vui lòng nhập thông tin đăng nhập");
+        }
+        showProgressDialog();
         String username = mUsernameEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
-        // TODO - validate
 
-        showProgressDialog();
         getOps().login(username, password);
     }
 
@@ -79,6 +85,7 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     public void forgotPassword() {
 
         // TODO - finish activity
+
 
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);

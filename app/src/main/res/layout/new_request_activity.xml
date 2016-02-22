@@ -6,12 +6,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_continue"
-        android:weightSum="1"
-        android:paddingTop="10dp"
+        android:layout_above="@+id/btn_continue_wrapper"
         android:orientation="vertical"
         android:paddingLeft="25dp"
-        android:paddingRight="25dp">
+        android:paddingRight="25dp"
+        android:paddingTop="10dp"
+        android:weightSum="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,9 +23,9 @@
                 android:id="@+id/goods_name"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:background="@drawable/edittext"
                 android:hint="Tên hàng"
-                android:paddingLeft="15dp"
-                android:background="@drawable/edittext"/>
+                android:paddingLeft="15dp" />
 
         </LinearLayout>
 
@@ -38,22 +38,23 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/pickup_date_textview"
                     android:layout_width="match_parent"
-                    android:textSize="18sp"
                     android:layout_height="56dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edittext"
                     android:hint="Ngày đóng hàng"
                     android:paddingLeft="15dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/edittext"/>
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:id="@+id/pickup_date_expand"
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
-                    android:src="@drawable/v"
-                    android:layout_gravity="center_vertical|right"/>
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/v" />
             </FrameLayout>
 
         </LinearLayout>
@@ -75,33 +76,36 @@
                     android:id="@+id/good_weight_number"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:inputType="numberDecimal"
-                    android:hint="Tải trọng"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/edittext"/>
+                    android:background="@drawable/edittext"
+                    android:hint="Tải trọng"
+                    android:inputType="numberDecimal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" />
 
             </FrameLayout>
+
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.4"
                 android:paddingLeft="5dp">
+
                 <TextView
                     android:id="@+id/good_weight_dimension"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/edittext"/>
+                    android:background="@drawable/edittext"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" />
+
                 <Spinner
                     android:id="@+id/dimension_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:paddingLeft="15dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:paddingLeft="15dp">
 
                 </Spinner>
             </FrameLayout>
@@ -113,26 +117,36 @@
             android:layout_height="0dp"
             android:layout_weight="0.25"
             android:gravity="center">
+
             <EditText
                 android:id="@+id/expected_price"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext"
                 android:hint="Giá mong muốn"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_gravity="center"
-                android:background="@drawable/edittext"/>
+                android:paddingRight="15dp" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@id/btn_continue"
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/btn_continue_wrapper"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="TIẾP TỤC"
-        android:textColor="#ffffff"
-        android:textSize="19sp"
-        android:background="@drawable/button_guiyeucau"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_guiyeucau">
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="TIẾP TỤC"
+            android:textColor="#ffffff"
+            android:textSize="19sp" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+
 </RelativeLayout>
