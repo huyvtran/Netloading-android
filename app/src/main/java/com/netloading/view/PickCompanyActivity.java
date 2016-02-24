@@ -55,14 +55,14 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);
 
-        ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
-        if (companyPOJOs.size() > 0) {
-            showList(companyPOJOs);
-        } else {
-            mNotFoundLayout.setVisibility(View.VISIBLE);
-            mCompanyListView.setVisibility(View.INVISIBLE);
-
-        }
+//        ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
+//        if (companyPOJOs.size() > 0) {
+//            showList(companyPOJOs);
+//        } else {
+//            mNotFoundLayout.setVisibility(View.VISIBLE);
+//            mCompanyListView.setVisibility(View.INVISIBLE);
+//
+//        }
 
     }
 
