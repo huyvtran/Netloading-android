@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -45,7 +44,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
         NetloadingService netloadingService = ServiceGenerator.getNetloadingService();
 
         // TODO - test here
-        RequestPOJO requestPOJO = new RequestPOJO(pickUpDate, goodsWeightDimension,
+        final RequestPOJO requestPOJO = new RequestPOJO(pickUpDate, goodsWeightDimension,
                 goodsWeightNumber, 861,
                 848, vehicleType,
                 expectedPrice, goodsName);
@@ -70,10 +69,10 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
 
 
                         /// TODO - on result
-                        mView.get().onRequestResult(companyPOJOs);
+                        mView.get().onRequestResult(companyPOJOs, requestPOJO);
 
                     } else {
-                        mView.get().onRequestResult(new ArrayList<CompanyPOJO>());
+                        mView.get().onRequestResult(new ArrayList<CompanyPOJO>(), requestPOJO);
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
@@ -96,6 +95,6 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
 
         void onError(int status);
 
-        void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs);
+        void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, RequestPOJO requestPOJO);
     }
 }
