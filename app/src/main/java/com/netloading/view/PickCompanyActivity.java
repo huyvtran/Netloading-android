@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
 import com.netloading.model.pojo.CompanyPOJO;
+import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.presenter.PickCompanyPresenter;
 import com.netloading.utils.Utils;
 import com.netloading.view.adapter.CompanyListAdapter;
@@ -55,19 +56,18 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);
 
-//        ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
-//        if (companyPOJOs.size() > 0) {
-//            showList(companyPOJOs);
-//        } else {
-//            mNotFoundLayout.setVisibility(View.VISIBLE);
-//            mCompanyListView.setVisibility(View.INVISIBLE);
-//
-//        }
+        ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
+        if (companyPOJOs.size() > 0) {
+            showList(companyPOJOs);
+        } else {
+            mNotFoundLayout.setVisibility(View.VISIBLE);
+            mCompanyListView.setVisibility(View.INVISIBLE);
+        }
 
     }
 
 
-    void showList(ArrayList<CompanyPOJO> companyPOJOs) {
+    private void showList(ArrayList<CompanyPOJO> companyPOJOs) {
         mNotFoundLayout.setVisibility(View.INVISIBLE);
         mCompanyListView.setVisibility(View.VISIBLE);
         mCompanyListAdapter = new CompanyListAdapter(this, companyPOJOs);
@@ -76,6 +76,11 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     }
 
 
+
+    @OnClick(R.id.delete_request_btn)
+    private void deleteRequest() {
+        getOps().
+    }
 
 
 

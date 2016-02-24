@@ -10,11 +10,11 @@ import android.widget.TextView;
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
 import com.netloading.model.pojo.CompanyPOJO;
+import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.presenter.ReviewRequestPresenter;
 import com.netloading.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -112,8 +112,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     }
 
     @Override
-    public void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs) {
-
+    public void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, RequestPOJO requestPOJO) {
         Intent intent = PickCompanyActivity.makeIntent(this, companyPOJOs);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
