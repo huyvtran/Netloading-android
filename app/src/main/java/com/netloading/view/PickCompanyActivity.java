@@ -29,6 +29,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
     private static final String COMPANY_POJO_EXTRA = "company pojo extra";
     private static final String REQUEST_ID_EXTRA = "request id extra";
+    private int requestId;
 
     private CompanyListAdapter mCompanyListAdapter;
 
@@ -58,6 +59,9 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);
 
+
+        // Get input
+        // company list
         ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
         if (companyPOJOs.size() > 0) {
             showList(companyPOJOs);
@@ -65,6 +69,9 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
             mNotFoundLayout.setVisibility(View.VISIBLE);
             mCompanyListView.setVisibility(View.INVISIBLE);
         }
+
+        // request id
+        requestId = getIntent().getIntExtra(REQUEST_ID_EXTRA, 0);
 
     }
 
@@ -81,10 +88,13 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
     @OnClick(R.id.delete_request_btn)
     private void deleteRequest() {
-        getOps().deleteRequest()
+        getOps().deleteRequest(requestId);
     }
 
 
-
-
+    @Override
+    public void onDeleteSuccess() {
+        Intent intent = PickLocationActivity.makeIntent(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
 }

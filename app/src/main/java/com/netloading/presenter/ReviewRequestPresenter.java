@@ -57,7 +57,6 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                 try {
                     JSONObject result = new JSONObject(response.body().string());
 
-
                     Utils.log(TAG, result.toString());
                     if (result.getString("status").equals("success")) {
 
@@ -68,13 +67,15 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                         }.getType();
                         ArrayList<CompanyPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
 
-
+                        // Get request id
+                        int id = result.getJSONObject("message").getInt("insertId");
+                        Utils.log(TAG, companyPOJOs.size() + " ");
 
                         /// TODO - on result
                         mView.get().onRequestResult(companyPOJOs, id);
 
                     } else {
-                        mView.get().onRequestResult(new ArrayList<CompanyPOJO>(), id);
+                        mView.get().onError(View.STATUS_ERROR_NETWORK);
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
