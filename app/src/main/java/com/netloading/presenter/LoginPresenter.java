@@ -66,7 +66,7 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
 
     public void login(String username, String password) {
         setProcessing(true);
-        final LoginPOJO loginPOJO = new LoginPOJO(username, password);
+        final LoginPOJO loginPOJO = new LoginPOJO("dandoh", "dandoh");
 
 
         mAccountService.loginAndSaveToken(loginPOJO).enqueue(new Callback<ResponseBody>() {

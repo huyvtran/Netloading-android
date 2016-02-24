@@ -164,7 +164,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         }
 
         String goodName = mGoodsNameEditText.getText().toString();
-        String goodWeightNumber = mGoodWeightNumberEditText.getText().toString();
+        int goodWeightNumber = Integer.parseInt(mGoodWeightNumberEditText.getText().toString());
         String date = mDateTextView.getText().toString();
         String expectedPrice = mExpectedPriceEditText.getText().toString();
 
@@ -172,7 +172,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         /// save into preference
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.edit().putString(Constants.GOODS_NAME, goodName).apply();
-        sharedPreferences.edit().putString(Constants.GOODS_WEIGHT_NUMBER, goodWeightNumber).apply();
+        sharedPreferences.edit().putInt(Constants.GOODS_WEIGHT_NUMBER, goodWeightNumber).apply();
         sharedPreferences.edit().putString(Constants.GOODS_PICKUP_DATE, date).apply();
         sharedPreferences.edit().putString(Constants.GOODS_EXPTECTED_PRICE, expectedPrice).apply();
         sharedPreferences.edit().putString(Constants.GOODS_WEIGHT_DIMENSION, mDimension).apply();

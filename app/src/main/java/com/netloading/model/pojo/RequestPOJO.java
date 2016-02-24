@@ -1,19 +1,21 @@
 package com.netloading.model.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by Dandoh on 2/20/16.
  */
-public class RequestPOJO {
+public class RequestPOJO implements Serializable{
     private final String pickup_date;
     private final String goods_weight_dimension;
-    private final String goods_weight_number;
+    private final int goods_weight_number;
     private final int start_address;
     private final int arrive_address;
     private final String vehicle_type;
     private final String expected_price;
     private final String goods_name;
 
-    public RequestPOJO(String pickUpDate, String goodsWeightDimension, String goodsWeightNumber, int startDistrictCode, int arriveDistrictCode, String vehicleType, String expectedPrice, String goodsName) {
+    public RequestPOJO(String pickUpDate, String goodsWeightDimension, int goodsWeightNumber, int startDistrictCode, int arriveDistrictCode, String vehicleType, String expectedPrice, String goodsName) {
 
         this.pickup_date = pickUpDate;
         this.goods_weight_dimension = goodsWeightDimension;
@@ -25,7 +27,7 @@ public class RequestPOJO {
         this.goods_name = goodsName;
     }
 
-    public String getGoods_weight_number() {
+    public int getGoods_weight_number() {
         return goods_weight_number;
     }
 

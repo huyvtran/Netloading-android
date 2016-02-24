@@ -9,8 +9,12 @@ import android.widget.TextView;
 
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
+import com.netloading.model.pojo.CompanyPOJO;
 import com.netloading.presenter.ReviewRequestPresenter;
 import com.netloading.utils.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,7 +50,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     private String arriveDistrictName;
     private String pickUpDate;
     private String goodsName;
-    private String goodsWeightNumber;
+    private int goodsWeightNumber;
     private String goodsWeightDimension;
     private String expectedPrice;
     private String vehicleType;
@@ -78,7 +82,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         arriveDistrictName = sharedPreferences.getString(Constants.TEN_HUYEN_DEN, "");
         pickUpDate = sharedPreferences.getString(Constants.GOODS_PICKUP_DATE, "");
         goodsName = sharedPreferences.getString(Constants.GOODS_NAME, "");
-        goodsWeightNumber = sharedPreferences.getString(Constants.GOODS_WEIGHT_NUMBER, "");
+        goodsWeightNumber = sharedPreferences.getInt(Constants.GOODS_WEIGHT_NUMBER, 0);
         goodsWeightDimension = sharedPreferences.getString(Constants.GOODS_WEIGHT_DIMENSION, "");
         expectedPrice = sharedPreferences.getString(Constants.GOODS_EXPTECTED_PRICE, "");
         startDistrictCode = sharedPreferences.getInt(Constants.MA_HUYEN_DI, 0);
@@ -100,5 +104,18 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     void sendRequest() {
         getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
                 startDistrictCode, arriveDistrictCode, vehicleType, expectedPrice, goodsName);
+    }
+
+    @Override
+    public void onError(int status) {
+
+    }
+
+    @Override
+    public void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs) {
+
+        Intent intent = PickCompanyActivity.makeIntent(this, companyPOJOs);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
