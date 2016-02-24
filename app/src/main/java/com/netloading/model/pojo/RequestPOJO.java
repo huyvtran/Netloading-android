@@ -15,7 +15,10 @@ public class RequestPOJO implements Serializable{
     private final String expected_price;
     private final String goods_name;
 
-    public RequestPOJO(String pickUpDate, String goodsWeightDimension, int goodsWeightNumber, int startDistrictCode, int arriveDistrictCode, String vehicleType, String expectedPrice, String goodsName) {
+    public RequestPOJO(String pickUpDate, String goodsWeightDimension,
+                       int goodsWeightNumber, int startDistrictCode,
+                       int arriveDistrictCode, String vehicleType,
+                       String expectedPrice, String goodsName) {
 
         this.pickup_date = pickUpDate;
         this.goods_weight_dimension = goodsWeightDimension;
@@ -53,5 +56,19 @@ public class RequestPOJO implements Serializable{
 
     public String getExpected_price() {
         return expected_price;
+    }
+
+    @Override
+    public String toString() {
+        return "RequestPOJO{" +
+                "pickup_date='" + pickup_date + '\'' +
+                ", goods_weight_dimension='" + goods_weight_dimension + '\'' +
+                ", goods_weight_number=" + goods_weight_number +
+                ", start_address=" + start_address +
+                ", arrive_address=" + arrive_address +
+                ", vehicle_type='" + vehicle_type + '\'' +
+                ", expected_price='" + expected_price + '\'' +
+                ", goods_name='" + goods_name + '\'' +
+                '}';
     }
 }

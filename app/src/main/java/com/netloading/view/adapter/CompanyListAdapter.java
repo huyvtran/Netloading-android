@@ -57,7 +57,7 @@ public class CompanyListAdapter extends BaseAdapter {
         TextView priceTextView = (TextView) convertView.findViewById(R.id.money_number_tv);
 
         nameTextView.setText(companyPOJOs.get(position).getName());
-        priceTextView.setText(companyPOJOs.get(position).getPrice());
+        priceTextView.setText(String.valueOf(companyPOJOs.get(position).getPrice()));
 
 
         return convertView;

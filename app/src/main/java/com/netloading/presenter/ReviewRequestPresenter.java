@@ -50,6 +50,8 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                 848, vehicleType,
                 expectedPrice, goodsName);
 
+        Utils.log(TAG, requestPOJO.toString());
+
         netloadingService.sendRequest(requestPOJO).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -60,14 +62,15 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                     if (result.getString("status").equals("success")) {
                         Gson gson = new Gson();
                         JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
-                        Type listType = new TypeToken<ArrayList<CompanyPOJO>>() {}.getType();
+                        Type listType = new TypeToken<ArrayList<CompanyPOJO>>() {
+                        }.getType();
                         ArrayList<CompanyPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
 
                         Utils.log(TAG, companyPOJOs.size() + " ");
 
-                        if (companyPOJOs.size() > 0) {
-                            mView.get().onRequestResult(companyPOJOs);
-                        }
+
+                        /// TODO - on result
+                        mView.get().onRequestResult(companyPOJOs);
 
                     } else {
                         mView.get().onError(View.STATUS_ERROR_NETWORK);
