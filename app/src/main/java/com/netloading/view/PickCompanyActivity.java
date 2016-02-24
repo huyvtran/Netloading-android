@@ -91,7 +91,6 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         getOps().deleteRequest(requestId);
     }
 
-
     @Override
     public void onDeleteSuccess() {
         Intent intent = PickLocationActivity.makeIntent(this);

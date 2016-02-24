@@ -83,10 +83,11 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
 
         Utils.log(TAG, vehicleType);
 
-        if (vehicleType == "xeTai" || vehicleType == "xeDongLanh") {
+        if (vehicleType.equals("xeTai") || vehicleType.equals("xeDongLanh")) {
             mDimension = "kg";
-            mDimensionEditText.setText("Kg");
-        } else {
+            mDimensionEditText.setText("kg");
+        } else
+        if (vehicleType.equals("xeBon")){
             mDimension = "m3";
             mDimensionEditText.setText("m³");
         }
