@@ -48,11 +48,69 @@
             android:textColor="#ffffff"/>
     </RelativeLayout>
 
-    <ListView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/delete_request_btn">
+        <RelativeLayout
+            android:id="@+id/company_not_found_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+            <LinearLayout
+                android:id="@+id/middle_linear"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rất xin lỗi!"
+                    android:textColor="@color/vOrange"
+                    android:textSize="24sp"/>
 
-    </ListView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chúng tôi không tìm thấy nhà xe thích hợp"
+                    android:textColor="@color/vOrange"
+                    android:layout_marginTop="2dp"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vui lòng kéo xuống để thử lại"
+                    android:textColor="@color/vOrange"
+                    android:layout_marginTop="2dp"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/middle_linear"
+                android:padding="56dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_not_found"/>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </RelativeLayout>
+
+
 
 </RelativeLayout>
