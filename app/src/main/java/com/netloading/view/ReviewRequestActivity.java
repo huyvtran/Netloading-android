@@ -112,8 +112,8 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     }
 
     @Override
-    public void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, RequestPOJO requestPOJO) {
-        Intent intent = PickCompanyActivity.makeIntent(this, companyPOJOs);
+    public void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, int requestId) {
+        Intent intent = PickCompanyActivity.makeIntent(this, companyPOJOs, requestId);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

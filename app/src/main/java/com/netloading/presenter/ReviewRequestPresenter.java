@@ -57,22 +57,24 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                 try {
                     JSONObject result = new JSONObject(response.body().string());
 
+
                     Utils.log(TAG, result.toString());
                     if (result.getString("status").equals("success")) {
+
+                        // Get company list
                         Gson gson = new Gson();
                         JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
                         Type listType = new TypeToken<ArrayList<CompanyPOJO>>() {
                         }.getType();
                         ArrayList<CompanyPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
 
-                        Utils.log(TAG, companyPOJOs.size() + " ");
 
 
                         /// TODO - on result
-                        mView.get().onRequestResult(companyPOJOs, requestPOJO);
+                        mView.get().onRequestResult(companyPOJOs, id);
 
                     } else {
-                        mView.get().onRequestResult(new ArrayList<CompanyPOJO>(), requestPOJO);
+                        mView.get().onRequestResult(new ArrayList<CompanyPOJO>(), id);
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
@@ -95,6 +97,6 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
 
         void onError(int status);
 
-        void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, RequestPOJO requestPOJO);
+        void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, int requestId);
     }
 }

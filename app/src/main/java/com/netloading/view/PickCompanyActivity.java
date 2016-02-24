@@ -28,6 +28,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         implements PickCompanyPresenter.View {
 
     private static final String COMPANY_POJO_EXTRA = "company pojo extra";
+    private static final String REQUEST_ID_EXTRA = "request id extra";
 
     private CompanyListAdapter mCompanyListAdapter;
 
@@ -38,9 +39,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     View mNotFoundLayout;
 
 
-    public static Intent makeIntent(Context context, ArrayList<CompanyPOJO> companyPOJOList) {
+    public static Intent makeIntent(Context context, ArrayList<CompanyPOJO> companyPOJOList, int id) {
         Intent intent = new Intent(context, PickCompanyActivity.class)
-                .putParcelableArrayListExtra(COMPANY_POJO_EXTRA, companyPOJOList);
+                .putParcelableArrayListExtra(COMPANY_POJO_EXTRA, companyPOJOList)
+                .putExtra(REQUEST_ID_EXTRA, id);
 
         return intent;
     }
@@ -79,7 +81,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
     @OnClick(R.id.delete_request_btn)
     private void deleteRequest() {
-        getOps().
+        getOps().deleteRequest()
     }
 
 
