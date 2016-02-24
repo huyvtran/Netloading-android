@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.netloading.R;
 import com.netloading.model.pojo.CompanyPOJO;
@@ -50,6 +51,13 @@ public class CompanyListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.company_item, parent, false);
         }
+
+//        TextView companyName = companyPOJOs.get(position).getName();
+        TextView nameTextView = (TextView) convertView.findViewById(R.id.company_name_tv);
+        TextView priceTextView = (TextView) convertView.findViewById(R.id.money_number_tv);
+
+        nameTextView.setText(companyPOJOs.get(position).getName());
+        priceTextView.setText(companyPOJOs.get(position).getPrice());
 
 
         return convertView;

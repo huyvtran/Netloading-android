@@ -107,4 +107,11 @@ public class CompanyPOJO implements Parcelable {
         }
     };
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }
