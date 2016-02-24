@@ -73,17 +73,18 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                         mView.get().onRequestResult(companyPOJOs);
 
                     } else {
-                        mView.get().onError(View.STATUS_ERROR_NETWORK);
+                        mView.get().onRequestResult(new ArrayList<CompanyPOJO>());
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
+                    mView.get().onError(View.STATUS_ERROR_NETWORK);
 
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                mView.get().onError(View.STATUS_ERROR_NETWORK);
             }
         });
 

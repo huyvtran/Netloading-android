@@ -3,6 +3,7 @@ package com.netloading.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.netloading.R;
@@ -32,6 +33,9 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Bind(R.id.pick_company_list)
     ListView mCompanyListView;
 
+    @Bind(R.id.company_not_found_layout)
+    View mNotFoundLayout;
+
 
     public static Intent makeIntent(Context context, ArrayList<CompanyPOJO> companyPOJOList) {
         Intent intent = new Intent(context, PickCompanyActivity.class)
@@ -52,13 +56,27 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);
 
         ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
-        mCompanyListAdapter = new CompanyListAdapter(this, companyPOJOs);
-        for (CompanyPOJO companyPOJO : companyPOJOs) {
-            Utils.log(TAG, companyPOJOs.toString());
+        if (companyPOJOs.size() > 0) {
+            showList(companyPOJOs);
+        } else {
+            mNotFoundLayout.setVisibility(View.VISIBLE);
+            mCompanyListView.setVisibility(View.INVISIBLE);
+
         }
+
+    }
+
+
+    void showList(ArrayList<CompanyPOJO> companyPOJOs) {
+        mNotFoundLayout.setVisibility(View.INVISIBLE);
+        mCompanyListView.setVisibility(View.VISIBLE);
+        mCompanyListAdapter = new CompanyListAdapter(this, companyPOJOs);
         mCompanyListView.setAdapter(mCompanyListAdapter);
 
     }
+
+
+
 
 
 

@@ -22,6 +22,8 @@ public class CompanyListAdapter extends BaseAdapter {
     private Context context;
     private List<CompanyPOJO> companyPOJOs;
 
+
+
     public CompanyListAdapter(Context context, List<CompanyPOJO> companyPOJOs) {
         this.context = context;
         this.companyPOJOs = companyPOJOs;
