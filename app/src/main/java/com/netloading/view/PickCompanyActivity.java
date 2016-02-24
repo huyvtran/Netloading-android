@@ -77,10 +77,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
 
 
-    @OnClick(R.id.delete_request_btn)
-    private void deleteRequest() {
-        getOps().
-    }
+//    @OnClick(R.id.delete_request_btn)
+//    private void deleteRequest() {
+//        getOps().
+//    }
 
 
 
