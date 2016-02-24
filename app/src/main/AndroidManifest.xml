@@ -50,10 +50,6 @@
         <activity
             android:name=".view.AddInfoRequestActivity"
             android:theme="@style/AppTheme">
-<<<<<<< HEAD
-=======
-
->>>>>>> main/master
         </activity>
 
         <activity
