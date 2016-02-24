@@ -23,6 +23,7 @@
                 android:id="@+id/goods_name_layout"
                 android:layout_width="match_parent"
                 android:background="@drawable/edittext"
+                android:paddingTop="0dp"
                 android:layout_height="56dp">
 
                 <EditText
