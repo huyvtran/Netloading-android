@@ -5,4 +5,5 @@
     <color name="colorAccent">#0070bf</color>
     <color name="vBlue">#0187d1</color>
     <color name="vOrange">#ff8f00</color>
+    <color name="gray">#6c6c6c</color>
 </resources>
