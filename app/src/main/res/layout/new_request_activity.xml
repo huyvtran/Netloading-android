@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,21 +14,37 @@
         android:paddingTop="10dp"
         android:weightSum="1">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.25"
             android:gravity="center">
 
-            <EditText
-                android:id="@+id/goods_name"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/edittext"
-                android:hint="Tên hàng"
-                android:paddingLeft="15dp" />
 
-        </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/goods_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp">
+
+                <EditText
+                    android:id="@+id/goods_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:hint="Tên hàng"
+                    android:paddingLeft="15dp"
+                    android:layout_alignTop="@+id/goods_name_layout"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:padding="15dp"
+                    android:singleLine="true"
+                    android:background="@drawable/bg_edit_text"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,21 +56,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/pickup_date_textview"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/pickup_date_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/edittext"
-                    android:hint="Ngày đóng hàng"
-                    android:paddingLeft="15dp"
-                    android:textSize="18sp" />
+                    android:clickable="false"
+                    app:hintTextAppearance="@style/TextAppearance.App.TextInputLayout"
+                    android:padding="0dp">
+                    <android.inputmethodservice.ExtractEditText
+                        android:id="@+id/pickup_date_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_gravity="center"
+                        android:hint="Ngày đóng hàng"
+                        android:editable="false"
+                        android:text="01-01-2016"
+                        android:textSize="18sp"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:background="@drawable/bg_edit_text"/>
+                </android.support.design.widget.TextInputLayout>
 
                 <ImageView
                     android:id="@+id/pickup_date_expand"
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical|right"
+                    android:layout_marginTop="9dp"
                     android:src="@drawable/v" />
             </FrameLayout>
 
@@ -72,16 +102,22 @@
                 android:layout_weight="0.6"
                 android:paddingRight="5dp">
 
-                <EditText
-                    android:id="@+id/good_weight_number"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/goods_weigth_number_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/edittext"
-                    android:hint="Tải trọng"
-                    android:inputType="numberDecimal"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp" />
+                    android:padding="0dp">
+                    <EditText
+                        android:id="@+id/good_weight_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:hint="Tải trọng"
+                        android:inputType="numberDecimal"
+                        android:padding="15dp"
+                        android:singleLine="true"
+                        android:background="@drawable/bg_edit_text"/>
+                </android.support.design.widget.TextInputLayout>
 
             </FrameLayout>
 
@@ -94,17 +130,19 @@
                 <TextView
                     android:id="@+id/good_weight_dimension"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="51dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/edittext"
+                    android:background="@drawable/bg_text_view"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp" />
+                    android:paddingRight="15dp"
+                    android:layout_marginTop="8dp"/>
 
                 <Spinner
                     android:id="@+id/dimension_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
+                    android:layout_height="51dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
                     android:paddingLeft="15dp">
 
                 </Spinner>
@@ -117,16 +155,23 @@
             android:layout_height="0dp"
             android:layout_weight="0.25"
             android:gravity="center">
-
-            <EditText
-                android:id="@+id/expected_price"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/expected_price_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/edittext"
-                android:hint="Giá mong muốn"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp" />
+                android:padding="0dp">
+                <EditText
+                    android:id="@+id/expected_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center"
+                    android:hint="Giá mong muốn"
+                    android:singleLine="true"
+                    android:padding="15dp"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/bg_edit_text"/>
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
     </LinearLayout>
