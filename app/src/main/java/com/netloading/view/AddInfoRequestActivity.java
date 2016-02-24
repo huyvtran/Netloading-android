@@ -7,13 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.netloading.R;
@@ -22,7 +17,6 @@ import com.netloading.utils.Constants;
 import com.netloading.utils.Utils;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -54,8 +48,8 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
     @Bind(R.id.good_weight_number)
     EditText mGoodWeightNumberEditText;
 
-    @Bind(R.id.dimension_spinner)
-    Spinner mDimensionSpinner;
+    @Bind(R.id.dimension_edit_text)
+    EditText mDimensionEditText;
 
     private Calendar myCalendar = Calendar.getInstance();
 
@@ -80,54 +74,22 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         setContentView(R.layout.new_request_activity);
         ButterKnife.bind(this);
 
-        setupSpinner();
-
+        setDimension();
     }
 
-    private void setupSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.dimension_item, Arrays.asList(
-                new String[]{"kg", "m³", "hehe"})) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+    private void setDimension() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String vehicleType = sharedPreferences.getString(Constants.LOAI_XE, "");
 
-                View v = super.getView(position, convertView, parent);
-                if (position == getCount()) {
-                    ((TextView) v.findViewById(R.id.vText)).setText("Đơn vị");
-                    ((TextView) v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
-                }
+        Utils.log(TAG, vehicleType);
 
-
-                return v;
-            }
-
-            @Override
-            public int getCount() {
-                return super.getCount() - 1; // you dont display last item. It is used as hint.
-            }
-        };
-
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        mDimensionSpinner.setAdapter(adapter);
-        mDimensionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    mDimension = "kg";
-                } else {
-                    mDimension = "m3";
-                }
-
-                Utils.log(TAG, mDimension);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        mDimensionSpinner.setSelection(adapter.getCount());
-
+        if (vehicleType == "xeTai" || vehicleType == "xeDongLanh") {
+            mDimension = "kg";
+            mDimensionEditText.setText("Kg");
+        } else {
+            mDimension = "m3";
+            mDimensionEditText.setText("m³");
+        }
     }
 
 
