@@ -64,6 +64,7 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         if (TextUtils.isEmpty(mPasswordEditText.getText())
                 || TextUtils.isEmpty(mUsernameEditText.getText())) {
             Utils.toast(this, "Vui lòng nhập thông tin đăng nhập");
+//            return;
         }
         showProgressDialog();
         String username = mUsernameEditText.getText().toString();

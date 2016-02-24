@@ -105,6 +105,7 @@
         </RelativeLayout>
 
         <ListView
+            android:id="@+id/pick_company_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
