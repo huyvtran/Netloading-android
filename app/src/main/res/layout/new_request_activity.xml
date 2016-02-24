@@ -148,7 +148,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:hint="Đơn vị"
-                        android:text="m³"
+                        android:text="kg"
                         android:editable="false"
                         android:clickable="false"
                         android:padding="5dp"
