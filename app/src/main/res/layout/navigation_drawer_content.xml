@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="240dp"
     android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize"
     android:background="@color/vBlue"
+    android:orientation="vertical"
+    android:paddingTop="?attr/actionBarSize"
     android:weightSum="2">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,129 +16,162 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/avatar_default"/>
+            android:src="@drawable/avatar_default" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.1"
-        android:weightSum="6"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="6">
 
-        <LinearLayout
+        <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:layout_weight="1">
 
-            <FrameLayout
-                android:layout_width="56dp"
-                android:layout_height="match_parent">
-                <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
+
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_quanlydonhang" />
+                </FrameLayout>
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_quanlydonhang"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:text="Quản lý đơn hàng"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quản lý đơn hàng"
-                android:layout_gravity="center_vertical"
-                android:textColor="#ffffff"
-                android:layout_marginLeft="16dp"/>
+            </LinearLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
-        </LinearLayout>
 
-        <LinearLayout
+        <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="8dp">
 
-            <FrameLayout
-                android:layout_width="56dp"
-                android:layout_height="match_parent">
-                <ImageView
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_quanlydonhang" />
+                </FrameLayout>
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_quanlydonhang"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:text="Quản lý yêu cầu"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quản lý yêu cầu"
-                android:layout_gravity="center_vertical"
-                android:textColor="#ffffff"
-                android:layout_marginLeft="16dp"/>
+            </LinearLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="8dp">
 
-            <FrameLayout
-                android:layout_width="56dp"
-                android:layout_height="match_parent">
-                <ImageView
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="3dp"
+                        android:src="@drawable/icon_profile" />
+                </FrameLayout>
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_profile"
-                    android:layout_marginLeft="3dp"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:text="Thông tin cá nhân"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Thông tin cá nhân"
-                android:layout_gravity="center_vertical"
-                android:textColor="#ffffff"
-                android:layout_marginLeft="16dp"/>
-
-        </LinearLayout>
+            </LinearLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
 
-        <LinearLayout
+
+        <com.balysv.materialripple.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingTop="8dp">
 
-            <FrameLayout
-                android:layout_width="56dp"
-                android:layout_height="match_parent">
-                <ImageView
+                <FrameLayout
+                    android:layout_width="56dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_dangxuat" />
+                </FrameLayout>
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_dangxuat"
-                    android:layout_gravity="center"/>
-            </FrameLayout>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="16dp"
+                    android:text="Đăng xuất"
+                    android:textColor="#ffffff" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đăng xuất"
-                android:layout_gravity="center_vertical"
-                android:textColor="#ffffff"
-                android:layout_marginLeft="16dp"/>
+            </LinearLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
