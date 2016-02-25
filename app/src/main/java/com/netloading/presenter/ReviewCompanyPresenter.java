@@ -90,9 +90,8 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
 
         Utils.log(TAG, acceptTripPOJO.toString());
 
-        //TODO - thay 1 = customer_id that
 
-        netloadingService.acceptTrip(1, acceptTripPOJO).enqueue(new Callback<ResponseBody>() {
+        netloadingService.acceptTrip(acceptTripPOJO).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 processing = false;

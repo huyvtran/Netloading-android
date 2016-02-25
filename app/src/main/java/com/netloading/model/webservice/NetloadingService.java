@@ -29,7 +29,7 @@ public interface NetloadingService {
     Call<ResponseBody> sendRequest(@Body RequestPOJO requestPOJO);
 
     @POST("/requests/accept")
-    Call<ResponseBody> acceptTrip(@Header("customer_id") int customer_id, @Body AcceptTripPOJO acceptTripPOJO);
+    Call<ResponseBody> acceptTrip(@Body AcceptTripPOJO acceptTripPOJO);
 
 
     @DELETE("/requests/{id}")
