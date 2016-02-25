@@ -4,4 +4,6 @@
     <string name="policy_title">Bằng cách nhấp vào đăng ký, bạn đồng ý với các điều khoản dịch vụ của chúng tôi</string>
     <string name="gcm_defaultSenderId">369873559475</string>
     <string name="google_app_id">369873559475</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>

@@ -5,7 +5,7 @@ package com.netloading.utils;
  */
 public class Constants {
 
-    public static final String API_BASE_URL = "http://192.168.32.102:3000";
+    public static final String API_BASE_URL = "http://192.168.0.101:3000";
 
     public static final String SHARED_PREFERENCE_ID_TAG = "id tag";
     public static final String MA_HUYEN_DI = "ma huyen di";
