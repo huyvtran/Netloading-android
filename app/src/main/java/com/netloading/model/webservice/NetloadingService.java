@@ -1,5 +1,6 @@
 package com.netloading.model.webservice;
 
+import com.netloading.model.pojo.AcceptTripPOJO;
 import com.netloading.model.pojo.GCMTokenPOJO;
 import com.netloading.model.pojo.RequestPOJO;
 
@@ -8,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -25,6 +27,9 @@ public interface NetloadingService {
 
     @POST("/requests")
     Call<ResponseBody> sendRequest(@Body RequestPOJO requestPOJO);
+
+    @POST("/requests/accept")
+    Call<ResponseBody> acceptTrip(@Header("customer_id") int customer_id, @Body AcceptTripPOJO acceptTripPOJO);
 
 
     @DELETE("/requests/{id}")

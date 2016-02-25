@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.netloading.R;
@@ -22,7 +21,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
-import butterknife.OnItemSelected;
 
 /**
  * Created by Dandoh on 2/24/16.
@@ -47,7 +45,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Bind(R.id.swipe_to_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private ArrayList<CompanyTripPOJO> companyPOJOs;
+    private ArrayList<CompanyTripPOJO> companyTripPOJOs;
 
 
     public static Intent makeIntent(Context context, ArrayList<CompanyTripPOJO> companyPOJOList, int id) {
@@ -102,21 +100,29 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     }
 
 
-    private void showList(ArrayList<CompanyTripPOJO> companyPOJOs) {
-        this.companyPOJOs = companyPOJOs;
+    private void showList(ArrayList<CompanyTripPOJO> companyTripPOJOs) {
+        this.companyTripPOJOs = companyTripPOJOs;
+
+        Utils.log(TAG, companyTripPOJOs.size() + "");
 
         mNotFoundLayout.setVisibility(View.INVISIBLE);
         mCompanyListView.setVisibility(View.VISIBLE);
-        mCompanyListAdapter = new CompanyListAdapter(this, companyPOJOs);
+        mCompanyListAdapter = new CompanyListAdapter(this, companyTripPOJOs);
+
+        Utils.log(TAG, mCompanyListAdapter.getCount() + " ListAdapterCount");
+
         mCompanyListView.setAdapter(mCompanyListAdapter);
 
     }
 
     @OnItemClick(R.id.pick_company_list)
     void onCompanyItemClick(int position) {
-        int company_id = companyPOJOs.get(position).getCompany_id();
+        int company_id = companyTripPOJOs.get(position).getCompany_id();
+        int trip_id = companyTripPOJOs.get(position).getId();
+        Utils.log(TAG, "request_id: " + requestId);
+        Utils.log(TAG, "trip_id : " + trip_id);
 
-        Intent intent = ReviewCompanyActivity.makeIntent(getApplicationContext(), company_id);
+        Intent intent = ReviewCompanyActivity.makeIntent(getApplicationContext(), company_id, requestId, trip_id);
         startActivity(intent);
     }
 
@@ -149,10 +155,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     }
 
     @Override
-    public void onRetrySuccess(ArrayList<CompanyTripPOJO> companyPOJOs) {
+    public void onRetrySuccess(ArrayList<CompanyTripPOJO> companyTripPOJOs) {
 
-        if (companyPOJOs.size() > 0) {
-            showList(companyPOJOs);
+        if (companyTripPOJOs.size() > 0) {
+            showList(companyTripPOJOs);
         } else {
             mNotFoundLayout.setVisibility(View.VISIBLE);
             mCompanyListView.setVisibility(View.INVISIBLE);

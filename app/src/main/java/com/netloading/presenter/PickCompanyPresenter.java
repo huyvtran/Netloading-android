@@ -91,13 +91,13 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
                         JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
                         Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
                         }.getType();
-                        ArrayList<CompanyTripPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
+                        ArrayList<CompanyTripPOJO> companyTripPOJOs = gson.fromJson(companiesArray.toString(), listType);
 
                         // Get request id
-                        Utils.log(TAG, companyPOJOs.size() + " ");
+                        Utils.log(TAG, companyTripPOJOs.size() + " ");
 
                         /// TODO - on result
-                        mView.get().onRetrySuccess(companyPOJOs);
+                        mView.get().onRetrySuccess(companyTripPOJOs);
 
                     } else {
                         mView.get().onError(View.STATUS_NETWORK_ERROR);
@@ -125,7 +125,7 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
 
         void onError(int status);
 
-        void onRetrySuccess(ArrayList<CompanyTripPOJO> companyPOJOs);
+        void onRetrySuccess(ArrayList<CompanyTripPOJO> companyTripPOJOs);
     }
 
 

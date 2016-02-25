@@ -128,10 +128,10 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
 //            return;
 //        }
 
-        String goodName = "hehe";//mGoodsNameEditText.getText().toString();
-        int goodWeightNumber = 12;//Integer.parseInt(mGoodWeightNumberEditText.getText().toString());
+        String goodName = "Bánh kẹo";//mGoodsNameEditText.getText().toString();
+        int goodWeightNumber = 500;//Integer.parseInt(mGoodWeightNumberEditText.getText().toString());
         String date = "2016-02-26";//mDateTextView.getText().toString();
-        String expectedPrice = "2938293";//mExpectedPriceEditText.getText().toString();
+        String expectedPrice = "1000000";//mExpectedPriceEditText.getText().toString();
 
 
         /// save into preference

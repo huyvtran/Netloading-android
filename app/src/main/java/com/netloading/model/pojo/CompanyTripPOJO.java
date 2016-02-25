@@ -116,4 +116,8 @@ public class CompanyTripPOJO implements Parcelable {
     public int getCompany_id() {
         return company_id;
     }
+
+    public int getId() {
+        return id;
+    }
 }

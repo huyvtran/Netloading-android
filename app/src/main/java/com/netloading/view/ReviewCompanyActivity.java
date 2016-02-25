@@ -10,11 +10,13 @@ import com.netloading.R;
 import com.netloading.common.GenericActivity;
 import com.netloading.model.pojo.CompanyPOJO;
 import com.netloading.presenter.ReviewCompanyPresenter;
+import com.netloading.utils.Utils;
 
 import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.internal.Util;
 
 /**
@@ -24,7 +26,9 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
     implements ReviewCompanyPresenter.View {
 
     private static final String EXTRA_COMPANY_ID = "extra_company_id";
-    private int mCompanyId;
+    private static final String EXTRA_REQUEST_ID = "extra request id";
+    private static final String EXTRA_TRIP_ID = "extra trip id";
+    private int mCompanyId, mRequestId, mTripId;
     private ProgressDialog mProgressDialog;
 
     @Bind(R.id.company_address_tv)
@@ -42,9 +46,16 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
     @Bind(R.id.company_website_tv)
     TextView mWebsiteTextView;
 
+    @Bind(R.id.company_name_tv)
+    TextView mCompanyNameTextView;
 
-    public static Intent makeIntent(Context context, int company_id) {
-        return new Intent(context, ReviewCompanyActivity.class).putExtra(EXTRA_COMPANY_ID, company_id);
+    @Bind(R.id.accept_trip_btn)
+    TextView mAcceptTripButton;
+
+
+    public static Intent makeIntent(Context context, int company_id, int request_id, int trip_id) {
+        return new Intent(context, ReviewCompanyActivity.class).putExtra(EXTRA_COMPANY_ID, company_id)
+                .putExtra(EXTRA_REQUEST_ID, request_id).putExtra(EXTRA_TRIP_ID, trip_id);
     }
 
 
@@ -59,6 +70,8 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
         super.onCreate(savedInstanceState, ReviewCompanyPresenter.class, this);
 
         mCompanyId = getIntent().getIntExtra(EXTRA_COMPANY_ID, -1);
+        mRequestId = getIntent().getIntExtra(EXTRA_REQUEST_ID, -1);
+        mTripId = getIntent().getIntExtra(EXTRA_TRIP_ID, -1);
 
         mProgressDialog = new ProgressDialog(this);
 
@@ -84,6 +97,11 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
     public void onError(int status) {
     }
 
+    @OnClick(R.id.accept_trip_btn)
+    public void onAcceptTripClick() {
+        getOps().acceptTrip(mRequestId, mTripId);
+    }
+
     @Override
     public void updateCompanyInfo(CompanyPOJO companyInfo) {
 
@@ -92,9 +110,14 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
         mFaxTextView.setText(companyInfo.getFax());
         mEmailTextView.setText(companyInfo.getEmail());
         mWebsiteTextView.setText(companyInfo.getWebsite());
+        mCompanyNameTextView.setText(companyInfo.getName());
 
         mProgressDialog.dismiss();
-
-
     }
+
+    @Override
+    public void handleAcceptTripDone() {
+        Utils.toast(getApplicationContext(), "chờ notification");
+    }
+
 }
