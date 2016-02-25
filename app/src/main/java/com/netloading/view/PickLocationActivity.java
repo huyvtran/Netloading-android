@@ -6,7 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +89,8 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
         ButterKnife.bind(this);
 
+        initializeEssentialView();
+
         ImageButton continueButton = (ImageButton) findViewById(R.id.pick_continue);
 //        continueButton.setBackgroundColor(Color.argb(100, 0, 0, 0));
 
@@ -107,6 +112,21 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
         SetUpSpinner();
 
+    }
+
+    private void initializeEssentialView() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private void SetUpSpinner() {

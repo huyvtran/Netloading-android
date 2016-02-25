@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="240dp"
     android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize"
     android:background="@color/vBlue"
     android:weightSum="2">
     <LinearLayout
