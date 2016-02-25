@@ -8,8 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.netloading.R;
-import com.netloading.model.pojo.CompanyPOJO;
-import com.netloading.model.pojo.RequestPOJO;
+import com.netloading.model.pojo.CompanyTripPOJO;
 
 import java.util.List;
 
@@ -20,11 +19,11 @@ public class CompanyListAdapter extends BaseAdapter {
 
 
     private Context context;
-    private List<CompanyPOJO> companyPOJOs;
+    private List<CompanyTripPOJO> companyPOJOs;
 
 
 
-    public CompanyListAdapter(Context context, List<CompanyPOJO> companyPOJOs) {
+    public CompanyListAdapter(Context context, List<CompanyTripPOJO> companyPOJOs) {
         this.context = context;
         this.companyPOJOs = companyPOJOs;
     }

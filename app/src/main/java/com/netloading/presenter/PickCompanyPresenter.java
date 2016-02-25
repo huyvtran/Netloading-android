@@ -1,17 +1,21 @@
 package com.netloading.presenter;
 
-import android.app.Service;
-
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.netloading.common.ConfigurableOps;
 import com.netloading.common.ContextView;
+import com.netloading.model.pojo.CompanyTripPOJO;
 import com.netloading.model.webservice.ServiceGenerator;
 import com.netloading.utils.Utils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -70,6 +74,49 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
         return processing;
     }
 
+    public void retry(int requestId) {
+
+        ServiceGenerator.getNetloadingService().retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+
+                    JSONObject result = new JSONObject(response.body().string());
+
+                    Utils.log(TAG, result.toString());
+                    if (result.getString("status").equals("success")) {
+
+                        // Get company list
+                        Gson gson = new Gson();
+                        JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
+                        Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
+                        }.getType();
+                        ArrayList<CompanyTripPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
+
+                        // Get request id
+                        Utils.log(TAG, companyPOJOs.size() + " ");
+
+                        /// TODO - on result
+                        mView.get().onRetrySuccess(companyPOJOs);
+
+                    } else {
+                        mView.get().onError(View.STATUS_NETWORK_ERROR);
+                    }
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                    mView.get().onError(View.STATUS_NETWORK_ERROR);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     public interface View extends ContextView {
         int STATUS_NETWORK_ERROR =  234;
         int STATUS_UNHANDLED_ERROR = 252;
@@ -77,6 +124,8 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
         void onDeleteSuccess();
 
         void onError(int status);
+
+        void onRetrySuccess(ArrayList<CompanyTripPOJO> companyPOJOs);
     }
 
 

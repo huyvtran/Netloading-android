@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
-import com.netloading.model.pojo.CompanyPOJO;
-import com.netloading.model.pojo.RequestPOJO;
+import com.netloading.model.pojo.CompanyTripPOJO;
 import com.netloading.presenter.ReviewRequestPresenter;
 import com.netloading.utils.Constants;
 import com.netloading.utils.Utils;
@@ -138,7 +137,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     }
 
     @Override
-    public void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, int requestId) {
+    public void onRequestResult(ArrayList<CompanyTripPOJO> companyPOJOs, int requestId) {
         mProgressDialog.dismiss();
 
         Intent intent = PickCompanyActivity.makeIntent(this, companyPOJOs, requestId);

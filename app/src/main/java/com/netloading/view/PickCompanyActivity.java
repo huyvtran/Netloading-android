@@ -4,29 +4,31 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
-import com.netloading.model.pojo.CompanyPOJO;
-import com.netloading.model.pojo.RequestPOJO;
+import com.netloading.model.pojo.CompanyTripPOJO;
 import com.netloading.presenter.PickCompanyPresenter;
 import com.netloading.utils.Utils;
 import com.netloading.view.adapter.CompanyListAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
+import butterknife.OnItemSelected;
 
 /**
  * Created by Dandoh on 2/24/16.
  */
 public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.View, PickCompanyPresenter>
-        implements PickCompanyPresenter.View {
+        implements PickCompanyPresenter.View, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String COMPANY_POJO_EXTRA = "company pojo extra";
     private static final String REQUEST_ID_EXTRA = "request id extra";
@@ -42,8 +44,13 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Bind(R.id.company_not_found_layout)
     View mNotFoundLayout;
 
+    @Bind(R.id.swipe_to_refresh)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-    public static Intent makeIntent(Context context, ArrayList<CompanyPOJO> companyPOJOList, int id) {
+    private ArrayList<CompanyTripPOJO> companyPOJOs;
+
+
+    public static Intent makeIntent(Context context, ArrayList<CompanyTripPOJO> companyPOJOList, int id) {
         Intent intent = new Intent(context, PickCompanyActivity.class)
                 .putParcelableArrayListExtra(COMPANY_POJO_EXTRA, companyPOJOList)
                 .putExtra(REQUEST_ID_EXTRA, id);
@@ -69,7 +76,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         // Get input
         // company list
-        ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
+        ArrayList<CompanyTripPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
         if (companyPOJOs.size() > 0) {
             showList(companyPOJOs);
         } else {
@@ -79,6 +86,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         // request id
         requestId = getIntent().getIntExtra(REQUEST_ID_EXTRA, 0);
+
+
+        //swipe to refresh
+        mSwipeRefreshLayout.setOnRefreshListener(this);
 
     }
 
@@ -91,7 +102,9 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     }
 
 
-    private void showList(ArrayList<CompanyPOJO> companyPOJOs) {
+    private void showList(ArrayList<CompanyTripPOJO> companyPOJOs) {
+        this.companyPOJOs = companyPOJOs;
+
         mNotFoundLayout.setVisibility(View.INVISIBLE);
         mCompanyListView.setVisibility(View.VISIBLE);
         mCompanyListAdapter = new CompanyListAdapter(this, companyPOJOs);
@@ -99,7 +112,13 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
     }
 
+    @OnItemClick(R.id.pick_company_list)
+    void onCompanyItemClick(int position) {
+        int company_id = companyPOJOs.get(position).getCompany_id();
 
+        Intent intent = ReviewCompanyActivity.makeIntent(getApplicationContext(), company_id);
+        startActivity(intent);
+    }
 
     @OnClick(R.id.delete_request_btn)
     void deleteRequest() {
@@ -125,5 +144,28 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         } else {
             Utils.toast(this, "Đã có lỗi xảy ra, vui lòng thử lại");
         }
+
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onRetrySuccess(ArrayList<CompanyTripPOJO> companyPOJOs) {
+
+        if (companyPOJOs.size() > 0) {
+            showList(companyPOJOs);
+        } else {
+            mNotFoundLayout.setVisibility(View.VISIBLE);
+            mCompanyListView.setVisibility(View.INVISIBLE);
+        }
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+
+    @Override
+    public void onRefresh() {
+        Utils.log(TAG, "On refresh");
+
+        getOps().retry(requestId);
+
     }
 }

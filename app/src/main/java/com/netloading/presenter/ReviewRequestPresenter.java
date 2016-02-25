@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.netloading.common.ConfigurableOps;
 import com.netloading.common.ContextView;
-import com.netloading.model.pojo.CompanyPOJO;
+import com.netloading.model.pojo.CompanyTripPOJO;
 import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.model.webservice.NetloadingService;
 import com.netloading.model.webservice.ServiceGenerator;
@@ -75,9 +75,9 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                         // Get company list
                         Gson gson = new Gson();
                         JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
-                        Type listType = new TypeToken<ArrayList<CompanyPOJO>>() {
+                        Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
                         }.getType();
-                        ArrayList<CompanyPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
+                        ArrayList<CompanyTripPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
 
                         // Get request id
                         int id = result.getJSONObject("message").getInt("insertId");
@@ -115,6 +115,6 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
 
         void onError(int status);
 
-        void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, int requestId);
+        void onRequestResult(ArrayList<CompanyTripPOJO> companyPOJOs, int requestId);
     }
 }

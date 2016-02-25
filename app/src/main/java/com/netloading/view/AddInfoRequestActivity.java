@@ -113,23 +113,25 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
 
     @OnClick(R.id.btn_continue)
     void continueToReviewRequest() {
-        if (TextUtils.isEmpty(mGoodsNameEditText.getText())
-                || TextUtils.isEmpty(mGoodWeightNumberEditText.getText())
-                || TextUtils.isEmpty(mDateTextView.getText())) {
-            Utils.toast(this, "Vui lòng điền đầy đủ các thông về yêu cầu chở hàng");
-            return;
-        }
+        // TODO - uncomment this
 
+//        if (TextUtils.isEmpty(mGoodsNameEditText.getText())
+//                || TextUtils.isEmpty(mGoodWeightNumberEditText.getText())
+//                || TextUtils.isEmpty(mDateTextView.getText())) {
+//            Utils.toast(this, "Vui lòng điền đầy đủ các thông về yêu cầu chở hàng");
+//            return;
+//        }
+//
+//
+//        if (myCalendar.before(Calendar.getInstance())) {
+//            Utils.toast(this, "Ngày đóng hàng không hợp lệ");
+//            return;
+//        }
 
-        if (myCalendar.before(Calendar.getInstance())) {
-            Utils.toast(this, "Ngày đóng hàng không hợp lệ");
-            return;
-        }
-
-        String goodName = mGoodsNameEditText.getText().toString();
-        int goodWeightNumber = Integer.parseInt(mGoodWeightNumberEditText.getText().toString());
-        String date = mDateTextView.getText().toString();
-        String expectedPrice = mExpectedPriceEditText.getText().toString();
+        String goodName = "hehe";//mGoodsNameEditText.getText().toString();
+        int goodWeightNumber = 12;//Integer.parseInt(mGoodWeightNumberEditText.getText().toString());
+        String date = "2016-02-26";//mDateTextView.getText().toString();
+        String expectedPrice = "2938293";//mExpectedPriceEditText.getText().toString();
 
 
         /// save into preference
