@@ -33,8 +33,10 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:onClick="onNavigationItemClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/navigation_manage_trips"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"
@@ -69,6 +71,8 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <LinearLayout
+                android:onClick="onNavigationItemClick"
+                android:id="@+id/navigation_manage_requests"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -104,6 +108,8 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <LinearLayout
+                android:onClick="onNavigationItemClick"
+                android:id="@+id/navigation_manage_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -142,9 +148,11 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <LinearLayout
+                android:onClick="onNavigationItemClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:id="@+id/navigation_sign_out"
                 android:orientation="horizontal"
                 android:paddingBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
