@@ -76,6 +76,8 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
     List<Integer> denListPosition = new ArrayList<Integer>();
     private String vehicleType = "xeTai";
 
+    private NetloadingNavigationHandler mNavigationHandler;
+
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, PickLocationActivity.class);
@@ -114,6 +116,13 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
     }
 
+    /**
+     * Step to add drawer navigation
+     * + Add toolbar like this activity toolbar
+     * + Wrap drawer_layout outside
+     * + Add left_drawer
+     * + Copy this code
+     */
     private void initializeEssentialView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -127,7 +136,17 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        this.mNavigationHandler = new NetloadingNavigationHandler(this);
     }
+
+    public void onNavigationItemClick(View view) {
+        mNavigationHandler.onNavigationItemClick(view);
+    }
+
+    /**
+     * Navigation part end here
+     */
 
     private void SetUpSpinner() {
         tinhDiSpinner = (Spinner) findViewById(R.id.tinh_di);
@@ -233,6 +252,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         this.map = map;
     }
+
 
     private class TinhSelectedEvent implements AdapterView.OnItemSelectedListener {
 
