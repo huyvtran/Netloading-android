@@ -122,6 +122,8 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         mProgressDialog.dismiss();
         if (status == STATUS_NETWORK_ERROR) {
             Utils.toast(this, "Lỗi đường truyền, vui lòng thử lại");
+        } else {
+            Utils.toast(this, "Đã có lỗi xảy ra, vui lòng thử lại");
         }
     }
 }

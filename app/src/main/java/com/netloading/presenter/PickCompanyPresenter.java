@@ -5,6 +5,7 @@ import android.app.Service;
 import com.netloading.common.ConfigurableOps;
 import com.netloading.common.ContextView;
 import com.netloading.model.webservice.ServiceGenerator;
+import com.netloading.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ import retrofit2.Response;
  * Created by Dandoh on 2/24/16.
  */
 public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresenter.View> {
+    private static final String TAG = "PickCompanyPresenter";
     private WeakReference<View> mView;
     private boolean processing;
 
@@ -41,8 +43,12 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
                 try {
                     JSONObject result = new JSONObject(response.body().string());
 
-                    if (result.getString("message").equals("success")) {
+                    Utils.log(TAG, result.toString());
+
+                    if (result.getString("status").equals("success")) {
                         mView.get().onDeleteSuccess();
+                    } else {
+                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
@@ -66,6 +72,7 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
 
     public interface View extends ContextView {
         int STATUS_NETWORK_ERROR =  234;
+        int STATUS_UNHANDLED_ERROR = 252;
 
         void onDeleteSuccess();
 
