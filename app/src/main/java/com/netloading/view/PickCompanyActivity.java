@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,8 +29,12 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         implements PickCompanyPresenter.View {
 
     private static final String COMPANY_POJO_EXTRA = "company pojo extra";
+    private static final String REQUEST_ID_EXTRA = "request id extra";
+    private int requestId;
 
     private CompanyListAdapter mCompanyListAdapter;
+
+    private ProgressDialog mProgressDialog;
 
     @Bind(R.id.pick_company_list)
     ListView mCompanyListView;
@@ -38,9 +43,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     View mNotFoundLayout;
 
 
-    public static Intent makeIntent(Context context, ArrayList<CompanyPOJO> companyPOJOList) {
+    public static Intent makeIntent(Context context, ArrayList<CompanyPOJO> companyPOJOList, int id) {
         Intent intent = new Intent(context, PickCompanyActivity.class)
-                .putParcelableArrayListExtra(COMPANY_POJO_EXTRA, companyPOJOList);
+                .putParcelableArrayListExtra(COMPANY_POJO_EXTRA, companyPOJOList)
+                .putExtra(REQUEST_ID_EXTRA, id);
 
         return intent;
     }
@@ -56,6 +62,13 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);
 
+        mProgressDialog = new ProgressDialog(this);
+        if (getOps().isProcessing()) {
+            showProgressDialog();
+        }
+
+        // Get input
+        // company list
         ArrayList<CompanyPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
         if (companyPOJOs.size() > 0) {
             showList(companyPOJOs);
@@ -64,6 +77,17 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
             mCompanyListView.setVisibility(View.INVISIBLE);
         }
 
+        // request id
+        requestId = getIntent().getIntExtra(REQUEST_ID_EXTRA, 0);
+
+    }
+
+    private void showProgressDialog() {
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle("Đang xử lí");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
+        mProgressDialog.show();
     }
 
 
@@ -77,12 +101,27 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
 
 
-//    @OnClick(R.id.delete_request_btn)
-//    private void deleteRequest() {
-//        getOps().
-//    }
+    @OnClick(R.id.delete_request_btn)
+    void deleteRequest() {
+        showProgressDialog();
+        getOps().deleteRequest(requestId);
+    }
 
+    @Override
+    public void onDeleteSuccess() {
+        mProgressDialog.dismiss();
+        Utils.toast(this, "Xoá yêu cầu vận tải thành công");
 
+        Intent intent = PickLocationActivity.makeIntent(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 
-
+    @Override
+    public void onError(int status) {
+        mProgressDialog.dismiss();
+        if (status == STATUS_NETWORK_ERROR) {
+            Utils.toast(this, "Lỗi đường truyền, vui lòng thử lại");
+        }
+    }
 }
