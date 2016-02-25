@@ -3,12 +3,11 @@ package com.netloading.model.pojo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-
 /**
  * Created by Dandoh on 2/20/16.
  */
-public class RequestPOJO implements Serializable, Parcelable {
+public class RequestPOJO implements Parcelable {
+
     private final String pickup_date;
     private final String goods_weight_dimension;
     private final int goods_weight_number;
@@ -17,11 +16,18 @@ public class RequestPOJO implements Serializable, Parcelable {
     private final String vehicle_type;
     private final String expected_price;
     private final String goods_name;
+    private String start_province_name;
+    private String arrive_province_name;
+    private String start_district_name;
+    private String arrive_district_name;
+    private int id;
 
     public RequestPOJO(String pickUpDate, String goodsWeightDimension,
                        int goodsWeightNumber, int startDistrictCode,
                        int arriveDistrictCode, String vehicleType,
-                       String expectedPrice, String goodsName) {
+                       String expectedPrice, String goodsName,
+                       String startProvinceName, String arriveProvinceName,
+                       String startDistrictName, String arriveDistrictName) {
 
         this.pickup_date = pickUpDate;
         this.goods_weight_dimension = goodsWeightDimension;
@@ -31,6 +37,10 @@ public class RequestPOJO implements Serializable, Parcelable {
         this.vehicle_type = vehicleType;
         this.expected_price = expectedPrice;
         this.goods_name = goodsName;
+        this.start_province_name = startProvinceName;
+        this.arrive_province_name = arriveProvinceName;
+        this.start_district_name = startDistrictName;
+        this.arrive_district_name = arriveDistrictName;
     }
 
     public int getGoods_weight_number() {
@@ -61,20 +71,6 @@ public class RequestPOJO implements Serializable, Parcelable {
         return expected_price;
     }
 
-    @Override
-    public String toString() {
-        return "RequestPOJO{" +
-                "pickup_date='" + pickup_date + '\'' +
-                ", goods_weight_dimension='" + goods_weight_dimension + '\'' +
-                ", goods_weight_number=" + goods_weight_number +
-                ", start_address=" + start_address +
-                ", arrive_address=" + arrive_address +
-                ", vehicle_type='" + vehicle_type + '\'' +
-                ", expected_price='" + expected_price + '\'' +
-                ", goods_name='" + goods_name + '\'' +
-                '}';
-    }
-
 
     @Override
     public int describeContents() {
@@ -91,6 +87,11 @@ public class RequestPOJO implements Serializable, Parcelable {
         dest.writeString(this.vehicle_type);
         dest.writeString(this.expected_price);
         dest.writeString(this.goods_name);
+        dest.writeString(this.start_province_name);
+        dest.writeString(this.arrive_province_name);
+        dest.writeString(this.start_district_name);
+        dest.writeString(this.arrive_district_name);
+        dest.writeInt(this.id);
     }
 
     private RequestPOJO(Parcel in) {
@@ -102,6 +103,11 @@ public class RequestPOJO implements Serializable, Parcelable {
         this.vehicle_type = in.readString();
         this.expected_price = in.readString();
         this.goods_name = in.readString();
+        this.start_province_name = in.readString();
+        this.arrive_province_name = in.readString();
+        this.start_district_name = in.readString();
+        this.arrive_district_name = in.readString();
+        this.id = in.readInt();
     }
 
     public static final Parcelable.Creator<RequestPOJO> CREATOR = new Parcelable.Creator<RequestPOJO>() {

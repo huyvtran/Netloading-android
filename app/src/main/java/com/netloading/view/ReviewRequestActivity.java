@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import com.netloading.model.pojo.CompanyPOJO;
 import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.presenter.ReviewRequestPresenter;
 import com.netloading.utils.Constants;
+import com.netloading.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,9 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     @Bind(R.id.expected_price)
     TextView mExpectedPriceTextView;
 
+
+    private ProgressDialog mProgressDialog;
+
     private String startProvinceName;
     private String startDistrictName;
     private String arriveProvinceName;
@@ -72,6 +77,19 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         super.onCreate(savedInstanceState, ReviewRequestPresenter.class, this);
 
         loadRequestInformation();
+        mProgressDialog = new ProgressDialog(this);
+
+        if (getOps().isProcessing()) {
+            showProgressDialog();
+        }
+    }
+
+    private void showProgressDialog() {
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle("Đang xử lí");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
+        mProgressDialog.show();
     }
 
     private void loadRequestInformation() {
@@ -102,19 +120,30 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
 
     @OnClick(R.id.send_request)
     void sendRequest() {
+        showProgressDialog();
         getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
-                startDistrictCode, arriveDistrictCode, vehicleType, expectedPrice, goodsName);
+                startDistrictCode, arriveDistrictCode, vehicleType,
+                expectedPrice, goodsName,
+                startProvinceName, arriveProvinceName,
+                startDistrictName, arriveDistrictName);
     }
 
     @Override
     public void onError(int status) {
+        mProgressDialog.dismiss();
 
+        if (status == STATUS_ERROR_NETWORK) {
+            Utils.toast(this, "Lỗi đường truyền, vui lòng thử lại");
+        }
     }
 
     @Override
     public void onRequestResult(ArrayList<CompanyPOJO> companyPOJOs, int requestId) {
+        mProgressDialog.dismiss();
+
         Intent intent = PickCompanyActivity.makeIntent(this, companyPOJOs, requestId);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 }

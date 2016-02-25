@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
     private CompanyListAdapter mCompanyListAdapter;
 
+    private ProgressDialog mProgressDialog;
+
     @Bind(R.id.pick_company_list)
     ListView mCompanyListView;
 
@@ -59,6 +62,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);
 
+        mProgressDialog = new ProgressDialog(this);
+        if (getOps().isProcessing()) {
+            showProgressDialog();
+        }
 
         // Get input
         // company list
@@ -75,6 +82,14 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
     }
 
+    private void showProgressDialog() {
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle("Đang xử lí");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
+        mProgressDialog.show();
+    }
+
 
     private void showList(ArrayList<CompanyPOJO> companyPOJOs) {
         mNotFoundLayout.setVisibility(View.INVISIBLE);
@@ -87,13 +102,26 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
 
     @OnClick(R.id.delete_request_btn)
-    private void deleteRequest() {
+    void deleteRequest() {
+        showProgressDialog();
         getOps().deleteRequest(requestId);
     }
 
     @Override
     public void onDeleteSuccess() {
+        mProgressDialog.dismiss();
+        Utils.toast(this, "Xoá yêu cầu vận tải thành công");
+
         Intent intent = PickLocationActivity.makeIntent(this);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onError(int status) {
+        mProgressDialog.dismiss();
+        if (status == STATUS_NETWORK_ERROR) {
+            Utils.toast(this, "Lỗi đường truyền, vui lòng thử lại");
+        }
     }
 }

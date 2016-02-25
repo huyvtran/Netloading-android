@@ -22,6 +22,7 @@ import retrofit2.Response;
  */
 public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresenter.View> {
     private WeakReference<View> mView;
+    private boolean processing;
 
     @Override
     public void onConfiguration(View view, boolean firstTimeIn) {
@@ -29,10 +30,14 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
     }
 
     public void deleteRequest(int requestId) {
+        processing = true;
+
         ServiceGenerator.getNetloadingService()
                 .deleteRequest(requestId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                processing = false;
+
                 try {
                     JSONObject result = new JSONObject(response.body().string());
 
@@ -41,18 +46,30 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
+
+                    mView.get().onError(View.STATUS_NETWORK_ERROR);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                processing = false;
 
+                mView.get().onError(View.STATUS_NETWORK_ERROR);
             }
         });
     }
 
+    public boolean isProcessing() {
+        return processing;
+    }
+
     public interface View extends ContextView {
+        int STATUS_NETWORK_ERROR =  234;
+
         void onDeleteSuccess();
+
+        void onError(int status);
     }
 
 
