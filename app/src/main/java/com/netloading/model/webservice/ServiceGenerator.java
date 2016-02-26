@@ -106,6 +106,7 @@ public class ServiceGenerator {
                         Request modifiedRequest = request.newBuilder()
                                 .addHeader("token", getAccessToken())
                                 .addHeader("customer_id", id + "")
+                                .addHeader("account_type", "customer")
                                 .build();
 
 

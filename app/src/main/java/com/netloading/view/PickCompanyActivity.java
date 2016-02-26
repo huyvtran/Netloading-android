@@ -132,6 +132,12 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         getOps().deleteRequest(requestId);
     }
 
+    @OnClick(R.id.wait_other_btn)
+    void onWaitOtherClick() {
+        Intent intent = RequestListActivity.makeIntent(getApplicationContext());
+        startActivity(intent);
+    }
+
     @Override
     public void onDeleteSuccess() {
         mProgressDialog.dismiss();

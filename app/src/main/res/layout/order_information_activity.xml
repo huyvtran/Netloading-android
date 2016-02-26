@@ -9,7 +9,7 @@
         android:layout_height="56dp"
         android:layout_alignParentTop="true">
         <TextView
-            android:id="@+id/request_title"
+            android:id="@+id/order_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đơn hàng 1"
@@ -62,10 +62,12 @@
                         android:layout_height="wrap_content"
                         android:text="Công ty"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
+                        android:id="@+id/company_name_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Công ty TNHH BLABLABABLLBL bLABLas fdbalsdbflasdf"
@@ -109,10 +111,12 @@
                         android:layout_height="wrap_content"
                         android:text="Điểm đi"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
+                        android:id="@+id/start_address_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Can Lộc, Hà Tĩnh"
@@ -156,10 +160,12 @@
                         android:layout_height="wrap_content"
                         android:text="Điểm đến"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
+                        android:id="@+id/arrive_address_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Đống Đa, Hà Nội"
@@ -203,10 +209,12 @@
                         android:layout_height="wrap_content"
                         android:text="Tình trạng"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
+                        android:id="@+id/order_status_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Đang chờ"
@@ -250,10 +258,12 @@
                         android:layout_height="wrap_content"
                         android:text="Tên hàng"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
+                        android:id="@+id/good_name_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bánh kẹo"
@@ -297,10 +307,12 @@
                         android:layout_height="wrap_content"
                         android:text="Tải trọng"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
+                        android:id="@+id/good_weight_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0.2 tấn"
@@ -344,10 +356,12 @@
                         android:layout_height="wrap_content"
                         android:text="Giá"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         android:textColor="@color/vBlue"
                         android:layout_marginLeft="10dp"/>
 
                     <TextView
+                        android:id="@+id/order_price_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2.000.000 VNĐ"

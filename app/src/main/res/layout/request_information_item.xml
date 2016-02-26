@@ -27,7 +27,7 @@
         android:textColor="@color/vBlue"/>
 
     <TextView
-        android:id="@+id/company_name_tv"
+        android:id="@+id/request_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Yêu cầu 1"

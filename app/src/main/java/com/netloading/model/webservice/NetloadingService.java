@@ -31,6 +31,9 @@ public interface NetloadingService {
     @POST("/requests/accept")
     Call<ResponseBody> acceptTrip(@Body AcceptTripPOJO acceptTripPOJO);
 
+    @GET("/requests")
+    Call<ResponseBody> getAllRequestOfCustomer();
+
 
     @DELETE("/requests/{id}")
     Call<ResponseBody> deleteRequest(@Path("id") int requestId);
@@ -38,6 +41,7 @@ public interface NetloadingService {
     @GET("/requests/retry/{id}")
     Call<ResponseBody> retryRequest(@Path("id") int requestId);
 
-
+    @GET("/orders")
+    Call<ResponseBody> getAllOrdersOfCustomer();
 
 }

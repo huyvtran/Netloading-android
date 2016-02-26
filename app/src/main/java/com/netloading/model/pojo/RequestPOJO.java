@@ -21,6 +21,7 @@ public class RequestPOJO implements Parcelable {
     private String start_district_name;
     private String arrive_district_name;
     private int id;
+    private int status;
 
     public RequestPOJO(String pickUpDate, String goodsWeightDimension,
                        int goodsWeightNumber, int startDistrictCode,
@@ -71,6 +72,49 @@ public class RequestPOJO implements Parcelable {
         return expected_price;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getStart_province_name() {
+        return start_province_name;
+    }
+
+    public void setStart_province_name(String start_province_name) {
+        this.start_province_name = start_province_name;
+    }
+
+    public String getArrive_province_name() {
+        return arrive_province_name;
+    }
+
+    public void setArrive_province_name(String arrive_province_name) {
+        this.arrive_province_name = arrive_province_name;
+    }
+
+    public String getStart_district_name() {
+        return start_district_name;
+    }
+
+    public void setStart_district_name(String start_district_name) {
+        this.start_district_name = start_district_name;
+    }
+
+    public String getArrive_district_name() {
+        return arrive_district_name;
+    }
+
+    public void setArrive_district_name(String arrive_district_name) {
+        this.arrive_district_name = arrive_district_name;
+    }
+
+    public String getGoods_name() {
+        return goods_name;
+    }
 
     @Override
     public int describeContents() {
@@ -92,6 +136,7 @@ public class RequestPOJO implements Parcelable {
         dest.writeString(this.start_district_name);
         dest.writeString(this.arrive_district_name);
         dest.writeInt(this.id);
+        dest.writeInt(this.status);
     }
 
     private RequestPOJO(Parcel in) {
@@ -108,6 +153,7 @@ public class RequestPOJO implements Parcelable {
         this.start_district_name = in.readString();
         this.arrive_district_name = in.readString();
         this.id = in.readInt();
+        this.status = in.readInt();
     }
 
     public static final Parcelable.Creator<RequestPOJO> CREATOR = new Parcelable.Creator<RequestPOJO>() {
@@ -119,4 +165,24 @@ public class RequestPOJO implements Parcelable {
             return new RequestPOJO[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "RequestPOJO{" +
+                "pickup_date='" + pickup_date + '\'' +
+                ", goods_weight_dimension='" + goods_weight_dimension + '\'' +
+                ", goods_weight_number=" + goods_weight_number +
+                ", start_address=" + start_address +
+                ", arrive_address=" + arrive_address +
+                ", vehicle_type='" + vehicle_type + '\'' +
+                ", expected_price='" + expected_price + '\'' +
+                ", goods_name='" + goods_name + '\'' +
+                ", start_province_name='" + start_province_name + '\'' +
+                ", arrive_province_name='" + arrive_province_name + '\'' +
+                ", start_district_name='" + start_district_name + '\'' +
+                ", arrive_district_name='" + arrive_district_name + '\'' +
+                ", id=" + id +
+                ", status=" + status +
+                '}';
+    }
 }

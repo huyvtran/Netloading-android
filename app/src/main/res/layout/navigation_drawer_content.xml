@@ -36,7 +36,7 @@
                 android:onClick="onNavigationItemClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/navigation_manage_trips"
+                android:id="@+id/navigation_manage_orders"
                 android:layout_weight="1"
                 android:background="?android:attr/selectableItemBackground"
                 android:orientation="horizontal"

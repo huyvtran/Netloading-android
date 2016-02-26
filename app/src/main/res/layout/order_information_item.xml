@@ -4,7 +4,7 @@
     android:layout_height="56dp">
 
     <TextView
-        android:id="@+id/money_number_tv"
+        android:id="@+id/pickup_date_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10/10/2016"
