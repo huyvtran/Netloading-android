@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
@@ -45,6 +46,9 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Bind(R.id.swipe_to_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @Bind(R.id.header)
+    RelativeLayout mHeaderRelativeLayout;
+
     private ArrayList<CompanyTripPOJO> companyTripPOJOs;
 
 
@@ -77,6 +81,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         ArrayList<CompanyTripPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
         if (companyPOJOs.size() > 0) {
             showList(companyPOJOs);
+            mHeaderRelativeLayout.setVisibility(View.VISIBLE);
         } else {
             mNotFoundLayout.setVisibility(View.VISIBLE);
             mCompanyListView.setVisibility(View.INVISIBLE);
@@ -107,6 +112,8 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         mNotFoundLayout.setVisibility(View.INVISIBLE);
         mCompanyListView.setVisibility(View.VISIBLE);
+        mHeaderRelativeLayout.setVisibility(View.VISIBLE);
+
         mCompanyListAdapter = new CompanyListAdapter(this, companyTripPOJOs);
 
         Utils.log(TAG, mCompanyListAdapter.getCount() + " ListAdapterCount");

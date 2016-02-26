@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class OrderListActivity extends GenericActivity<OrderListPresenter.View, 
 
     private ArrayList<OrderPOJO> orderPOJOs;
     private OrderListAdapter mOrderListAdapter;
+    private ProgressDialog mProgressDialog;
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, OrderListActivity.class);
@@ -44,9 +46,25 @@ public class OrderListActivity extends GenericActivity<OrderListPresenter.View, 
 
         super.onCreate(savedInstanceState, OrderListPresenter.class, this);
 
+        mProgressDialog = new ProgressDialog(this);
 
-        getOps().updateOrderInformation();
+        if (getRetainedFragmentManager().firstTimeIn()) {
+            showProgressDialog();
 
+            getOps().updateOrderInformation();
+        }
+
+        if (getOps().isProcessing()) {
+            showProgressDialog();
+        }
+    }
+
+    private void showProgressDialog() {
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle("Đang xử lí");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
+        mProgressDialog.show();
     }
 
     private void showList(ArrayList<OrderPOJO> orders) {
@@ -72,11 +90,12 @@ public class OrderListActivity extends GenericActivity<OrderListPresenter.View, 
 
     @Override
     public void onError(int statusUnhandledError) {
-
+        mProgressDialog.dismiss();
     }
 
     @Override
     public void updateOrderList(ArrayList<OrderPOJO> orderPOJOs) {
         showList(orderPOJOs);
+        mProgressDialog.dismiss();
     }
 }

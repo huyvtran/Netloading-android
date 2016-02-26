@@ -28,6 +28,7 @@ public class OrderListPresenter implements ConfigurableOps<OrderListPresenter.Vi
 
     private static final String TAG = "OrderListPresenter";
     private WeakReference<View> mView;
+    private boolean processing;
 
     @Override
     public void onConfiguration(View view, boolean firstTimeIn) {
@@ -35,10 +36,11 @@ public class OrderListPresenter implements ConfigurableOps<OrderListPresenter.Vi
     }
 
     public void updateOrderInformation() {
-
+        processing = true;
         ServiceGenerator.getNetloadingService().getAllOrdersOfCustomer().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(retrofit2.Call<ResponseBody> call, Response<ResponseBody> response) {
+                processing = false;
 
                 try {
                     JSONObject result = new JSONObject(response.body().string());
@@ -55,10 +57,6 @@ public class OrderListPresenter implements ConfigurableOps<OrderListPresenter.Vi
 
                         ArrayList<OrderPOJO> orderPOJOs = gson.fromJson(ordersArray.toString(), listType);
 
-                        Utils.log(TAG, orderPOJOs.size() + " ");
-                        Utils.log(TAG, orderPOJOs.get(0).getRequest().toString() + " ");
-                        Utils.log(TAG, orderPOJOs.get(0).getOrder().toString() + " ");
-
                         mView.get().updateOrderList(orderPOJOs);
 
                     } else {
@@ -69,22 +67,28 @@ public class OrderListPresenter implements ConfigurableOps<OrderListPresenter.Vi
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    mView.get().onError(View.STATUS_NETWORK_ERROR);
                 }
-
             }
 
             @Override
             public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
-
+                processing = false;
+                mView.get().onError(View.STATUS_NETWORK_ERROR);
             }
         });
 
 
     }
 
+    public boolean isProcessing() {
+        return processing;
+    }
+
     public interface View extends ContextView {
 
         int STATUS_UNHANDLED_ERROR = 888;
+        int STATUS_NETWORK_ERROR = 999;
 
         void onError(int statusUnhandledError);
 
