@@ -60,7 +60,7 @@ public class OrderListPresenter implements ConfigurableOps<OrderListPresenter.Vi
 
                         mView.get().updateOrderList(orderPOJOs);
 
-                    } else {
+                    } else if (result.getString("status").equals("error")){
                         mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
 

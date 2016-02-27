@@ -52,7 +52,7 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
 
                     if (result.getString("status").equals("success")) {
                         mView.get().onDeleteSuccess();
-                    } else {
+                    } else if (result.getString("status").equals("error")){
                         mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
                 } catch (JSONException | IOException e) {
@@ -100,8 +100,8 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
                         /// TODO - on result
                         mView.get().onRetrySuccess(companyTripPOJOs);
 
-                    } else {
-                        mView.get().onError(View.STATUS_NETWORK_ERROR);
+                    } else if (result.getString("status").equals("error")){
+                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
@@ -119,8 +119,8 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
     }
 
     public interface View extends ContextView {
-        int STATUS_NETWORK_ERROR = 234;
-        int STATUS_UNHANDLED_ERROR = 252;
+        int STATUS_NETWORK_ERROR = 999;
+        int STATUS_UNHANDLED_ERROR = 888;
 
         void onDeleteSuccess();
 

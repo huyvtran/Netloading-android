@@ -52,7 +52,7 @@ public class RequestInformationPresenter implements ConfigurableOps<RequestInfor
 
                     if (result.getString("status").equals("success")) {
                         mView.get().onDeleteSuccess();
-                    } else {
+                    } else if (result.getString("status").equals("error")){
                         mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
                 } catch (JSONException | IOException e) {
@@ -95,8 +95,8 @@ public class RequestInformationPresenter implements ConfigurableOps<RequestInfor
                         /// TODO - on result
                         mView.get().onRetrySuccess(companyTripPOJOs);
 
-                    } else {
-                        mView.get().onError(View.STATUS_NETWORK_ERROR);
+                    } else if (result.getString("status").equals("error")){
+                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();

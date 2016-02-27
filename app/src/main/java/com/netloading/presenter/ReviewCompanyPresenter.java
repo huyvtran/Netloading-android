@@ -56,7 +56,7 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
 
                         mView.get().updateCompanyInfo(companyInfo);
 
-                    } else {
+                    } else if (result.getString("status").equals("error")){
                         mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
 
@@ -104,8 +104,8 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
                     Utils.log(TAG, result.toString());
                     if (result.getString("status").equals("success")) {
                         mView.get().handleAcceptTripDone();
-                    } else {
-                        mView.get().onError(View.STATUS_NETWORK_ERROR);
+                    } else if (result.getString("status").equals("error")){
+                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
 
 

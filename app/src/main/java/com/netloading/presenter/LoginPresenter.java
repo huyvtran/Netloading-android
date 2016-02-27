@@ -81,14 +81,14 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
                 setProcessing(false);
                 try {
 
-                    JSONObject jsonObject = new JSONObject(response.body().string());
-                    String status = jsonObject.getString("status");
+                    JSONObject result = new JSONObject(response.body().string());
+                    String status = result.getString("status");
                     //TODO - check message and status
                     if (status.equals("success")) {
 
                         // Save id and initialize
-                        String token = jsonObject.getJSONObject("message").getString("token");
-                        int id = jsonObject.getJSONObject("message").getInt("id");
+                        String token = result.getJSONObject("message").getString("token");
+                        int id = result.getJSONObject("message").getInt("id");
 
                         ServiceGenerator.initialize(token, id);
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
@@ -101,7 +101,7 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
 
                         mView.get().loginSucceed();
 
-                    } else {
+                    } else if (result.getString("status").equals("error")){
                         mView.get().loginFailure(View.USERNAME_PASSWORD_ERROR);
                     }
 

@@ -67,7 +67,7 @@ public class RequestListPresenter implements ConfigurableOps<RequestListPresente
 
                         mView.get().updateRequestList(requestPOJOs);
 
-                    } else {
+                    } else if (result.getString("status").equals("error")){
                         mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
 
