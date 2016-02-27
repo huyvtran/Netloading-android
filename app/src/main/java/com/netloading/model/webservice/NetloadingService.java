@@ -18,6 +18,9 @@ import retrofit2.http.Path;
  */
 public interface NetloadingService {
 
+    @DELETE("/customers/sessions")
+    Call<ResponseBody> logout();
+
     @GET("/customers/company_info/{id}")
     Call<ResponseBody> getCompanyInfomation(@Path("id") int companyId);
 
@@ -46,5 +49,10 @@ public interface NetloadingService {
 
     @GET("/customers/order_info/{id}")
     Call<ResponseBody> getOrderDetailById(@Path("id") int orderId);
+
+    @GET("/customers/request_info/{id}")
+    Call<ResponseBody> getRequestDetailById(@Path("id") int requestId);
+
+
 
 }

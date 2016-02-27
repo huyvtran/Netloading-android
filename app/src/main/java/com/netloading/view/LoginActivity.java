@@ -2,15 +2,20 @@ package com.netloading.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.netloading.NetloadingApplication;
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
 import com.netloading.model.gcm.RegistrationIntentService;
+import com.netloading.model.webservice.ServiceGenerator;
 import com.netloading.presenter.LoginPresenter;
+import com.netloading.utils.Constants;
 import com.netloading.utils.Utils;
 import com.netloading.utils.Validator;
 
@@ -38,6 +43,16 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         ButterKnife.bind(this);
 
         super.onCreate(savedInstanceState, LoginPresenter.class, this);
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
+
+        String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
+
+
+        if (!token.equals("NULL")) {
+            finish();
+            startActivity(PickLocationActivity.makeIntent(this));
+        }
 
         mProgressDialog = new ProgressDialog(this);
         if (getOps().isProcessing()) {
@@ -64,7 +79,7 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         if (TextUtils.isEmpty(mPasswordEditText.getText())
                 || TextUtils.isEmpty(mUsernameEditText.getText())) {
             Utils.toast(this, "Vui lòng nhập thông tin đăng nhập");
-//            return;
+            return;
         }
         showProgressDialog();
         String username = mUsernameEditText.getText().toString();

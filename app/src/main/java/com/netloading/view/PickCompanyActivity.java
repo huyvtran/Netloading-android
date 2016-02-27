@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.netloading.R;
 import com.netloading.common.GenericActivity;
 import com.netloading.model.pojo.CompanyTripPOJO;
+import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.presenter.PickCompanyPresenter;
 import com.netloading.utils.Utils;
 import com.netloading.view.adapter.CompanyListAdapter;
@@ -26,7 +27,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
-import okhttp3.internal.Util;
 
 /**
  * Created by Dandoh on 2/24/16.
@@ -156,6 +156,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     void onWaitOtherClick() {
         Intent intent = RequestListActivity.makeIntent(getApplicationContext());
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -192,6 +193,14 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         mSwipeRefreshLayout.setRefreshing(false);
     }
 
+    @Override
+    public void onGetRequestDetailSuccess(RequestPOJO requestPOJO) {
+        Intent intent = RequestInformationActivity.makeIntent(getApplicationContext(),
+                requestPOJO, requestPOJO.getId());
+
+        startActivity(intent);
+    }
+
 
     @Override
     public void onRefresh() {
@@ -222,7 +231,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Utils.toast(this, "setting");
+//            Utils.toast(this, "setting");
+
+            getOps().getRequestInfo(requestId);
+
         } else
         if (id == android.R.id.home) {
             Utils.backToHome(this);

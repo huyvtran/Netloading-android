@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -73,6 +75,11 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
 
         setContentView(R.layout.new_request_activity);
         ButterKnife.bind(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         setDimension();
     }
@@ -115,23 +122,23 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
     void continueToReviewRequest() {
         // TODO - uncomment this
 
-//        if (TextUtils.isEmpty(mGoodsNameEditText.getText())
-//                || TextUtils.isEmpty(mGoodWeightNumberEditText.getText())
-//                || TextUtils.isEmpty(mDateTextView.getText())) {
-//            Utils.toast(this, "Vui lòng điền đầy đủ các thông về yêu cầu chở hàng");
-//            return;
-//        }
-//
-//
-//        if (myCalendar.before(Calendar.getInstance())) {
-//            Utils.toast(this, "Ngày đóng hàng không hợp lệ");
-//            return;
-//        }
+        if (TextUtils.isEmpty(mGoodsNameEditText.getText())
+                || TextUtils.isEmpty(mGoodWeightNumberEditText.getText())
+                || TextUtils.isEmpty(mDateTextView.getText())) {
+            Utils.toast(this, "Vui lòng điền đầy đủ các thông về yêu cầu chở hàng");
+            return;
+        }
 
-        String goodName = "Bánh kẹo";//mGoodsNameEditText.getText().toString();
-        int goodWeightNumber = 500;//Integer.parseInt(mGoodWeightNumberEditText.getText().toString());
-        String date = "2016-02-28";//mDateTextView.getText().toString();
-        String expectedPrice = "1000000";//mExpectedPriceEditText.getText().toString();
+
+        if (myCalendar.before(Calendar.getInstance())) {
+            Utils.toast(this, "Ngày đóng hàng không hợp lệ");
+            return;
+        }
+
+        String goodName = mGoodsNameEditText.getText().toString();//"Bánh kẹo";
+        int goodWeightNumber = Integer.parseInt(mGoodWeightNumberEditText.getText().toString());//500;
+        String date = mDateTextView.getText().toString();//"2016-02-28";
+        String expectedPrice = mExpectedPriceEditText.getText().toString();//"1000000";
 
 
         /// save into preference
@@ -143,8 +150,15 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         sharedPreferences.edit().putString(Constants.GOODS_WEIGHT_DIMENSION, mDimension).apply();
 
         startActivity(ReviewRequestActivity.makeIntent(this));
-
-
-
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

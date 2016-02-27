@@ -3,6 +3,9 @@ package com.netloading.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.netloading.R;
@@ -73,6 +76,12 @@ public class OrderInformationActivity extends GenericActivity<OrderInformationPr
 
         ButterKnife.bind(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         super.onCreate(savedInstanceState, OrderInformationPresenter.class, this);
 
         mRequestInfo = getIntent().getParcelableExtra(REQUEST_INFO_EXTRA);
@@ -109,4 +118,32 @@ public class OrderInformationActivity extends GenericActivity<OrderInformationPr
 
         mOrderPriceTextView.setText(mOrderPrice + "");
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            backToOrderListActivity();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            backToOrderListActivity();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void backToOrderListActivity() {
+        Intent intent = OrderListActivity.makeIntent(getApplicationContext());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
 }

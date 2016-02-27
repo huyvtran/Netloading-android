@@ -3,6 +3,7 @@ package com.netloading.presenter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.netloading.NetloadingApplication;
 import com.netloading.common.ConfigurableOps;
 import com.netloading.common.ContextView;
 import com.netloading.model.pojo.LoginPOJO;
@@ -72,7 +73,7 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
 
     public void login(String username, String password) {
         setProcessing(true);
-        final LoginPOJO loginPOJO = new LoginPOJO("dandoh", "dandoh");
+        final LoginPOJO loginPOJO = new LoginPOJO(username, password);
 
 
         mAccountService.loginAndSaveToken(loginPOJO).enqueue(new Callback<ResponseBody>() {
@@ -91,13 +92,16 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
                         int id = result.getJSONObject("message").getInt("id");
 
                         ServiceGenerator.initialize(token, id);
+
+                        Utils.log(TAG, token);
+                        Utils.log(TAG, ServiceGenerator.getAccessToken());
+
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
-                                mView.get().getApplicationContext()
+                                NetloadingApplication.getAppContext()
                         );
                         sharedPreferences.edit().putInt(Constants.SHARED_PREFERENCE_ID_TAG, id)
                                 .putString(Constants.SHARED_PREFERENCE_TOKEN_TAG, token)
                                 .apply();
-
 
                         mView.get().loginSucceed();
 

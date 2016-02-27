@@ -1,298 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <FrameLayout
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-        <TextView
-            android:id="@+id/company_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Công ty TNHH Bồ Câu"
-            android:singleLine="true"
-            android:layout_gravity="center"
-            android:textColor="#ff8f00"
-            android:textSize="15sp"/>
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/middle"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/top"
-        android:layout_above="@+id/accept_trip_btn"
-        android:weightSum="7">
+        android:layout_below="@+id/actionBar">
+        <FrameLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+            <TextView
+                android:id="@+id/company_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Công ty TNHH Bồ Câu"
+                android:singleLine="true"
+                android:layout_gravity="center"
+                android:textColor="#ff8f00"
+                android:textSize="15sp"/>
+        </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/middle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="5">
+            android:layout_below="@id/top"
+            android:layout_above="@+id/accept_trip_btn"
+            android:weightSum="7">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:weightSum="1">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="5">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_diachi"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:paddingRight="16dp">
-                    <TextView
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:text="Địa chỉ"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold" />
+                    android:weightSum="1">
 
-                    <TextView
-                        android:id="@+id/company_address_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Can Lộc, Hà Tĩnh"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:padding="12dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_gravity="left">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_diachi"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="center_vertical"
+                        android:paddingRight="16dp">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="Địa chỉ"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/company_address_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Can Lộc, Hà Tĩnh"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="5dp"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
                 </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:padding="12dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_gravity="left">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_sdt"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="center_vertical"
+                        android:paddingRight="16dp">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="STĐ"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/company_phone_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="01651276812"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="5dp"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:padding="12dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_gravity="left">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_fax"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="center_vertical"
+                        android:paddingRight="16dp">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="Fax"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="10dp"/>
+
+                        <TextView
+                            android:id="@+id/company_fax_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="912749182349187234"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="10dp"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:padding="12dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_gravity="left">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_email"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="center_vertical"
+                        android:paddingRight="16dp">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="Email"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/company_email_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="hello@gmail.com"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="5dp"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:padding="12dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_gravity="left">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_website"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="center_vertical"
+                        android:paddingRight="16dp">
+                        <TextView
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:text="Website"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/company_website_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="http://netloading.com"
+                            android:textSize="16sp"
+                            android:textColor="@color/vBlue"
+                            android:layout_marginLeft="5dp"
+                            android:singleLine="true"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
             </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_sdt"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:gravity="center_vertical"
-                    android:paddingRight="16dp">
-                    <TextView
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:text="STĐ"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/company_phone_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="01651276812"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_fax"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:gravity="center_vertical"
-                    android:paddingRight="16dp">
-                    <TextView
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:text="Fax"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"/>
-
-                    <TextView
-                        android:id="@+id/company_fax_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="912749182349187234"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"
-                        android:singleLine="true"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_email"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:gravity="center_vertical"
-                    android:paddingRight="16dp">
-                    <TextView
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:text="Email"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/company_email_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hello@gmail.com"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:padding="12dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="left">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_website"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:gravity="center_vertical"
-                    android:paddingRight="16dp">
-                    <TextView
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:text="Website"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/company_website_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="http://netloading.com"
-                        android:textSize="16sp"
-                        android:textColor="@color/vBlue"
-                        android:layout_marginLeft="5dp"
-                        android:singleLine="true"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-
         </LinearLayout>
-    </LinearLayout>
 
-    <Button
-        android:id="@id/accept_trip_btn"
+        <Button
+            android:id="@id/accept_trip_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/vBlue"
+            android:text="Đồng ý"
+            android:textColor="#ffffff"/>
+    </RelativeLayout>
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@id/actionBar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/vBlue"
-        android:text="Đồng ý"
-        android:textColor="#ffffff"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
 
 </RelativeLayout>

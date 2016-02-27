@@ -145,6 +145,12 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         mNavigationHandler.onNavigationItemClick(view);
     }
 
+    @Override
+    protected void onResume() {
+        ((DrawerLayout) findViewById(R.id.drawer_layout)).closeDrawers();
+        super.onResume();
+    }
+
     /**
      * Navigation part end here
      */

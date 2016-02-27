@@ -22,4 +22,5 @@ public class NetloadingApplication extends Application {
     public static Context getAppContext() {
         return appContext;
     }
+
 }

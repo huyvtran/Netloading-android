@@ -39,11 +39,11 @@
 
         <activity
             android:name=".view.RequestInformationActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".view.OrderInformationActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".view.ForgotPasswordActivity"
@@ -51,11 +51,11 @@
 
         <activity
             android:name=".view.RequestListActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".view.OrderListActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".view.PickLocationActivity"
@@ -66,12 +66,12 @@
 
         <activity
             android:name=".view.AddInfoRequestActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".view.ReviewRequestActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
@@ -81,7 +81,8 @@
 
         </activity>
 
-        <activity android:name=".view.ReviewCompanyActivity">
+        <activity android:name=".view.ReviewCompanyActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
 
         </activity>

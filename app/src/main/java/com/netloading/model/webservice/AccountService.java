@@ -7,6 +7,7 @@ import com.netloading.model.pojo.RegisterPOJO;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.POST;
 
 /**

@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.netloading.R;
@@ -11,6 +14,7 @@ import com.netloading.common.GenericActivity;
 import com.netloading.model.pojo.OrderPOJO;
 import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.presenter.OrderListPresenter;
+import com.netloading.utils.Utils;
 import com.netloading.view.adapter.OrderListAdapter;
 import com.netloading.view.adapter.RequestListAdapter;
 
@@ -43,6 +47,12 @@ public class OrderListActivity extends GenericActivity<OrderListPresenter.View, 
 
         setContentView(R.layout.order_list_activity);
         ButterKnife.bind(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         super.onCreate(savedInstanceState, OrderListPresenter.class, this);
 
@@ -98,4 +108,25 @@ public class OrderListActivity extends GenericActivity<OrderListPresenter.View, 
         showList(orderPOJOs);
         mProgressDialog.dismiss();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            Utils.backToHome(this);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            Utils.backToHome(this);
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

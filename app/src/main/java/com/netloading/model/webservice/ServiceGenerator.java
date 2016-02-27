@@ -92,6 +92,10 @@ public class ServiceGenerator {
         return isLoggedIn;
     }
 
+    public static void setIsLoggedIn(boolean isLoggedIn) {
+        ServiceGenerator.isLoggedIn = isLoggedIn;
+    }
+
     public static void initialize(String accessToken, int id) {
         if (isLoggedIn) return;
 
@@ -135,6 +139,7 @@ public class ServiceGenerator {
                         Response originalResponse = chain.proceed(chain.request());
 
                         if (originalResponse.code() == 222) {
+                            isLoggedIn = false;
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -146,6 +151,14 @@ public class ServiceGenerator {
                                     context.startActivity(intent);
                                     Utils.toast(context, "Phiên đăng nhập kết thúc hoặc tài khoản đang đăng nhập ở thiết bị khác," +
                                             "vui lòng đăng nhập lại");
+
+                                    SharedPreferences sharedPreferences = PreferenceManager
+                                            .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
+                                    sharedPreferences.edit().putInt(Constants.SHARED_PREFERENCE_ID_TAG, 0)
+                                            .putString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL")
+                                            .apply();
+
+
                                 }
                             });
 
@@ -195,8 +208,10 @@ public class ServiceGenerator {
             SharedPreferences sharedPreferences = PreferenceManager
                     .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
 
-            String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "RANDOM_TOKEN");
+            String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
             int customer_id = sharedPreferences.getInt(Constants.SHARED_PREFERENCE_ID_TAG, -1);
+
+            Utils.log(TAG, "TOKEN : " + token);
 
             ServiceGenerator.initialize(token, customer_id);
 

@@ -3,6 +3,9 @@ package com.netloading.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -78,6 +81,11 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
         setContentView(R.layout.request_information_activity);
         ButterKnife.bind(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         super.onCreate(savedInstanceState, RequestInformationPresenter.class, this);
 
@@ -170,4 +178,32 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            backToRequestListActivity();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void backToRequestListActivity() {
+        Intent intent = RequestListActivity.makeIntent(getApplicationContext());
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            backToRequestListActivity();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.netloading.R;
@@ -67,6 +69,12 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
 
         ButterKnife.bind(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         super.onCreate(savedInstanceState, ReviewCompanyPresenter.class, this);
 
         mCompanyId = getIntent().getIntExtra(EXTRA_COMPANY_ID, -1);
@@ -123,7 +131,15 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
         finish();
         Intent intent = RequestListActivity.makeIntent(getApplicationContext());
         startActivity(intent);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

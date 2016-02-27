@@ -6,7 +6,7 @@ package com.netloading.utils;
 public class Constants {
 
 
-    public static final String API_BASE_URL = "http://192.168.32.113:3000";//"http://netloading-dandoh.rhcloud.com";
+    public static final String API_BASE_URL = "http://192.168.32.107:3000";//"http://netloading-dandoh.rhcloud.com";
 
 
     public static final String SHARED_PREFERENCE_ID_TAG = "id tag";
