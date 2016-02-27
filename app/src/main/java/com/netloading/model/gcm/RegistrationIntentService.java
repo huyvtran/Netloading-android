@@ -76,11 +76,7 @@ public class RegistrationIntentService extends IntentService {
 
         // send network request, send to server
         NetloadingService netloadingService = null;
-        try {
-            netloadingService = ServiceGenerator.getNetloadingService();
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+        netloadingService = ServiceGenerator.getNetloadingService();
         int id = sharedPreferences.getInt(Constants.SHARED_PREFERENCE_ID_TAG, 0);
 
 

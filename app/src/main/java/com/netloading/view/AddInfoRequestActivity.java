@@ -130,7 +130,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
 
         String goodName = "Bánh kẹo";//mGoodsNameEditText.getText().toString();
         int goodWeightNumber = 500;//Integer.parseInt(mGoodWeightNumberEditText.getText().toString());
-        String date = "2016-02-26";//mDateTextView.getText().toString();
+        String date = "2016-02-28";//mDateTextView.getText().toString();
         String expectedPrice = "1000000";//mExpectedPriceEditText.getText().toString();
 
 

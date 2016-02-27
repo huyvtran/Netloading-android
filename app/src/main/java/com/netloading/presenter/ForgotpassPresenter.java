@@ -58,7 +58,7 @@ public class ForgotpassPresenter implements ConfigurableOps<ForgotpassPresenter.
 
                     if (message.equals("success")) {
                         mView.get().onSucceed();
-                    } else {
+                    } else if (responseBody.getString("status").equals("error")) {
                         mView.get().onError(View.STATUS_EMAIL_ERROR);
                     }
                 } catch (JSONException | IOException e) {
