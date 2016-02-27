@@ -50,11 +50,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
         processing = true;
 
         NetloadingService netloadingService = null;
-        try {
-            netloadingService = ServiceGenerator.getNetloadingService();
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+        netloadingService = ServiceGenerator.getNetloadingService();
 
         // TODO - test here
         final RequestPOJO requestPOJO = new RequestPOJO(pickUpDate, goodsWeightDimension,
@@ -72,7 +68,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 processing = false;
                 try {
-
+                    Utils.log(TAG, "status = " + response.code());
                     JSONObject result = new JSONObject(response.body().string());
 
                     Utils.log(TAG, result.toString());
@@ -92,8 +88,8 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                         /// TODO - on result
                         mView.get().onRequestResult(companyPOJOs, id);
 
-                    } else {
-                        mView.get().onError(View.STATUS_ERROR_NETWORK);
+                    } else if (result.getString("status").equals("error")){
+                        mView.get().onError(View.STATUS_ERROR_UNHANDLE);
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
@@ -117,7 +113,8 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
     }
 
     public interface View extends ContextView {
-        int STATUS_ERROR_NETWORK = 123;
+        int STATUS_ERROR_NETWORK = 999;
+        int STATUS_ERROR_UNHANDLE = 888;
 
         void onError(int status);
 

@@ -38,50 +38,46 @@ public class OrderListPresenter implements ConfigurableOps<OrderListPresenter.Vi
 
     public void updateOrderInformation() {
         processing = true;
-        try {
-            ServiceGenerator.getNetloadingService().getAllOrdersOfCustomer().enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(retrofit2.Call<ResponseBody> call, Response<ResponseBody> response) {
-                    processing = false;
+        ServiceGenerator.getNetloadingService().getAllOrdersOfCustomer().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(retrofit2.Call<ResponseBody> call, Response<ResponseBody> response) {
+                processing = false;
 
-                    try {
-                        JSONObject result = new JSONObject(response.body().string());
+                try {
+                    JSONObject result = new JSONObject(response.body().string());
 
-                        Utils.log(TAG, result.toString());
+                    Utils.log(TAG, result.toString());
 
-                        if (result.getString("status").equals("success")) {
+                    if (result.getString("status").equals("success")) {
 
-                            Gson gson = new Gson();
-                            JSONArray ordersArray = result.getJSONArray("message");
+                        Gson gson = new Gson();
+                        JSONArray ordersArray = result.getJSONArray("message");
 
-                            Type listType = new TypeToken<ArrayList<OrderPOJO>>() {
-                            }.getType();
+                        Type listType = new TypeToken<ArrayList<OrderPOJO>>() {
+                        }.getType();
 
-                            ArrayList<OrderPOJO> orderPOJOs = gson.fromJson(ordersArray.toString(), listType);
+                        ArrayList<OrderPOJO> orderPOJOs = gson.fromJson(ordersArray.toString(), listType);
 
-                            mView.get().updateOrderList(orderPOJOs);
+                        mView.get().updateOrderList(orderPOJOs);
 
-                        } else {
-                            mView.get().onError(View.STATUS_UNHANDLED_ERROR);
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        mView.get().onError(View.STATUS_NETWORK_ERROR);
+                    } else if (result.getString("status").equals("error")){
+                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
-                }
 
-                @Override
-                public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
-                    processing = false;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                     mView.get().onError(View.STATUS_NETWORK_ERROR);
                 }
-            });
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<ResponseBody> call, Throwable t) {
+                processing = false;
+                mView.get().onError(View.STATUS_NETWORK_ERROR);
+            }
+        });
 
 
     }

@@ -40,46 +40,42 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
     public void getCompanyInfo(int mCompanyId) {
         processing = true;
 
-        try {
-            ServiceGenerator.getNetloadingService()
-                    .getCompanyInfomation(mCompanyId).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    processing = false;
+        ServiceGenerator.getNetloadingService()
+                .getCompanyInfomation(mCompanyId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                processing = false;
 
-                    try {
-                        JSONObject result = new JSONObject(response.body().string());
-                        if (result.getString("status").equals("success")) {
-                            CompanyPOJO companyInfo = new Gson().fromJson(
-                                    result.getJSONObject("message").toString(),
-                                    CompanyPOJO.class
-                            );
+                try {
+                    JSONObject result = new JSONObject(response.body().string());
+                    if (result.getString("status").equals("success")) {
+                        CompanyPOJO companyInfo = new Gson().fromJson(
+                                result.getJSONObject("message").toString(),
+                                CompanyPOJO.class
+                        );
 
-                            mView.get().updateCompanyInfo(companyInfo);
+                        mView.get().updateCompanyInfo(companyInfo);
 
-                        } else {
-                            mView.get().onError(View.STATUS_UNHANDLED_ERROR);
-                        }
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        mView.get().onError(View.STATUS_NETWORK_ERROR);
+                    } else if (result.getString("status").equals("error")){
+                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
 
-                }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    processing = false;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                     mView.get().onError(View.STATUS_NETWORK_ERROR);
                 }
-            });
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                processing = false;
+                mView.get().onError(View.STATUS_NETWORK_ERROR);
+            }
+        });
 
     }
 
@@ -90,11 +86,7 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
     public void acceptTrip(int mRequestId, int mTripId) {
         processing = true;
         NetloadingService netloadingService = null;
-        try {
-            netloadingService = ServiceGenerator.getNetloadingService();
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+        netloadingService = ServiceGenerator.getNetloadingService();
 
         final AcceptTripPOJO acceptTripPOJO = new AcceptTripPOJO(mRequestId, mTripId);
 
@@ -112,8 +104,8 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
                     Utils.log(TAG, result.toString());
                     if (result.getString("status").equals("success")) {
                         mView.get().handleAcceptTripDone();
-                    } else {
-                        mView.get().onError(View.STATUS_NETWORK_ERROR);
+                    } else if (result.getString("status").equals("error")){
+                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
                     }
 
 

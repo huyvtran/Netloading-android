@@ -44,4 +44,7 @@ public interface NetloadingService {
     @GET("/orders")
     Call<ResponseBody> getAllOrdersOfCustomer();
 
+    @GET("/customers/order_info/{id}")
+    Call<ResponseBody> getOrderDetailById(@Path("id") int orderId);
+
 }

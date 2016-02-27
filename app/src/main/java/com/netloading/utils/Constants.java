@@ -8,6 +8,7 @@ public class Constants {
 
     public static final String API_BASE_URL = "http://192.168.32.113:3000";//"http://netloading-dandoh.rhcloud.com";
 
+
     public static final String SHARED_PREFERENCE_ID_TAG = "id tag";
     public static final String MA_HUYEN_DI = "ma huyen di";
     public static final String MA_HUYEN_DEN = "ma huyen den";

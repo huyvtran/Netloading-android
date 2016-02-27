@@ -1,8 +1,17 @@
 package com.netloading.model.webservice;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+import android.preference.PreferenceManager;
+
+import com.netloading.NetloadingApplication;
 import com.netloading.utils.Constants;
 import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
+import com.netloading.view.LoginActivity;
 
 import java.io.IOException;
 
@@ -12,6 +21,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.HTTP;
 
 /**
  * Created by Dandoh on 2/10/16.
@@ -119,7 +129,34 @@ public class ServiceGenerator {
 
                         return chain.proceed(modifiedRequest);
                     }
-                }).build();
+                }).addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Response originalResponse = chain.proceed(chain.request());
+
+                        if (originalResponse.code() == 222) {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Utils.log(TAG, "222 Unauthenticated");
+                                    Context context = NetloadingApplication.getAppContext();
+                                    Intent intent = new Intent(context, LoginActivity.class)
+                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    context.startActivity(intent);
+                                    Utils.toast(context, "Phiên đăng nhập kết thúc hoặc tài khoản đang đăng nhập ở thiết bị khác," +
+                                            "vui lòng đăng nhập lại");
+                                }
+                            });
+
+
+
+                        }
+
+                        return originalResponse;
+                    }
+                })
+                .build();
 
         return okHttpClient;
     }
@@ -152,16 +189,24 @@ public class ServiceGenerator {
 
     private static NetloadingService mNetloadingService;
 
-    public static NetloadingService getNetloadingService() throws NotAuthenticatedException {
-        if (!isLoggedIn) throw new NotAuthenticatedException();
+    public static NetloadingService getNetloadingService() {
+
+        if (!isLoggedIn()) {
+            SharedPreferences sharedPreferences = PreferenceManager
+                    .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
+
+            String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "RANDOM_TOKEN");
+            int customer_id = sharedPreferences.getInt(Constants.SHARED_PREFERENCE_ID_TAG, -1);
+
+            ServiceGenerator.initialize(token, customer_id);
+
+        }
 
         if (mNetloadingService == null) {
             mNetloadingService = createService(NetloadingService.class, builder(), getAuthenticatedHttpClient());
         }
-        return  mNetloadingService;
+        return mNetloadingService;
     }
-
-
 
 
 }
