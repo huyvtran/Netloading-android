@@ -59,7 +59,7 @@ public class OrderListAdapter extends BaseAdapter {
         TextView mPickupDateTextView = (TextView) convertView.findViewById(R.id.pickup_date_tv);
 
 
-        mOrderNameTextureView.setText("Đơn hàng " + (position + 1));
+        mOrderNameTextureView.setText("Đơn hàng #" + orders.get(position).getOrder().getId());
 
         //TODO - set the company_name instead of good_name
         mCompanyNameTextView.setText(orders.get(position).getCompany_name());

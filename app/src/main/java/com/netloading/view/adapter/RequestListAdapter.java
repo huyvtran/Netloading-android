@@ -93,7 +93,7 @@ public class RequestListAdapter extends BaseAdapter {
         }
 
 
-        ((TextView)convertView.findViewById(R.id.request_name)).setText("Yêu cầu " + (position + 1));
+        ((TextView)convertView.findViewById(R.id.request_name)).setText("Yêu cầu #" + requestPOJOs.get(position).getId());
 
         return convertView;
     }

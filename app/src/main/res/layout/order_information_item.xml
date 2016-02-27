@@ -24,7 +24,7 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/vBlue"
         android:layout_marginLeft="16dp"
-        android:layout_toLeftOf="@id/money_number_tv"
+        android:layout_toLeftOf="@id/pickup_date_tv"
         android:paddingRight="15dp"/>
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_marginBottom="8dp"
         android:textColor="@color/vBlue"
         android:layout_marginLeft="16dp"
-        android:layout_toLeftOf="@id/money_number_tv"
+        android:layout_toLeftOf="@id/pickup_date_tv"
         android:layout_alignParentBottom="true"
         android:paddingRight="15dp"/>
 
