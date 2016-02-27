@@ -7,6 +7,7 @@ import com.netloading.common.ContextView;
 import com.netloading.model.pojo.CompanyTripPOJO;
 import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.model.webservice.ServiceGenerator;
+import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
 
 import org.json.JSONArray;
@@ -43,48 +44,52 @@ public class RequestListPresenter implements ConfigurableOps<RequestListPresente
     public void getAllRequest() {
         processing = true;
 
-        ServiceGenerator.getNetloadingService()
-                .getAllRequestOfCustomer().enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                processing = false;
+        try {
+            ServiceGenerator.getNetloadingService()
+                    .getAllRequestOfCustomer().enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    processing = false;
 
-                try {
-                    JSONObject result = new JSONObject(response.body().string());
+                    try {
+                        JSONObject result = new JSONObject(response.body().string());
 
-                    if (result.getString("status").equals("success")) {
+                        if (result.getString("status").equals("success")) {
 
-                        Gson gson = new Gson();
-                        JSONArray requestsArray = result.getJSONArray("message");
+                            Gson gson = new Gson();
+                            JSONArray requestsArray = result.getJSONArray("message");
 
-                        Type listType = new TypeToken<ArrayList<RequestPOJO>>() {
-                        }.getType();
+                            Type listType = new TypeToken<ArrayList<RequestPOJO>>() {
+                            }.getType();
 
-                        ArrayList<RequestPOJO> requestPOJOs = gson.fromJson(requestsArray.toString(), listType);
+                            ArrayList<RequestPOJO> requestPOJOs = gson.fromJson(requestsArray.toString(), listType);
 
-                        Utils.log(TAG, requestPOJOs.size() + " ");
+                            Utils.log(TAG, requestPOJOs.size() + " ");
 
-                        mView.get().updateRequestList(requestPOJOs);
+                            mView.get().updateRequestList(requestPOJOs);
 
-                    } else {
-                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
+                        } else {
+                            mView.get().onError(View.STATUS_UNHANDLED_ERROR);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        mView.get().onError(View.STATUS_NETWORK_ERROR);
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    mView.get().onError(View.STATUS_NETWORK_ERROR);
                 }
 
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                processing = false;
-                mView.get().onError(View.STATUS_NETWORK_ERROR);
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    processing = false;
+                    mView.get().onError(View.STATUS_NETWORK_ERROR);
+                }
+            });
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
 
     }
 
