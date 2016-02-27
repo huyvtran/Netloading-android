@@ -220,7 +220,14 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        Utils.toast(this, id + "");
+        if (id == R.id.action_settings) {
+            Utils.toast(this, "setting");
+        } else
+        if (id == android.R.id.home) {
+            Utils.backToHome(this);
+//            Utils.toast(this, "back");
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

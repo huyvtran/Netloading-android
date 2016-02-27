@@ -66,7 +66,7 @@ public class RequestListAdapter extends BaseAdapter {
         if (status == 2) {
             statusString = "Đang chờ chấp nhận";
 //            convertView.setBackgroundColor(Color.parseColor("#e7eccd"));
-        }
+        } else if (status == 3) statusString = "Đã khớp lệnh";
 
         requestStatus.setText(statusString);
 

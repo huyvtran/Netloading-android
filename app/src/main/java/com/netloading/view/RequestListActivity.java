@@ -62,6 +62,13 @@ public class RequestListActivity extends GenericActivity<RequestListPresenter.Vi
         }
     }
 
+    @Override
+    protected void onResume() {
+        showProgressDialog();
+        getOps().getAllRequest();
+        super.onResume();
+    }
+
     private void showList(ArrayList<RequestPOJO> requestPOJOs) {
 
         this.requestPOJOs = requestPOJOs;

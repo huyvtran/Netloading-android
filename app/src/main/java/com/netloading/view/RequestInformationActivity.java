@@ -3,7 +3,9 @@ package com.netloading.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.netloading.R;
@@ -97,7 +99,7 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
 
 
     private void updateRequestInformation(RequestPOJO requestInfo) {
-        mRequestTitleTextView.setText("Yêu Cầu " + (getIntent().getIntExtra(REQUEST_POSITION_EXTRA, 1) + 1));
+        mRequestTitleTextView.setText("Yêu Cầu " + (requestInfo.getId()));
 
         mStartAddressTextView.setText(requestInfo.getStart_district_name() + ", " + requestInfo.getStart_province_name());
         mArriveTextView.setText(requestInfo.getArrive_district_name() + ", " + requestInfo.getArrive_province_name());
@@ -117,7 +119,12 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
 
         int status = requestInfo.getStatus();
         String statusString = "Đang tìm nhà xe";
+        ((LinearLayout)findViewById(R.id.footer)).setVisibility(View.VISIBLE);
         if (status == 2) statusString = "Đang chờ chấp nhận";
+        else if (status == 3) {
+            statusString = "Đã khớp lệnh";
+            ((LinearLayout)findViewById(R.id.footer)).setVisibility(View.INVISIBLE);
+        }
 
         mStatusTextView.setText(statusString);
     }
@@ -142,9 +149,9 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
     @Override
     public void onDeleteSuccess() {
         Utils.toast(this, "Xoá yêu cầu vận tải thành công");
-
-        Intent intent = RequestListActivity.makeIntent(this);
-        startActivity(intent);
+        finish();
+//        Intent intent = RequestListActivity.makeIntent(this);
+//        startActivity(intent);
     }
 
     @Override
