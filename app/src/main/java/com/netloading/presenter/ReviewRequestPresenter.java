@@ -50,11 +50,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
         processing = true;
 
         NetloadingService netloadingService = null;
-        try {
-            netloadingService = ServiceGenerator.getNetloadingService();
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+        netloadingService = ServiceGenerator.getNetloadingService();
 
         // TODO - test here
         final RequestPOJO requestPOJO = new RequestPOJO(pickUpDate, goodsWeightDimension,
@@ -72,7 +68,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 processing = false;
                 try {
-
+                    Utils.log(TAG, "status = " + response.code());
                     JSONObject result = new JSONObject(response.body().string());
 
                     Utils.log(TAG, result.toString());

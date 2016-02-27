@@ -46,7 +46,6 @@ public class GcmMessageHandler extends GcmListenerService {
     public void onMessageReceived(String from, Bundle data) {
         if (data == null) return;
 
-        if (!Utils.initializeAuthentication(getBaseContext())) return;
 
         int status = Integer.parseInt(data.getString("status"));
         Utils.log(TAG, "status received " + status);
@@ -61,61 +60,57 @@ public class GcmMessageHandler extends GcmListenerService {
         final String message = data.getString("message");
         final int orderId = Integer.parseInt(data.getString("order_id"));
 
-        try {
-            ServiceGenerator.getNetloadingService()
-                    .getOrderDetailById(orderId).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    try {
-                        JSONObject result = new JSONObject(response.body().string());
-                        if (result.getString("status").equals("success")) {
-                            OrderPOJO orderPOJO = new Gson().fromJson(result.getJSONObject("message").toString(),
-                                    OrderPOJO.class);
+        ServiceGenerator.getNetloadingService()
+                .getOrderDetailById(orderId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    JSONObject result = new JSONObject(response.body().string());
+                    if (result.getString("status").equals("success")) {
+                        OrderPOJO orderPOJO = new Gson().fromJson(result.getJSONObject("message").toString(),
+                                OrderPOJO.class);
 
-                            Intent intent = OrderInformationActivity.makeIntent(
-                                    getBaseContext(),
-                                    orderPOJO.getRequest(),
-                                    orderPOJO.getOrder().getId(),
-                                    orderPOJO.getCompany_name(),
-                                    orderPOJO.getPrice(),
-                                    orderPOJO.getOrder().getStatus()
-                            );
+                        Intent intent = OrderInformationActivity.makeIntent(
+                                getBaseContext(),
+                                orderPOJO.getRequest(),
+                                orderPOJO.getOrder().getId(),
+                                orderPOJO.getCompany_name(),
+                                orderPOJO.getPrice(),
+                                orderPOJO.getOrder().getStatus()
+                        );
 
-                            PendingIntent pendingIntent = PendingIntent.getActivity(
-                                    getBaseContext(),
-                                    0,
-                                    intent,
-                                    PendingIntent.FLAG_UPDATE_CURRENT
-                            );
+                        PendingIntent pendingIntent = PendingIntent.getActivity(
+                                getBaseContext(),
+                                0,
+                                intent,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
 
-                            Context context = getBaseContext();
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                                    .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
-                                    .setContentText("Ấn vào ...")
-                                    .setContentIntent(pendingIntent);
-                            NotificationManager mNotificationManager = (NotificationManager) context
-                                    .getSystemService(Context.NOTIFICATION_SERVICE);
-                            mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
+                        Context context = getBaseContext();
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                                .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
+                                .setContentText("Ấn vào ...")
+                                .setContentIntent(pendingIntent);
+                        NotificationManager mNotificationManager = (NotificationManager) context
+                                .getSystemService(Context.NOTIFICATION_SERVICE);
+                        mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
 
 
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
 
-                }
-            });
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
 
 
     }
@@ -128,60 +123,57 @@ public class GcmMessageHandler extends GcmListenerService {
         final String message = data.getString("message");
         final int requestId = Integer.parseInt(data.getString("request_id"));
 
-        try {
-            ServiceGenerator.getNetloadingService()
-                    .retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+        ServiceGenerator.getNetloadingService()
+                .retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                    try {
+                try {
 
-                        JSONObject result = new JSONObject(response.body().string());
+                    JSONObject result = new JSONObject(response.body().string());
 
-                        Utils.log(TAG, result.toString());
-                        if (result.getString("status").equals("success")) {
+                    Utils.log(TAG, result.toString());
+                    if (result.getString("status").equals("success")) {
 
-                            // Get company list
-                            Gson gson = new Gson();
-                            JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
-                            Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {}.getType();
-                            ArrayList<CompanyTripPOJO> companyTripPOJOs = gson.fromJson(companiesArray.toString(), listType);
+                        // Get company list
+                        Gson gson = new Gson();
+                        JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
+                        Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
+                        }.getType();
+                        ArrayList<CompanyTripPOJO> companyTripPOJOs = gson.fromJson(companiesArray.toString(), listType);
 
-                            // start activity
-                            Intent intent = PickCompanyActivity.makeIntent(getBaseContext(),
-                                    companyTripPOJOs, requestId);
+                        // start activity
+                        Intent intent = PickCompanyActivity.makeIntent(getBaseContext(),
+                                companyTripPOJOs, requestId);
 
-                            PendingIntent pendingIntent = PendingIntent.getActivity(
-                                    getBaseContext(),
-                                    0,
-                                    intent,
-                                    PendingIntent.FLAG_UPDATE_CURRENT
-                            );
+                        PendingIntent pendingIntent = PendingIntent.getActivity(
+                                getBaseContext(),
+                                0,
+                                intent,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
 
-                            Context context = getBaseContext();
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                                    .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
-                                    .setContentText("Ấn vào ...")
-                                    .setContentIntent(pendingIntent);
-                            NotificationManager mNotificationManager = (NotificationManager) context
-                                    .getSystemService(Context.NOTIFICATION_SERVICE);
-                            mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
-                        } else {
-                        }
-                    } catch (JSONException | IOException e) {
-                        e.printStackTrace();
+                        Context context = getBaseContext();
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                                .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
+                                .setContentText("Ấn vào ...")
+                                .setContentIntent(pendingIntent);
+                        NotificationManager mNotificationManager = (NotificationManager) context
+                                .getSystemService(Context.NOTIFICATION_SERVICE);
+                        mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
+                    } else {
                     }
-
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
                 }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+            }
 
-                }
-            });
-        } catch (NotAuthenticatedException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
 
     }
 
