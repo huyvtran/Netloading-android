@@ -78,6 +78,9 @@ public class ServiceGenerator {
 
     private static boolean isLoggedIn = false;
 
+    public static boolean isLoggedIn() {
+        return isLoggedIn;
+    }
 
     public static void initialize(String accessToken, int id) {
         if (isLoggedIn) return;
