@@ -58,6 +58,12 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
         mView = new WeakReference<View>(view);
         if (firstTimeIn) {
             mAccountService = ServiceGenerator.getAccountService();
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                    mView.get().getApplicationContext()
+            );
+
+
+
         } else {
 
         }
@@ -81,19 +87,16 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
                     if (status.equals("success")) {
 
                         // Save id and initialize
-
                         String token = jsonObject.getJSONObject("message").getString("token");
                         int id = jsonObject.getJSONObject("message").getInt("id");
 
-                        Utils.log(TAG, status);
-                        Utils.log(TAG, token);
-
                         ServiceGenerator.initialize(token, id);
-
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
                                 mView.get().getApplicationContext()
                         );
-                        sharedPreferences.edit().putInt(Constants.SHARED_PREFERENCE_ID_TAG, id).apply();
+                        sharedPreferences.edit().putInt(Constants.SHARED_PREFERENCE_ID_TAG, id)
+                                .putString(Constants.SHARED_PREFERENCE_TOKEN_TAG, token)
+                                .apply();
 
 
                         mView.get().loginSucceed();

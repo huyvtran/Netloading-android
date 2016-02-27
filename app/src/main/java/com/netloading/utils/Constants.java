@@ -20,4 +20,5 @@ public class Constants {
     public static final String GOODS_WEIGHT_NUMBER = "goods weight number";
     public static final String GOODS_NAME = "good name";
     public static final String GOODS_WEIGHT_DIMENSION = "goods weight dimension";
+    public static final String SHARED_PREFERENCE_TOKEN_TAG = "shared prefrence token tag";
 }
