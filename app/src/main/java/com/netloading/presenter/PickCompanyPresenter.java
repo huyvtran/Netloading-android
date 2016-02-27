@@ -111,7 +111,7 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                mView.get().onError(View.STATUS_NETWORK_ERROR);
             }
         });
 
