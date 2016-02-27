@@ -3,12 +3,15 @@ package com.netloading.model.gcm;
 import com.google.android.gms.gcm.GcmListenerService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.netloading.NetloadingApplication;
 import com.netloading.R;
 import com.netloading.model.pojo.CompanyTripPOJO;
+import com.netloading.model.pojo.OrderPOJO;
 import com.netloading.model.webservice.ServiceGenerator;
 import com.netloading.utils.Constants;
 import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
+import com.netloading.view.OrderInformationActivity;
 import com.netloading.view.PickCompanyActivity;
 
 import android.app.NotificationManager;
@@ -43,14 +46,7 @@ public class GcmMessageHandler extends GcmListenerService {
     public void onMessageReceived(String from, Bundle data) {
         if (data == null) return;
 
-        if (!ServiceGenerator.isLoggedIn()) {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-            String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, " ");
-            int customer_id = sharedPreferences.getInt(Constants.SHARED_PREFERENCE_ID_TAG, 0);
-
-            ServiceGenerator.initialize(token, customer_id);
-        }
+        if (!Utils.initializeAuthentication(getBaseContext())) return;
 
         int status = Integer.parseInt(data.getString("status"));
         Utils.log(TAG, "status received " + status);
@@ -62,11 +58,73 @@ public class GcmMessageHandler extends GcmListenerService {
     }
 
     private void companyAcceptNotification(Bundle data) {
+        final String message = data.getString("message");
+        final int orderId = Integer.parseInt(data.getString("order_id"));
+
+        try {
+            ServiceGenerator.getNetloadingService()
+                    .getOrderDetailById(orderId).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+                        JSONObject result = new JSONObject(response.body().string());
+                        if (result.getString("status").equals("success")) {
+                            OrderPOJO orderPOJO = new Gson().fromJson(result.getJSONObject("message").toString(),
+                                    OrderPOJO.class);
+
+                            Intent intent = OrderInformationActivity.makeIntent(
+                                    getBaseContext(),
+                                    orderPOJO.getRequest(),
+                                    orderPOJO.getOrder().getId(),
+                                    orderPOJO.getCompany_name(),
+                                    orderPOJO.getPrice(),
+                                    orderPOJO.getOrder().getStatus()
+                            );
+
+                            PendingIntent pendingIntent = PendingIntent.getActivity(
+                                    getBaseContext(),
+                                    0,
+                                    intent,
+                                    PendingIntent.FLAG_UPDATE_CURRENT
+                            );
+
+                            Context context = getBaseContext();
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                                    .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
+                                    .setContentText("Ấn vào ...")
+                                    .setContentIntent(pendingIntent);
+                            NotificationManager mNotificationManager = (NotificationManager) context
+                                    .getSystemService(Context.NOTIFICATION_SERVICE);
+                            mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
+
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
     // Creates notification based on title and body received
     private void tripAvailableNotification(Bundle data) {
+
+        Utils.log(TAG, (NetloadingApplication.getAppContext() == null) + " NULL OR NOT");
+
         final String message = data.getString("message");
         final int requestId = Integer.parseInt(data.getString("request_id"));
 

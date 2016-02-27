@@ -69,8 +69,9 @@ public class OrderInformationActivity extends GenericActivity<OrderInformationPr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.order_information_activity);
+
+        Utils.initializeAuthentication(this);
         ButterKnife.bind(this);
 
         super.onCreate(savedInstanceState, OrderInformationPresenter.class, this);

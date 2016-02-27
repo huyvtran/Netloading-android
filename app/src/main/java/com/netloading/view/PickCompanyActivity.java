@@ -69,6 +69,8 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
 
         setContentView(R.layout.pick_company_activity);
+
+        Utils.initializeAuthentication(this);
         ButterKnife.bind(this);
 
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);

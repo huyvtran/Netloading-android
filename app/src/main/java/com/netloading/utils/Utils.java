@@ -2,9 +2,12 @@ package com.netloading.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.netloading.model.webservice.ServiceGenerator;
 import com.netloading.view.PickLocationActivity;
 
 /**
@@ -28,6 +31,23 @@ public class Utils {
     public static void backToHome(Context context) {
         Intent intent = PickLocationActivity.makeIntent(context);
         context.startActivity(intent);
+    }
+
+    public static boolean initializeAuthentication(Context context) {
+        if (ServiceGenerator.isLoggedIn()) return true;
+
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, " ");
+        int customer_id = sharedPreferences.getInt(Constants.SHARED_PREFERENCE_ID_TAG, -1);
+
+        if (customer_id == -1)
+            return false;
+
+        ServiceGenerator.initialize(token, customer_id);
+
+        return true;
     }
 
 }

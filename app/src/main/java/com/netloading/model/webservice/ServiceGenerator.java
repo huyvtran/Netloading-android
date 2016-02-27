@@ -152,8 +152,7 @@ public class ServiceGenerator {
 
     private static NetloadingService mNetloadingService;
 
-    public static NetloadingService getNetloadingService() throws NotAuthenticatedException {
-        if (!isLoggedIn) throw new NotAuthenticatedException();
+    public static NetloadingService getNetloadingService() {
 
         if (mNetloadingService == null) {
             mNetloadingService = createService(NetloadingService.class, builder(), getAuthenticatedHttpClient());
