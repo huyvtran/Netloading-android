@@ -81,10 +81,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         ArrayList<CompanyTripPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
         if (companyPOJOs.size() > 0) {
             showList(companyPOJOs);
-            mHeaderRelativeLayout.setVisibility(View.VISIBLE);
         } else {
             mNotFoundLayout.setVisibility(View.VISIBLE);
             mCompanyListView.setVisibility(View.INVISIBLE);
+            mHeaderRelativeLayout.setVisibility(View.INVISIBLE);
         }
 
         // request id

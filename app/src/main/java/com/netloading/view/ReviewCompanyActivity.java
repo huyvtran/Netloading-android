@@ -117,7 +117,13 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
 
     @Override
     public void handleAcceptTripDone() {
-        Utils.toast(getApplicationContext(), "chờ notification");
+        Utils.toast(getApplicationContext(), "Yêu cầu của bạn đã được gửi cho " + mCompanyNameTextView.getText().toString()
+        + ". Vui lòng đợi phản hồi từ công ty.");
+
+        finish();
+        Intent intent = RequestListActivity.makeIntent(getApplicationContext());
+        startActivity(intent);
+
     }
 
 }
