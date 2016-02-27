@@ -7,6 +7,7 @@ import com.netloading.model.pojo.AcceptTripPOJO;
 import com.netloading.model.pojo.CompanyPOJO;
 import com.netloading.model.webservice.NetloadingService;
 import com.netloading.model.webservice.ServiceGenerator;
+import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
 
 import org.json.JSONException;
@@ -39,42 +40,46 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
     public void getCompanyInfo(int mCompanyId) {
         processing = true;
 
-        ServiceGenerator.getNetloadingService()
-                .getCompanyInfomation(mCompanyId).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                processing = false;
+        try {
+            ServiceGenerator.getNetloadingService()
+                    .getCompanyInfomation(mCompanyId).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    processing = false;
 
-                try {
-                    JSONObject result = new JSONObject(response.body().string());
-                    if (result.getString("status").equals("success")) {
-                        CompanyPOJO companyInfo = new Gson().fromJson(
-                                result.getJSONObject("message").toString(),
-                                CompanyPOJO.class
-                        );
+                    try {
+                        JSONObject result = new JSONObject(response.body().string());
+                        if (result.getString("status").equals("success")) {
+                            CompanyPOJO companyInfo = new Gson().fromJson(
+                                    result.getJSONObject("message").toString(),
+                                    CompanyPOJO.class
+                            );
 
-                        mView.get().updateCompanyInfo(companyInfo);
+                            mView.get().updateCompanyInfo(companyInfo);
 
-                    } else {
-                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
+                        } else {
+                            mView.get().onError(View.STATUS_UNHANDLED_ERROR);
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        mView.get().onError(View.STATUS_NETWORK_ERROR);
                     }
 
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    mView.get().onError(View.STATUS_NETWORK_ERROR);
                 }
 
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                processing = false;
-                mView.get().onError(View.STATUS_NETWORK_ERROR);
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    processing = false;
+                    mView.get().onError(View.STATUS_NETWORK_ERROR);
+                }
+            });
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -84,7 +89,12 @@ public class ReviewCompanyPresenter implements ConfigurableOps<ReviewCompanyPres
 
     public void acceptTrip(int mRequestId, int mTripId) {
         processing = true;
-        NetloadingService netloadingService = ServiceGenerator.getNetloadingService();
+        NetloadingService netloadingService = null;
+        try {
+            netloadingService = ServiceGenerator.getNetloadingService();
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
 
         final AcceptTripPOJO acceptTripPOJO = new AcceptTripPOJO(mRequestId, mTripId);
 

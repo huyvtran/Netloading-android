@@ -8,6 +8,7 @@ import com.netloading.model.pojo.CompanyTripPOJO;
 import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.model.webservice.NetloadingService;
 import com.netloading.model.webservice.ServiceGenerator;
+import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
 
 import org.json.JSONArray;
@@ -48,7 +49,12 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
         // set state
         processing = true;
 
-        NetloadingService netloadingService = ServiceGenerator.getNetloadingService();
+        NetloadingService netloadingService = null;
+        try {
+            netloadingService = ServiceGenerator.getNetloadingService();
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
 
         // TODO - test here
         final RequestPOJO requestPOJO = new RequestPOJO(pickUpDate, goodsWeightDimension,

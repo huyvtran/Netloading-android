@@ -6,6 +6,7 @@ import com.netloading.common.ConfigurableOps;
 import com.netloading.common.ContextView;
 import com.netloading.model.pojo.CompanyTripPOJO;
 import com.netloading.model.webservice.ServiceGenerator;
+import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
 
 import org.json.JSONArray;
@@ -38,77 +39,85 @@ public class RequestInformationPresenter implements ConfigurableOps<RequestInfor
     }
 
     public void deleteRequest(int requestId) {
-        ServiceGenerator.getNetloadingService()
-                .deleteRequest(requestId).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                processing = false;
+        try {
+            ServiceGenerator.getNetloadingService()
+                    .deleteRequest(requestId).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+    //                processing = false;
 
-                try {
-                    JSONObject result = new JSONObject(response.body().string());
+                    try {
+                        JSONObject result = new JSONObject(response.body().string());
 
-                    Utils.log(TAG, result.toString());
+                        Utils.log(TAG, result.toString());
 
-                    if (result.getString("status").equals("success")) {
-                        mView.get().onDeleteSuccess();
-                    } else {
-                        mView.get().onError(View.STATUS_UNHANDLED_ERROR);
+                        if (result.getString("status").equals("success")) {
+                            mView.get().onDeleteSuccess();
+                        } else {
+                            mView.get().onError(View.STATUS_UNHANDLED_ERROR);
+                        }
+                    } catch (JSONException | IOException e) {
+                        e.printStackTrace();
+
+                        mView.get().onError(View.STATUS_NETWORK_ERROR);
                     }
-                } catch (JSONException | IOException e) {
-                    e.printStackTrace();
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+    //                processing = false;
 
                     mView.get().onError(View.STATUS_NETWORK_ERROR);
                 }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                processing = false;
-
-                mView.get().onError(View.STATUS_NETWORK_ERROR);
-            }
-        });
+            });
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void retryRequest(int requestId) {
-        ServiceGenerator.getNetloadingService().retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
+        try {
+            ServiceGenerator.getNetloadingService().retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
 
-                    JSONObject result = new JSONObject(response.body().string());
+                        JSONObject result = new JSONObject(response.body().string());
 
-                    Utils.log(TAG, result.toString());
-                    if (result.getString("status").equals("success")) {
+                        Utils.log(TAG, result.toString());
+                        if (result.getString("status").equals("success")) {
 
-                        // Get company list
-                        Gson gson = new Gson();
-                        JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
-                        Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
-                        }.getType();
-                        ArrayList<CompanyTripPOJO> companyTripPOJOs = gson.fromJson(companiesArray.toString(), listType);
+                            // Get company list
+                            Gson gson = new Gson();
+                            JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
+                            Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
+                            }.getType();
+                            ArrayList<CompanyTripPOJO> companyTripPOJOs = gson.fromJson(companiesArray.toString(), listType);
 
-                        // Get request id
-                        Utils.log(TAG, companyTripPOJOs.size() + " ");
+                            // Get request id
+                            Utils.log(TAG, companyTripPOJOs.size() + " ");
 
-                        /// TODO - on result
-                        mView.get().onRetrySuccess(companyTripPOJOs);
+                            /// TODO - on result
+                            mView.get().onRetrySuccess(companyTripPOJOs);
 
-                    } else {
+                        } else {
+                            mView.get().onError(View.STATUS_NETWORK_ERROR);
+                        }
+                    } catch (JSONException | IOException e) {
+                        e.printStackTrace();
                         mView.get().onError(View.STATUS_NETWORK_ERROR);
+
                     }
-                } catch (JSONException | IOException e) {
-                    e.printStackTrace();
-                    mView.get().onError(View.STATUS_NETWORK_ERROR);
-
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                mView.get().onError(View.STATUS_NETWORK_ERROR);
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    mView.get().onError(View.STATUS_NETWORK_ERROR);
+                }
+            });
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
     }
 
     public interface View extends ContextView {

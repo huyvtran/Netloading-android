@@ -13,6 +13,7 @@ import com.netloading.model.pojo.GCMTokenPOJO;
 import com.netloading.model.webservice.NetloadingService;
 import com.netloading.model.webservice.ServiceGenerator;
 import com.netloading.utils.Constants;
+import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
 
 import java.io.IOException;
@@ -74,7 +75,12 @@ public class RegistrationIntentService extends IntentService {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         // send network request, send to server
-        NetloadingService netloadingService = ServiceGenerator.getNetloadingService();
+        NetloadingService netloadingService = null;
+        try {
+            netloadingService = ServiceGenerator.getNetloadingService();
+        } catch (NotAuthenticatedException e) {
+            e.printStackTrace();
+        }
         int id = sharedPreferences.getInt(Constants.SHARED_PREFERENCE_ID_TAG, 0);
 
 
