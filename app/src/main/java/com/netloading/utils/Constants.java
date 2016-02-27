@@ -5,7 +5,7 @@ package com.netloading.utils;
  */
 public class Constants {
 
-    public static final String API_BASE_URL = "http://192.168.32.107:3000";//"http://netloading-dandoh.rhcloud.com";
+    public static final String API_BASE_URL = "http://192.168.32.109:3000";//"http://netloading-dandoh.rhcloud.com";
 
     public static final String SHARED_PREFERENCE_ID_TAG = "id tag";
     public static final String MA_HUYEN_DI = "ma huyen di";
@@ -20,4 +20,5 @@ public class Constants {
     public static final String GOODS_WEIGHT_NUMBER = "goods weight number";
     public static final String GOODS_NAME = "good name";
     public static final String GOODS_WEIGHT_DIMENSION = "goods weight dimension";
+    public static final String SHARED_PREFERENCE_TOKEN_TAG = "shared prefrence token tag";
 }

@@ -80,7 +80,8 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
 
     public static Intent makeIntent(Context context) {
-        return new Intent(context, PickLocationActivity.class);
+        return new Intent(context, PickLocationActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 
     @Override

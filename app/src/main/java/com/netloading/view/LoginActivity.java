@@ -85,9 +85,6 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     @OnClick(R.id.login_forgot_password)
     public void forgotPassword() {
 
-        // TODO - finish activity
-
-
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }

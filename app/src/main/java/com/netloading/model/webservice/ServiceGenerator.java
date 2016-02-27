@@ -1,6 +1,7 @@
 package com.netloading.model.webservice;
 
 import com.netloading.utils.Constants;
+import com.netloading.utils.NotAuthenticatedException;
 import com.netloading.utils.Utils;
 
 import java.io.IOException;
@@ -77,8 +78,14 @@ public class ServiceGenerator {
 
     private static boolean isLoggedIn = false;
 
+    public static boolean isLoggedIn() {
+        return isLoggedIn;
+    }
 
     public static void initialize(String accessToken, int id) {
+        if (isLoggedIn) return;
+
+
         setAccessToken(accessToken);
         setId(id);
         isLoggedIn = true;
@@ -145,7 +152,9 @@ public class ServiceGenerator {
 
     private static NetloadingService mNetloadingService;
 
-    public static NetloadingService getNetloadingService() {
+    public static NetloadingService getNetloadingService() throws NotAuthenticatedException {
+        if (!isLoggedIn) throw new NotAuthenticatedException();
+
         if (mNetloadingService == null) {
             mNetloadingService = createService(NetloadingService.class, builder(), getAuthenticatedHttpClient());
         }
