@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -22,6 +23,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import okhttp3.internal.Util;
 
 /**
  * Created by Dandoh on 2/24/16.
@@ -29,7 +31,7 @@ import butterknife.OnItemClick;
 public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.View, PickCompanyPresenter>
         implements PickCompanyPresenter.View, SwipeRefreshLayout.OnRefreshListener {
 
-    private static final String COMPANY_POJO_EXTRA = "company pojo extra";
+    private static final String COMPANY_TRIP_POJO_EXTRA = "company pojo extra";
     private static final String REQUEST_ID_EXTRA = "request id extra";
     private int requestId;
 
@@ -52,9 +54,9 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     private ArrayList<CompanyTripPOJO> companyTripPOJOs;
 
 
-    public static Intent makeIntent(Context context, ArrayList<CompanyTripPOJO> companyPOJOList, int id) {
+    public static Intent makeIntent(Context context, ArrayList<CompanyTripPOJO> companyTripPOJOs, int id) {
         Intent intent = new Intent(context, PickCompanyActivity.class)
-                .putParcelableArrayListExtra(COMPANY_POJO_EXTRA, companyPOJOList)
+                .putParcelableArrayListExtra(COMPANY_TRIP_POJO_EXTRA, companyTripPOJOs)
                 .putExtra(REQUEST_ID_EXTRA, id);
 
         return intent;
@@ -78,9 +80,9 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         // Get input
         // company list
-        ArrayList<CompanyTripPOJO> companyPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_POJO_EXTRA);
-        if (companyPOJOs.size() > 0) {
-            showList(companyPOJOs);
+        ArrayList<CompanyTripPOJO> companyTripPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_TRIP_POJO_EXTRA);
+        if (companyTripPOJOs.size() > 0) {
+            showList(companyTripPOJOs);
         } else {
             mNotFoundLayout.setVisibility(View.VISIBLE);
             mCompanyListView.setVisibility(View.INVISIBLE);
@@ -185,6 +187,16 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         Utils.log(TAG, "On refresh");
 
         getOps().retry(requestId);
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            Utils.backToHome(this);
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

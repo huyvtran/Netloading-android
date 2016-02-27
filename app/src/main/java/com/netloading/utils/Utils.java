@@ -1,8 +1,11 @@
 package com.netloading.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.netloading.view.PickLocationActivity;
 
 /**
  * Created by Dandoh on 2/13/16.
@@ -21,5 +24,10 @@ public class Utils {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+
+    public static void backToHome(Context context) {
+        Intent intent = PickLocationActivity.makeIntent(context);
+        context.startActivity(intent);
+    }
 
 }
