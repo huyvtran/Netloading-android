@@ -166,7 +166,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         mProgressDialog.dismiss();
         Utils.toast(this, "Xoá yêu cầu vận tải thành công");
 
-        Intent intent = PickLocationActivity.makeIntent(this);
+        Intent intent = PickLocationActivity.makeIntent(this, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

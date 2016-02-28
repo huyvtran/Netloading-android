@@ -48,6 +48,7 @@ import butterknife.OnClick;
 public class PickLocationActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "PickLocationActivity";
+    private static final String EXTRA_HAS_TOKEN = "Extra has token";
     private List<String> maTinhList = new ArrayList<String>();
     private List<String> allHuyenList = new ArrayList<String>();
     private List<String> maHuyenList = new ArrayList<String>();
@@ -79,8 +80,9 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
     private NetloadingNavigationHandler mNavigationHandler;
 
 
-    public static Intent makeIntent(Context context) {
+    public static Intent makeIntent(Context context, boolean hasToken) {
         return new Intent(context, PickLocationActivity.class)
+                .putExtra(EXTRA_HAS_TOKEN, hasToken)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 
@@ -125,16 +127,22 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
      * + Copy this code
      */
     private void initializeEssentialView() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+        //
+        boolean hasToken = getIntent().getBooleanExtra(EXTRA_HAS_TOKEN, true);
+        if (!hasToken) {
+            findViewById(R.id.navigation_sign_out)
+                    .setVisibility(View.INVISIBLE);
+        }
+
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Chọn địa điểm và loại xe");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-        getSupportActionBar().setTitle("Chọn địa điểm và loại xe");
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);

@@ -36,6 +36,12 @@ public class NetloadingNavigationHandler {
 
     public void onNavigationItemClick(View v) {
 
+        if (!ServiceGenerator.isLoggedIn()) {
+            Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_AFTER_LOGOUT);
+            mActivity.startActivity(intent);
+            return;
+        }
+
 //        Utils.log(TAG, v.getId() + " clicked on navigation drawer");
         switch (v.getId()) {
             // TODO

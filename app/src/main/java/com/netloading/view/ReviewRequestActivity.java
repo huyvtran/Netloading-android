@@ -136,14 +136,19 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         showProgressDialog();
 
         // TODO -- check whether is logged in or not, if not, start login activity clear task | new task
-        if (ServiceGenerator.isLoggedIn())
+        if (ServiceGenerator.isLoggedIn()) {
 
+            getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
+                    startDistrictCode, arriveDistrictCode, vehicleType,
+                    expectedPrice, goodsName,
+                    startProvinceName, arriveProvinceName,
+                    startDistrictName, arriveDistrictName);
+        } else {
 
-        getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
-                startDistrictCode, arriveDistrictCode, vehicleType,
-                expectedPrice, goodsName,
-                startProvinceName, arriveProvinceName,
-                startDistrictName, arriveDistrictName);
+            Intent intent = LoginActivity.makeIntent(this, LoginActivity.LOGIN_FIRST_TIME_CREATE_REQUEST)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -174,6 +179,10 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
+
+            Intent intent = AddInfoRequestActivity.makeIntent(this)
+                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

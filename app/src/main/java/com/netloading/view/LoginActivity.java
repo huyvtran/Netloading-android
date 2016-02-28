@@ -57,15 +57,6 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         ButterKnife.bind(this);
 
         super.onCreate(savedInstanceState, LoginPresenter.class, this);
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
-
-        String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
-
-        if (!token.equals("NULL")) {
-            finish();
-            startActivity(PickLocationActivity.makeIntent(this));
-        }
 
         mProgressDialog = new ProgressDialog(this);
         if (getOps().isProcessing()) {
@@ -84,7 +75,6 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-
 
 
     @OnClick(R.id.login_button)
@@ -128,7 +118,12 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         Intent intent = RegistrationIntentService.makeIntent(this);
         startService(intent);
 
-        startActivity(PickLocationActivity.makeIntent(this));
+        int stateBefore = getIntent().getIntExtra(STATE_BEFORE_LOGIN, -1);
+        if (stateBefore == LOGIN_FIRST_TIME_CREATE_REQUEST) {
+            startActivity(ReviewRequestActivity.makeIntent(this));
+        } else {
+            startActivity(PickLocationActivity.makeIntent(this, true));
+        }
 
     }
 
