@@ -74,19 +74,19 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                     Utils.log(TAG, result.toString());
                     if (result.getString("status").equals("success")) {
 
-                        // Get company list
-                        Gson gson = new Gson();
-                        JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
-                        Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
-                        }.getType();
-                        ArrayList<CompanyTripPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
-
-                        // Get request id
+//                        // Get company list
+//                        Gson gson = new Gson();
+//                        JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
+//                        Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
+//                        }.getType();
+//                        ArrayList<CompanyTripPOJO> companyPOJOs = gson.fromJson(companiesArray.toString(), listType);
+//
+//                        // Get request id
                         int id = result.getJSONObject("message").getInt("insertId");
-                        Utils.log(TAG, companyPOJOs.size() + " ");
+//                        Utils.log(TAG, companyPOJOs.size() + " ");
 
                         /// TODO - on result
-                        mView.get().onRequestResult(companyPOJOs, id);
+                        mView.get().onRequestResult(id);
 
                     } else if (result.getString("status").equals("error")){
                         mView.get().onError(View.STATUS_ERROR_UNHANDLE);
@@ -118,6 +118,6 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
 
         void onError(int status);
 
-        void onRequestResult(ArrayList<CompanyTripPOJO> companyPOJOs, int requestId);
+        void onRequestResult(int requestId);
     }
 }

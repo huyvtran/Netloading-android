@@ -85,11 +85,14 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
     }
 
     public void retry(int requestId) {
+        processing = true;
 
         ServiceGenerator.getNetloadingService().retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                processing = false;
                 try {
+
 
                     JSONObject result = new JSONObject(response.body().string());
 
@@ -121,6 +124,7 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                processing = false;
                 mView.get().onError(View.STATUS_NETWORK_ERROR);
             }
         });

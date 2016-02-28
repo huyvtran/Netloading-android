@@ -36,10 +36,16 @@ public class NetloadingNavigationHandler {
 
     public void onNavigationItemClick(View v) {
 
-//        Utils.log(TAG, v.getId() + " clicked on navigation drawer");
-        switch (v.getId()) {
-            // TODO
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
+
+        if (token.equals("NULL")) {
+            Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_AFTER_LOGOUT)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            mActivity.startActivity(intent);
+            return;
         }
+//        Utils.log(TAG, v.getId() + " clicked on navigation drawer");
 
         if (v.getId() == R.id.navigation_manage_requests) {
             Utils.log(TAG, v.getId() + " clicked on request button");
@@ -52,6 +58,8 @@ public class NetloadingNavigationHandler {
             mActivity.startActivity(intent);
         } else
         if (v.getId() == R.id.navigation_sign_out) {
+
+            Utils.log(TAG, "on navation sign out");
             ServiceGenerator.getNetloadingService().logout().enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -62,7 +70,7 @@ public class NetloadingNavigationHandler {
                         if (result.getString("status").equals("success")) {
                             ServiceGenerator.setIsLoggedIn(false);
 //                            System.exit(0);
-                            Intent intent = new Intent(mActivity, LoginActivity.class).setFlags(
+                            Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_AFTER_LOGOUT).setFlags(
                                     Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK
                             );
 
@@ -89,6 +97,20 @@ public class NetloadingNavigationHandler {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    ServiceGenerator.setIsLoggedIn(false);
+//                            System.exit(0);
+                    Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_AFTER_LOGOUT).setFlags(
+                            Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    );
+
+                    mActivity.startActivity(intent);
+
+
+                    SharedPreferences sharedPreferences = PreferenceManager
+                            .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
+                    sharedPreferences.edit().putInt(Constants.SHARED_PREFERENCE_ID_TAG, 0)
+                            .putString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL")
+                            .apply();
                     Utils.log(TAG, "Error when logout");
                 }
             });

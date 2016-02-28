@@ -83,7 +83,6 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
         getSupportActionBar().setTitle("Nhập thông tin yêu cầu");
 
         setDimension();
@@ -93,7 +92,11 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         mGoodWeightNumberEditText.setOnFocusChangeListener(this);
         mExpectedPriceEditText.setOnFocusChangeListener(this);
 
+        initializeDefaultValue();
+
     }
+
+
 
     private void setDimension() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -161,6 +164,19 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         sharedPreferences.edit().putString(Constants.GOODS_WEIGHT_DIMENSION, mDimension).apply();
 
         startActivity(ReviewRequestActivity.makeIntent(this));
+    }
+
+    private void initializeDefaultValue() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String goodName = sharedPreferences.getString(Constants.GOODS_NAME, "");
+        int goodWeightNumber = sharedPreferences.getInt(Constants.GOODS_WEIGHT_NUMBER, 0);
+        String date = sharedPreferences.getString(Constants.GOODS_PICKUP_DATE, "");
+        String expectedPrice = sharedPreferences.getString(Constants.GOODS_EXPTECTED_PRICE, "");
+
+        mGoodsNameEditText.setText(goodName);
+        mGoodWeightNumberEditText.setText(String.valueOf(goodWeightNumber));
+        mDateTextView.setText(date);
+        mExpectedPriceEditText.setText(expectedPrice + "");
     }
 
     @Override

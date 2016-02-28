@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +19,6 @@ import com.netloading.model.pojo.RequestPOJO;
 import com.netloading.presenter.RequestInformationPresenter;
 import com.netloading.utils.Utils;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.internal.Util;
 
 /**
  * Created by AnhVu on 2/26/16.
@@ -37,9 +35,9 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
     implements RequestInformationPresenter.View{
 
     private static final String REQUEST_INFO_EXTRA = "request info";
-    private static final String REQUEST_POSITION_EXTRA = "request pos";
+    private static final String REQUEST_ID_EXTRA = "request pos";
 
-    private RequestPOJO requestInfo;
+    private int mRequestId;
 
     @Bind(R.id.start_address_tv)
     TextView mStartAddressTextView;
@@ -68,10 +66,12 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
     @Bind(R.id.delete_request_btn)
     Button mDeleteRequestButton;
 
+    private ProgressDialog mProgressDialog;
 
-    public static Intent makeIntent(Context context, RequestPOJO requestPOJO, int position) {
+
+    public static Intent makeIntent(Context context, int id) {
         return new Intent(context, RequestInformationActivity.class)
-                .putExtra(REQUEST_INFO_EXTRA, requestPOJO).putExtra(REQUEST_POSITION_EXTRA, position);
+                .putExtra(REQUEST_ID_EXTRA, id);
     }
 
     @Override
@@ -89,26 +89,48 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
 
         getSupportActionBar().setTitle("Thông tin yêu cầu");
 
+        mRequestId = getIntent().getIntExtra(REQUEST_ID_EXTRA, -1);
+
         super.onCreate(savedInstanceState, RequestInformationPresenter.class, this);
 
-        requestInfo = getIntent().getParcelableExtra(REQUEST_INFO_EXTRA);
-        Utils.log(TAG, requestInfo.toString());
+        mProgressDialog = new ProgressDialog(this);
 
-        updateRequestInformation(requestInfo);
+        if (getRetainedFragmentManager().firstTimeIn()) {
+            showProgressDialog();
+            getOps().getRequestInfo(mRequestId);
+        }
+
+        if (getOps().isProcessing()) {
+            showProgressDialog();
+        }
+    }
+
+
+    private void showProgressDialog() {
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle("Đang xử lí");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
+        mProgressDialog.show();
     }
 
     @OnClick(R.id.delete_request_btn)
     void deleteRequest() {
-        getOps().deleteRequest(requestInfo.getId());
+        getOps().deleteRequest(mRequestId);
     }
 
     @OnClick(R.id.retry_request_btn)
     void retryRequest() {
-        getOps().retryRequest(requestInfo.getId());
+        Intent intent = PickCompanyActivity.makeIntent(this, mRequestId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
 
-    private void updateRequestInformation(RequestPOJO requestInfo) {
+    @Override
+    public void updateRequestInformation(RequestPOJO requestInfo) {
+        mProgressDialog.dismiss();
         mRequestTitleTextView.setText("Yêu Cầu " + (requestInfo.getId()));
 
         mStartAddressTextView.setText(requestInfo.getStart_district_name() + ", " + requestInfo.getStart_province_name());
@@ -166,6 +188,7 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
 
     @Override
     public void onError(int status) {
+        mProgressDialog.dismiss();
         if (status == STATUS_NETWORK_ERROR) {
             Utils.toast(this, "Lỗi đường truyền, vui lòng thử lại");
         } else {
@@ -173,13 +196,6 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
         }
     }
 
-    @Override
-    public void onRetrySuccess(ArrayList<CompanyTripPOJO> companyTripPOJOs) {
-        Intent intent = PickCompanyActivity.makeIntent(this, companyTripPOJOs, requestInfo.getId());
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

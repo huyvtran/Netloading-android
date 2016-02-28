@@ -100,7 +100,7 @@ public class RequestListActivity extends GenericActivity<RequestListPresenter.Vi
     @OnItemClick(R.id.all_request_listview)
     void onAllRequestItemClick(int position) {
 
-        Intent intent = RequestInformationActivity.makeIntent(getApplicationContext(), requestPOJOs.get(position), position);
+        Intent intent = RequestInformationActivity.makeIntent(getApplicationContext(), requestPOJOs.get(position).getId());
         startActivity(intent);
 
     }

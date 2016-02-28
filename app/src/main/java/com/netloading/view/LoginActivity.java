@@ -1,11 +1,13 @@
 package com.netloading.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -27,6 +29,12 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         implements LoginPresenter.View {
 
 
+    public static final int LOGIN_AFTER_LOGOUT = 21;
+    public static final int LOGIN_FIRST_TIME_CREATE_REQUEST = 35;
+    public static final int LOGIN_TOKEN_INVALID = 53;
+    private static final String STATE_BEFORE_LOGIN = "state before login";
+
+
     @Bind(R.id.username)
     EditText mUsernameEditText;
 
@@ -34,6 +42,12 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     EditText mPasswordEditText;
 
     private ProgressDialog mProgressDialog;
+
+
+    public static Intent makeIntent(Context context, int stateBeforeLogin) {
+        return new Intent(context, LoginActivity.class)
+                .putExtra(STATE_BEFORE_LOGIN, stateBeforeLogin);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +57,6 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         ButterKnife.bind(this);
 
         super.onCreate(savedInstanceState, LoginPresenter.class, this);
-        SharedPreferences sharedPreferences = PreferenceManager
-                .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
-
-        String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
-
-        if (!token.equals("NULL")) {
-            finish();
-            startActivity(PickLocationActivity.makeIntent(this));
-        }
 
         mProgressDialog = new ProgressDialog(this);
         if (getOps().isProcessing()) {
@@ -113,7 +118,13 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
         Intent intent = RegistrationIntentService.makeIntent(this);
         startService(intent);
 
-        startActivity(PickLocationActivity.makeIntent(this));
+        int stateBefore = getIntent().getIntExtra(STATE_BEFORE_LOGIN, -1);
+        if (stateBefore == LOGIN_FIRST_TIME_CREATE_REQUEST) {
+            startActivity(ReviewRequestActivity.makeIntent(this)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        } else {
+            startActivity(PickLocationActivity.makeIntent(this, true));
+        }
 
     }
 
