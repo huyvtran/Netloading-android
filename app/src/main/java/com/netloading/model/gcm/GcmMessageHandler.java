@@ -143,58 +143,26 @@ public class GcmMessageHandler extends GcmListenerService {
         final String message = data.getString("message");
         final int requestId = Integer.parseInt(data.getString("request_id"));
 
-        ServiceGenerator.getNetloadingService()
-                .retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+        // start activity
+        Intent intent = PickCompanyActivity.makeIntent(getBaseContext(),
+                requestId).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                try {
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                getBaseContext(),
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
 
-                    JSONObject result = new JSONObject(response.body().string());
+        Context context = getBaseContext();
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
+                .setContentText("Ấn vào để tìm nhà xe.")
+                .setContentIntent(pendingIntent).setAutoCancel(true);
 
-                    Utils.log(TAG, result.toString());
-                    if (result.getString("status").equals("success")) {
-
-                        // Get company list
-                        Gson gson = new Gson();
-                        JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
-                        Type listType = new TypeToken<ArrayList<CompanyTripPOJO>>() {
-                        }.getType();
-                        ArrayList<CompanyTripPOJO> companyTripPOJOs = gson.fromJson(companiesArray.toString(), listType);
-
-                        // start activity
-                        Intent intent = PickCompanyActivity.makeIntent(getBaseContext(),
-                                companyTripPOJOs, requestId).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                        PendingIntent pendingIntent = PendingIntent.getActivity(
-                                getBaseContext(),
-                                0,
-                                intent,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-
-                        Context context = getBaseContext();
-                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                                .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
-                                .setContentText("Ấn vào để tìm nhà xe.")
-                                .setContentIntent(pendingIntent).setAutoCancel(true);
-
-                        NotificationManager mNotificationManager = (NotificationManager) context
-                                .getSystemService(Context.NOTIFICATION_SERVICE);
-                        mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
-                    } else {
-                    }
-                } catch (JSONException | IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
+        NotificationManager mNotificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
 
     }
 
@@ -218,7 +186,7 @@ public class GcmMessageHandler extends GcmListenerService {
                         requestPOJO.setStatus(1);
 
                         Intent intent = RequestInformationActivity.makeIntent(
-                                getBaseContext(), requestPOJO, requestPOJO.getId())
+                                getBaseContext(), requestPOJO.getId())
                                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                         PendingIntent pendingIntent = PendingIntent.getActivity(

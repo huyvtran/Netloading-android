@@ -36,16 +36,16 @@ public class NetloadingNavigationHandler {
 
     public void onNavigationItemClick(View v) {
 
-        if (!ServiceGenerator.isLoggedIn()) {
-            Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_AFTER_LOGOUT);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
+
+        if (token.equals("NULL")) {
+            Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_AFTER_LOGOUT)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mActivity.startActivity(intent);
             return;
         }
-
 //        Utils.log(TAG, v.getId() + " clicked on navigation drawer");
-        switch (v.getId()) {
-            // TODO
-        }
 
         if (v.getId() == R.id.navigation_manage_requests) {
             Utils.log(TAG, v.getId() + " clicked on request button");
@@ -58,6 +58,8 @@ public class NetloadingNavigationHandler {
             mActivity.startActivity(intent);
         } else
         if (v.getId() == R.id.navigation_sign_out) {
+
+            Utils.log(TAG, "on navation sign out");
             ServiceGenerator.getNetloadingService().logout().enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

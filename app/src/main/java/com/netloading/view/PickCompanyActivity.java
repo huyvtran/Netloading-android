@@ -57,9 +57,8 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     private ArrayList<CompanyTripPOJO> companyTripPOJOs;
 
 
-    public static Intent makeIntent(Context context, ArrayList<CompanyTripPOJO> companyTripPOJOs, int id) {
+    public static Intent makeIntent(Context context, int id) {
         Intent intent = new Intent(context, PickCompanyActivity.class)
-                .putParcelableArrayListExtra(COMPANY_TRIP_POJO_EXTRA, companyTripPOJOs)
                 .putExtra(REQUEST_ID_EXTRA, id);
 
         return intent;
@@ -93,18 +92,22 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
         // Get input
         // company list
-        ArrayList<CompanyTripPOJO> companyTripPOJOs = getIntent().getParcelableArrayListExtra(COMPANY_TRIP_POJO_EXTRA);
-        if (companyTripPOJOs.size() > 0) {
-            showList(companyTripPOJOs);
-        } else {
-            mNotFoundLayout.setVisibility(View.VISIBLE);
-            mCompanyListView.setVisibility(View.INVISIBLE);
-            mHeaderRelativeLayout.setVisibility(View.INVISIBLE);
-        }
+        // TODO
+//        if (companyTripPOJOs.size() > 0) {
+//            showList(companyTripPOJOs);
+//        } else {
+//            mNotFoundLayout.setVisibility(View.VISIBLE);
+//            mCompanyListView.setVisibility(View.INVISIBLE);
+//            mHeaderRelativeLayout.setVisibility(View.INVISIBLE);
+//        }
+
 
         // request id
         requestId = getIntent().getIntExtra(REQUEST_ID_EXTRA, 0);
 
+
+        showProgressDialog();
+        getOps().retry(requestId);
 
         //swipe to refresh
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -173,7 +176,10 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
     @Override
     public void onError(int status) {
-        mProgressDialog.dismiss();
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+
         if (status == STATUS_NETWORK_ERROR) {
             Utils.toast(this, "Lỗi đường truyền, vui lòng thử lại");
         } else {
@@ -186,19 +192,26 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Override
     public void onRetrySuccess(ArrayList<CompanyTripPOJO> companyTripPOJOs) {
 
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+
         if (companyTripPOJOs.size() > 0) {
             showList(companyTripPOJOs);
         } else {
             mNotFoundLayout.setVisibility(View.VISIBLE);
             mCompanyListView.setVisibility(View.INVISIBLE);
+            mHeaderRelativeLayout.setVisibility(View.INVISIBLE);
         }
         mSwipeRefreshLayout.setRefreshing(false);
+
+
     }
 
     @Override
     public void onGetRequestDetailSuccess(RequestPOJO requestPOJO) {
         Intent intent = RequestInformationActivity.makeIntent(getApplicationContext(),
-                requestPOJO, requestPOJO.getId());
+                requestPOJO.getId());
 
         startActivity(intent);
     }
@@ -237,8 +250,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
 
             getOps().getRequestInfo(requestId);
 
-        } else
-        if (id == android.R.id.home) {
+        } else if (id == android.R.id.home) {
             Utils.backToHome(this);
 //            Utils.toast(this, "back");
         }

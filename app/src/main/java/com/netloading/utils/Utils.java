@@ -15,7 +15,7 @@ import com.netloading.view.PickLocationActivity;
  */
 public class Utils {
 
-    public static boolean isDev = false;
+    public static boolean isDev = true;
 
     public static void log(String tag, String message) {
         if (isDev) {

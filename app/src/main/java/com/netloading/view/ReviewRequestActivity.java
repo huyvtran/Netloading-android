@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -161,14 +162,14 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     }
 
     @Override
-    public void onRequestResult(ArrayList<CompanyTripPOJO> companyPOJOs, int requestId) {
+    public void onRequestResult(int requestId) {
         mProgressDialog.dismiss();
 
         String token = ServiceGenerator.getAccessToken();
 
         Utils.log(TAG, token);
 
-        Intent intent = PickCompanyActivity.makeIntent(this, companyPOJOs, requestId);
+        Intent intent = PickCompanyActivity.makeIntent(this, requestId);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
@@ -185,6 +186,21 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            finish();
+
+            Intent intent = AddInfoRequestActivity.makeIntent(this)
+                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 

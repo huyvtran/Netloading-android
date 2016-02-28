@@ -120,7 +120,8 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
         int stateBefore = getIntent().getIntExtra(STATE_BEFORE_LOGIN, -1);
         if (stateBefore == LOGIN_FIRST_TIME_CREATE_REQUEST) {
-            startActivity(ReviewRequestActivity.makeIntent(this));
+            startActivity(ReviewRequestActivity.makeIntent(this)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         } else {
             startActivity(PickLocationActivity.makeIntent(this, true));
         }

@@ -10,6 +10,7 @@ import com.netloading.R;
 import com.netloading.common.GenericActivity;
 import com.netloading.presenter.SplashPresenter;
 import com.netloading.utils.Constants;
+import com.netloading.utils.Utils;
 
 /**
  * Created by AnhVu on 2/28/16.
@@ -34,10 +35,11 @@ public class SplashActivity extends GenericActivity<SplashPresenter.View, Splash
                 .getDefaultSharedPreferences(NetloadingApplication.getAppContext());
 
         String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
-        if (!token.equals("NULL")) {
-            startActivity(PickLocationActivity.makeIntent(this, true));
-        } else {
+        Utils.log(TAG, token);
+        if (token.equals("NULL")) {
             startActivity(PickLocationActivity.makeIntent(this, false));
+        } else {
+            startActivity(PickLocationActivity.makeIntent(this, true));
         }
         finish();
     }
