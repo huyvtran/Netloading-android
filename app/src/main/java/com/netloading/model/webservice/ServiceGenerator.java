@@ -146,7 +146,7 @@ public class ServiceGenerator {
 
                                     Utils.log(TAG, "222 Unauthenticated");
                                     Context context = NetloadingApplication.getAppContext();
-                                    Intent intent = new Intent(context, LoginActivity.class)
+                                    Intent intent = LoginActivity.makeIntent(context, LoginActivity.LOGIN_TOKEN_INVALID)
                                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     context.startActivity(intent);
                                     Utils.toast(context, "Phiên đăng nhập kết thúc hoặc tài khoản đang đăng nhập ở thiết bị khác," +

@@ -80,7 +80,6 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
         getSupportActionBar().setTitle("Nhập thông tin yêu cầu");
 
         setDimension();

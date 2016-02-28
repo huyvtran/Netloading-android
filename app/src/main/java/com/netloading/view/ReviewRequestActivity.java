@@ -134,6 +134,11 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         Utils.log(TAG, token + "");
 
         showProgressDialog();
+
+        // TODO -- check whether is logged in or not, if not, start login activity clear task | new task
+        if (ServiceGenerator.isLoggedIn())
+
+
         getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
                 startDistrictCode, arriveDistrictCode, vehicleType,
                 expectedPrice, goodsName,
