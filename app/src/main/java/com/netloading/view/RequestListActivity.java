@@ -56,6 +56,8 @@ public class RequestListActivity extends GenericActivity<RequestListPresenter.Vi
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Danh sách yêu cầu");
+
         super.onCreate(savedInstanceState, RequestListPresenter.class, this);
 
         mProgressDialog = new ProgressDialog(this);

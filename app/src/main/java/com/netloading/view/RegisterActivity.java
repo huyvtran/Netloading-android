@@ -1,7 +1,9 @@
 package com.netloading.view;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.netloading.R;
@@ -39,6 +41,14 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
         setContentView(R.layout.register_activity);
 
         ButterKnife.bind(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        getSupportActionBar().setTitle("Đăng ký tài khoản mới");
 
         super.onCreate(savedInstanceState, RegisterPresenter.class, this);
     }
@@ -114,5 +124,14 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
         } else if (errorCode == STATUS_DUPLICATE_USERNAME) {
             Utils.toast(this, "Đăng kí không thành công, tên tài khoản của bạn đã tồn tại");
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

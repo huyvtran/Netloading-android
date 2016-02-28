@@ -81,6 +81,8 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Tìm chuyến xe");
+
 
         super.onCreate(savedInstanceState, PickCompanyPresenter.class, this);
 

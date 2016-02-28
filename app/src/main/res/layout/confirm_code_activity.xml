@@ -38,6 +38,7 @@
                 android:hint="Mã xác nhận"
                 android:background="@drawable/bg_edit_text"
                 android:padding="15dp"
+                android:singleLine="true"
                 android:textColorHint="#999999" />
         </android.support.design.widget.TextInputLayout>
 

@@ -81,6 +81,8 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Nhập thông tin yêu cầu");
+
         setDimension();
     }
 
@@ -93,8 +95,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         if (vehicleType.equals("xeTai") || vehicleType.equals("xeDongLanh")) {
             mDimension = "kg";
             mDimensionEditText.setText("kg");
-        } else
-        if (vehicleType.equals("xeBon")){
+        } else if (vehicleType.equals("xeBon")) {
             mDimension = "m3";
             mDimensionEditText.setText("m³");
         }
@@ -121,7 +122,6 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
     @OnClick(R.id.btn_continue)
     void continueToReviewRequest() {
         // TODO - uncomment this
-
         if (TextUtils.isEmpty(mGoodsNameEditText.getText())
                 || TextUtils.isEmpty(mGoodWeightNumberEditText.getText())
                 || TextUtils.isEmpty(mDateTextView.getText())) {
@@ -129,8 +129,10 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
             return;
         }
 
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
 
-        if (myCalendar.before(Calendar.getInstance())) {
+        if (myCalendar.before(cal)) {
             Utils.toast(this, "Ngày đóng hàng không hợp lệ");
             return;
         }

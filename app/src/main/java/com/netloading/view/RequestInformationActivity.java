@@ -87,6 +87,8 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Thông tin yêu cầu");
+
         super.onCreate(savedInstanceState, RequestInformationPresenter.class, this);
 
         requestInfo = getIntent().getParcelableExtra(REQUEST_INFO_EXTRA);
@@ -157,7 +159,7 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
     @Override
     public void onDeleteSuccess() {
         Utils.toast(this, "Xoá yêu cầu vận tải thành công");
-        finish();
+        backToRequestListActivity();
 //        Intent intent = RequestListActivity.makeIntent(this);
 //        startActivity(intent);
     }

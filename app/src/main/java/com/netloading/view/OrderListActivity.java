@@ -54,6 +54,8 @@ public class OrderListActivity extends GenericActivity<OrderListPresenter.View, 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Danh sách đơn hàng");
+
         super.onCreate(savedInstanceState, OrderListPresenter.class, this);
 
         mProgressDialog = new ProgressDialog(this);

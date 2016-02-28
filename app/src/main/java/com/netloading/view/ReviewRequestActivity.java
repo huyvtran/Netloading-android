@@ -81,6 +81,8 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Xem lại yêu cầu");
+
         super.onCreate(savedInstanceState, ReviewRequestPresenter.class, this);
 
         loadRequestInformation();

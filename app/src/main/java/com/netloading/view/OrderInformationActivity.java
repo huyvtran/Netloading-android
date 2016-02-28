@@ -82,6 +82,8 @@ public class OrderInformationActivity extends GenericActivity<OrderInformationPr
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Thông tin đơn hàng");
+
         super.onCreate(savedInstanceState, OrderInformationPresenter.class, this);
 
         mRequestInfo = getIntent().getParcelableExtra(REQUEST_INFO_EXTRA);

@@ -2,6 +2,8 @@ package com.netloading.view;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -36,6 +38,14 @@ public class ForgotPasswordActivity extends GenericActivity<ForgotpassPresenter.
         setContentView(R.layout.forgot_password_activity);
 
         ButterKnife.bind(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        getSupportActionBar().setTitle("Tìm lại mật khẩu");
 
         super.onCreate(savedInstanceState, ForgotpassPresenter.class, this);
 
@@ -86,5 +96,14 @@ public class ForgotPasswordActivity extends GenericActivity<ForgotpassPresenter.
             Utils.toast(this, "Có lỗi xảy ra, vui lòng thử lại");
 
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

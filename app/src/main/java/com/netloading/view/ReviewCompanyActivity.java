@@ -75,6 +75,8 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        getSupportActionBar().setTitle("Thông tin nhà xe");
+
         super.onCreate(savedInstanceState, ReviewCompanyPresenter.class, this);
 
         mCompanyId = getIntent().getIntExtra(EXTRA_COMPANY_ID, -1);
