@@ -1,5 +1,6 @@
 package com.netloading.view;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +32,7 @@ import butterknife.OnClick;
 /**
  * Created by Dandoh on 2/20/16.
  */
-public class AddInfoRequestActivity extends LifecycleLoggingActivity {
+public class AddInfoRequestActivity extends LifecycleLoggingActivity implements View.OnFocusChangeListener {
 
 
     private String mDimension;
@@ -84,6 +87,12 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         getSupportActionBar().setTitle("Nhập thông tin yêu cầu");
 
         setDimension();
+
+        mGoodsNameEditText.setOnFocusChangeListener(this);
+        mDateTextView.setOnFocusChangeListener(this);
+        mGoodWeightNumberEditText.setOnFocusChangeListener(this);
+        mExpectedPriceEditText.setOnFocusChangeListener(this);
+
     }
 
     private void setDimension() {
@@ -163,4 +172,15 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            hideKeyboard(v);
+        }
+    }
 }

@@ -97,9 +97,6 @@ public class ServiceGenerator {
     }
 
     public static void initialize(String accessToken, int id) {
-        if (isLoggedIn) return;
-
-
         setAccessToken(accessToken);
         setId(id);
         isLoggedIn = true;
