@@ -9,7 +9,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/actionBar">
+        android:layout_below="@+id/actionBar"
+        android:clickable="true"
+        android:focusableInTouchMode="true" >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,6 +41,7 @@
                         android:layout_height="56dp"
                         android:hint="Tên hàng"
                         android:paddingLeft="15dp"
+                        android:imeOptions="actionDone"
                         android:layout_alignTop="@+id/goods_name_layout"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
@@ -80,6 +83,7 @@
                             android:text="01-01-2016"
                             android:textSize="18sp"
                             android:padding="15dp"
+                            android:imeOptions="actionDone"
                             android:singleLine="true"
                             android:background="@drawable/bg_edit_text"/>
                     </android.support.design.widget.TextInputLayout>
@@ -119,6 +123,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
                             android:hint="Tải trọng"
+                            android:imeOptions="actionDone"
                             android:inputType="numberDecimal"
                             android:padding="15dp"
                             android:singleLine="true"
@@ -184,6 +189,7 @@
                         android:layout_gravity="center"
                         android:hint="Giá mong muốn"
                         android:singleLine="true"
+                        android:imeOptions="actionDone"
                         android:paddingLeft="15dp"
                         android:paddingRight="50dp"
                         android:inputType="numberDecimal"

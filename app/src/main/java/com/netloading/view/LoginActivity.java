@@ -62,7 +62,6 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
         String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
 
-
         if (!token.equals("NULL")) {
             finish();
             startActivity(PickLocationActivity.makeIntent(this));
