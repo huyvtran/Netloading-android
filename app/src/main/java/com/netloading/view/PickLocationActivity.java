@@ -355,8 +355,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         map.clear();
         Marker m1 = map.addMarker(new MarkerOptions()
                 .position(new LatLng(kDoDi, vDoDi))
-                .title("Start")
-                .snippet("Facebook HQ: Menlo Park"));
+                .title("Start"));
 
         Marker m2 = map.addMarker(new MarkerOptions()
                 .position(new LatLng(kDoDen, vDoDen))
