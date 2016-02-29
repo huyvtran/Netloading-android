@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.netloading">
+    package="com.ketnoivantai">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
-        android:name="com.netloading.permission.C2D_MESSAGE"
+        android:name="com.ketnoivantai.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
     <uses-permission android:name="com.netloading.permission.C2D_MESSAGE" />
 
@@ -17,14 +17,14 @@
         android:required="true" />
 
     <application
-        android:name=".NetloadingApplication"
+        android:name="com.ketnoivantai.NetloadingApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.SplashActivity"
+            android:name="com.ketnoivantai.view.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,63 +33,63 @@
         </activity>
 
         <activity
-            android:name=".view.LoginActivity"
+            android:name="com.ketnoivantai.view.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
         <activity
-            android:name=".view.RegisterActivity"
+            android:name="com.ketnoivantai.view.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".view.RequestInformationActivity"
+            android:name="com.ketnoivantai.view.RequestInformationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".view.OrderInformationActivity"
+            android:name="com.ketnoivantai.view.OrderInformationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".view.ForgotPasswordActivity"
+            android:name="com.ketnoivantai.view.ForgotPasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".view.RequestListActivity"
+            android:name="com.ketnoivantai.view.RequestListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".view.OrderListActivity"
+            android:name="com.ketnoivantai.view.OrderListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".view.PickLocationActivity"
+            android:name="com.ketnoivantai.view.PickLocationActivity"
             android:theme="@style/AppTheme.NoActionBar" >
 
         </activity>
 
 
         <activity
-            android:name=".view.AddInfoRequestActivity"
+            android:name="com.ketnoivantai.view.AddInfoRequestActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
 
 
         <activity
-            android:name=".view.ReviewRequestActivity"
+            android:name="com.ketnoivantai.view.ReviewRequestActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
-        <activity android:name=".view.PickCompanyActivity"
+        <activity android:name="com.ketnoivantai.view.PickCompanyActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
 
         </activity>
 
-        <activity android:name=".view.ReviewCompanyActivity"
+        <activity android:name="com.ketnoivantai.view.ReviewCompanyActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
 
@@ -99,11 +99,11 @@
 
 
         <service
-            android:name="com.netloading.model.gcm.RegistrationIntentService"
+            android:name="com.ketnoivantai.model.gcm.RegistrationIntentService"
             android:exported="false" />
 
         <service
-            android:name="com.netloading.model.gcm.MyInstanceIDListenerService"
+            android:name="com.ketnoivantai.model.gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
@@ -123,7 +123,7 @@
         </receiver>
 
         <service
-            android:name="com.netloading.model.gcm.GcmMessageHandler"
+            android:name="com.ketnoivantai.model.gcm.GcmMessageHandler"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
