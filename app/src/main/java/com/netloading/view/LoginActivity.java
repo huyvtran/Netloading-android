@@ -33,6 +33,7 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
     public static final int LOGIN_FIRST_TIME_CREATE_REQUEST = 35;
     public static final int LOGIN_TOKEN_INVALID = 53;
     private static final String STATE_BEFORE_LOGIN = "state before login";
+    public static final int LOGIN_NULL_TOKEN = 100;
 
 
     @Bind(R.id.username)
@@ -58,10 +59,17 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
         super.onCreate(savedInstanceState, LoginPresenter.class, this);
 
+        if (getIntent().getIntExtra(STATE_BEFORE_LOGIN, -1) == LOGIN_FIRST_TIME_CREATE_REQUEST
+                || getIntent().getIntExtra(STATE_BEFORE_LOGIN, -1) == LOGIN_NULL_TOKEN) {
+            Utils.toast(getApplicationContext(), "Bạn chưa đăng nhập, vui lòng đăng nhập hoặc đăng kí để sử dụng dịch vụ");
+        }
+
         mProgressDialog = new ProgressDialog(this);
         if (getOps().isProcessing()) {
             showProgressDialog();
         }
+
+
 
 //        Intent intent = RegistrationIntentService.makeIntent(this);
 //        startService(intent);

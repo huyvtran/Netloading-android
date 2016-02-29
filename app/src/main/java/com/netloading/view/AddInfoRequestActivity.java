@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -183,9 +184,21 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            finish();
+            Utils.backToHome(getApplicationContext());
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            Utils.backToHome(getApplicationContext());
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void hideKeyboard(View view) {

@@ -186,7 +186,7 @@ public class GcmMessageHandler extends GcmListenerService {
                         requestPOJO.setStatus(1);
 
                         Intent intent = RequestInformationActivity.makeIntent(
-                                getBaseContext(), requestPOJO.getId())
+                                getBaseContext(), requestPOJO.getId(), RequestInformationActivity.STATE_FROM_GCM)
                                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                         PendingIntent pendingIntent = PendingIntent.getActivity(

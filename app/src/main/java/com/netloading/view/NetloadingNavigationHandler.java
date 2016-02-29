@@ -40,9 +40,10 @@ public class NetloadingNavigationHandler {
         String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
 
         if (token.equals("NULL")) {
-            Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_AFTER_LOGOUT)
+            Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_NULL_TOKEN)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mActivity.startActivity(intent);
+
             return;
         }
 //        Utils.log(TAG, v.getId() + " clicked on navigation drawer");

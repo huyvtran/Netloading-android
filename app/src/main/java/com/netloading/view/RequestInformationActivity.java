@@ -36,8 +36,13 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
 
     private static final String REQUEST_INFO_EXTRA = "request info";
     private static final String REQUEST_ID_EXTRA = "request pos";
+    private static final String REQUEST_STATE_EXTRA = "request state";
+    public static final int STATE_FROM_PICK_COMPANY = 179;
+    public static final int STATE_FROM_GCM = 210;
+    public static final int STATE_FROM_REQ_LIST = 321;
 
     private int mRequestId;
+    private int mState;
 
     @Bind(R.id.start_address_tv)
     TextView mStartAddressTextView;
@@ -69,9 +74,10 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
     private ProgressDialog mProgressDialog;
 
 
-    public static Intent makeIntent(Context context, int id) {
+    public static Intent makeIntent(Context context, int id, int state) {
         return new Intent(context, RequestInformationActivity.class)
-                .putExtra(REQUEST_ID_EXTRA, id);
+                .putExtra(REQUEST_ID_EXTRA, id)
+                .putExtra(REQUEST_STATE_EXTRA, state);
     }
 
     @Override
@@ -90,6 +96,7 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
         getSupportActionBar().setTitle("Thông tin yêu cầu");
 
         mRequestId = getIntent().getIntExtra(REQUEST_ID_EXTRA, -1);
+        mState = getIntent().getIntExtra(REQUEST_STATE_EXTRA, STATE_FROM_REQ_LIST);
 
         super.onCreate(savedInstanceState, RequestInformationPresenter.class, this);
 
@@ -207,9 +214,11 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
     }
 
     private void backToRequestListActivity() {
-        Intent intent = RequestListActivity.makeIntent(getApplicationContext());
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        if (mState != STATE_FROM_PICK_COMPANY) {
+            Intent intent = RequestListActivity.makeIntent(getApplicationContext());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
         finish();
     }
 

@@ -149,6 +149,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
             Intent intent = LoginActivity.makeIntent(this, LoginActivity.LOGIN_FIRST_TIME_CREATE_REQUEST)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+//            Utils.toast(getApplicationContext(), "Bạn chưa đăng nhập, vui lòng đăng nhập hoặc đăng kí để sử dụng dịch vụ");
         }
     }
 

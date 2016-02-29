@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.05"
-        android:padding="25dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="25dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -27,75 +27,71 @@
     </LinearLayout>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.25"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:paddingBottom="15dp">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/username_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="0dp">
-                <EditText
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Tên tài khoản"
-                    android:singleLine="true"
-                    android:background="@drawable/bg_edit_text"
-                    android:padding="15dp"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/password_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:padding="0dp">
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_edit_text"
-                    android:hint="Mật khẩu"
-                    android:singleLine="true"
-                    android:inputType="textPassword"
-                    android:padding="15dp"/>
-            </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:paddingLeft="30dp">
+        android:layout_weight="1.25"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="0dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/username_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="0dp">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edit_text"
+                android:hint="Tên tài khoản"
+                android:padding="15dp"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="0dp">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edit_text"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
         <TextView
+            android:id="@+id/login_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quên mật khẩu?"
-            android:id="@+id/login_forgot_password"
             android:layout_gravity="left"
             android:layout_marginTop="8dp"
+            android:text="Quên mật khẩu?"
             android:textColor="#0187d1"
-            android:textSize="15dp"/>
+            android:textSize="15dp" />
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.7"
+        android:gravity="top"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:gravity="top">
+        android:weightSum="2">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -106,16 +102,16 @@
             android:paddingRight="23dp">
 
             <Button
+                android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đăng nhập"
-                android:textColor="#ffffff"
-                android:paddingTop="20dp"
+                android:background="@drawable/button_primary_selector"
                 android:paddingBottom="20dp"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
-                android:id="@+id/login_button"
-                android:background="@drawable/button_primary_selector"/>
+                android:paddingTop="20dp"
+                android:text="Đăng nhập"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,22 +119,22 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_horizontal|top"
+            android:paddingBottom="0dp"
             android:paddingLeft="25dp"
             android:paddingRight="30dp"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp">
+            android:paddingTop="0dp">
 
             <Button
                 android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đăng kí"
-                android:textColor="#ffffff"
-                android:paddingTop="20dp"
+                android:background="@drawable/button_primary_selector"
                 android:paddingBottom="20dp"
                 android:paddingLeft="7dp"
                 android:paddingRight="7dp"
-                android:background="@drawable/button_primary_selector"/>
+                android:paddingTop="20dp"
+                android:text="Đăng kí"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
 

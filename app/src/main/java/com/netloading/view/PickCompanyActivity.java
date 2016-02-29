@@ -211,7 +211,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Override
     public void onGetRequestDetailSuccess(RequestPOJO requestPOJO) {
         Intent intent = RequestInformationActivity.makeIntent(getApplicationContext(),
-                requestPOJO.getId());
+                requestPOJO.getId(), RequestInformationActivity.STATE_FROM_PICK_COMPANY);
 
         startActivity(intent);
     }
