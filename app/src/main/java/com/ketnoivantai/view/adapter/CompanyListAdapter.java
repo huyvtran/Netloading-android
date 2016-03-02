@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.ketnoivantai.R;
 import com.ketnoivantai.model.pojo.CompanyTripPOJO;
+import com.ketnoivantai.utils.Utils;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class CompanyListAdapter extends BaseAdapter {
         TextView priceTextView = (TextView) convertView.findViewById(R.id.money_number_tv);
 
         nameTextView.setText(companyPOJOs.get(position).getName());
-        priceTextView.setText(String.valueOf(companyPOJOs.get(position).getPrice()));
+        priceTextView.setText(Utils.formatNumber(companyPOJOs.get(position).getPrice()));
 
 
         return convertView;

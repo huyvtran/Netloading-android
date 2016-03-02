@@ -116,9 +116,9 @@ public class OrderInformationActivity extends GenericActivity<OrderInformationPr
         String dimension = "kg";
         if (mRequestInfo.getVehicle_type().equals("xeBon")) dimension = "m³";
         mGoodWeightTextView.setText(
-                mRequestInfo.getGoods_weight_number() + " " + dimension);
+                Utils.formatNumber(mRequestInfo.getGoods_weight_number()) + " " + dimension);
 
-        mOrderPriceTextView.setText(mOrderPrice + "");
+        mOrderPriceTextView.setText(Utils.formatNumber(mOrderPrice) + " VNĐ");
     }
 
     @Override

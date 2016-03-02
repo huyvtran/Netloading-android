@@ -146,9 +146,9 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
         String dimension = "kg";
         if (requestInfo.getVehicle_type().equals("xeBon")) dimension = "m³";
         mGoodWeightTextView.setText(
-                requestInfo.getGoods_weight_number() + " " + dimension);
+                Utils.formatNumber(requestInfo.getGoods_weight_number()) + " " + dimension);
 
-        mExpectedPriceTextView.setText(requestInfo.getExpected_price());
+        mExpectedPriceTextView.setText(Utils.formatNumber(Integer.parseInt(requestInfo.getExpected_price())) + " VNĐ");
     }
 
     private void handleStatus(RequestPOJO requestInfo) {

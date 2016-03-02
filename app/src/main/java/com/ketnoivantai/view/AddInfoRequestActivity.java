@@ -8,7 +8,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,10 @@ import com.ketnoivantai.common.LifecycleLoggingActivity;
 import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -29,6 +35,7 @@ import java.util.Locale;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 
 /**
  * Created by Dandoh on 2/20/16.
@@ -90,6 +97,9 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Nhập thông tin yêu cầu");
 
+        mExpectedPriceEditText.addTextChangedListener(new NumberTextWatcher(mExpectedPriceEditText));
+        mGoodWeightNumberEditText.addTextChangedListener(new NumberTextWatcher(mGoodWeightNumberEditText));
+
         setDimension();
 
         mGoodsNameEditText.setOnFocusChangeListener(this);
@@ -101,6 +111,11 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
 
     }
 
+    String formatNumber(String bd){
+        Double number = Double.valueOf(bd.replace(".", ""));
+        DecimalFormat dec = new DecimalFormat("#,##0.00");
+        return dec.format(number);
+    }
 
 
     private void setDimension() {
@@ -155,10 +170,9 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         }
 
         String goodName = mGoodsNameEditText.getText().toString();//"Bánh kẹo";
-        int goodWeightNumber = Integer.parseInt(mGoodWeightNumberEditText.getText().toString());//500;
+        int goodWeightNumber = Integer.parseInt(mGoodWeightNumberEditText.getText().toString().replace(".", ""));//500;
         String date = mDateTextView.getText().toString();//"2016-02-28";
         String expectedPrice = mExpectedPriceEditText.getText().toString();//"1000000";
-
 
         /// save into preference
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -176,11 +190,22 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         String goodName = sharedPreferences.getString(Constants.GOODS_NAME, "");
         int goodWeightNumber = sharedPreferences.getInt(Constants.GOODS_WEIGHT_NUMBER, 0);
         String date = sharedPreferences.getString(Constants.GOODS_PICKUP_DATE, "");
-        String expectedPrice = sharedPreferences.getString(Constants.GOODS_EXPTECTED_PRICE, "");
+        String expectedPrice = sharedPreferences.getString(Constants.GOODS_EXPTECTED_PRICE, "0");
 
         mGoodsNameEditText.setText(goodName);
         mGoodWeightNumberEditText.setText(String.valueOf(goodWeightNumber));
-        mDateTextView.setText(date);
+
+
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        mDateTextView.setText(sdf.format(Calendar.getInstance().getTime()));
+//        mDateTextView.setText(date);
+
+//        NumberFormat nf = NumberFormat.getNumberInstance(Locale.GERMAN);
+//        DecimalFormat df = (DecimalFormat)nf;
+//
+//        expectedPrice = df.format(Integer.parseInt(expectedPrice));
+
         mExpectedPriceEditText.setText(expectedPrice + "");
     }
 
@@ -224,3 +249,5 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
     }
 
 }
+
+

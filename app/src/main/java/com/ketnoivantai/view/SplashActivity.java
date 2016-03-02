@@ -24,8 +24,19 @@ public class SplashActivity extends GenericActivity<SplashPresenter.View, Splash
         setContentView(R.layout.splash_activity);
 
         super.onCreate(savedInstanceState, SplashPresenter.class, this);
+        resetDefaultValue();
+
         getOps().setDelayTime(3000);
 
+    }
+
+    private void resetDefaultValue() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.edit()
+                .putString(Constants.GOODS_NAME, "")
+                .putInt(Constants.GOODS_WEIGHT_NUMBER, 0)
+                .putString(Constants.GOODS_PICKUP_DATE, "")
+                .putString(Constants.GOODS_EXPTECTED_PRICE, "0").apply();
     }
 
     @Override

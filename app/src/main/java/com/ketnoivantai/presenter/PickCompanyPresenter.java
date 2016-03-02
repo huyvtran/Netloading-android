@@ -1,5 +1,7 @@
 package com.ketnoivantai.presenter;
 
+import android.os.Handler;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ketnoivantai.common.ConfigurableOps;
@@ -75,7 +77,19 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
         return processing;
     }
 
-    public void retry(int requestId) {
+    public void retry(final int requestId) {
+        processing = true;
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                retryAfterWait(requestId);
+                processing = false;
+            }
+        }, 2000);
+    }
+
+    private void retryAfterWait(int requestId) {
         processing = true;
 
         ServiceGenerator.getNetloadingService().retryRequest(requestId).enqueue(new Callback<ResponseBody>() {
@@ -119,7 +133,6 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
                 mView.get().onError(View.STATUS_NETWORK_ERROR);
             }
         });
-
     }
 
     public void getRequestInfo(int requestId) {

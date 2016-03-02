@@ -2,10 +2,12 @@ package com.ketnoivantai.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -17,6 +19,10 @@ import com.ketnoivantai.model.webservice.ServiceGenerator;
 import com.ketnoivantai.presenter.ReviewRequestPresenter;
 import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -118,35 +124,58 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         mArriveAddressTextView.setText(arriveDistrictName + ", " + arriveProvinceName);
         mPickupDateTextView.setText(pickUpDate);
         mGoodsNameTextView.setText(goodsName);
-        mGoodsWeightTextView.setText(goodsWeightNumber + " " + goodsWeightDimension);
-        mExpectedPriceTextView.setText(expectedPrice);
+
+//        DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.getDefault());
+//        otherSymbols.setDecimalSeparator(',');
+//        otherSymbols.setGroupingSeparator('.');
+//        DecimalFormat df = new DecimalFormat("#,###.##", otherSymbols);
+
+//        String goodsWeightNumberString = df.format(goodsWeightNumber);
+
+        mGoodsWeightTextView.setText(Utils.formatNumber(goodsWeightNumber) + " " + goodsWeightDimension);
+        mExpectedPriceTextView.setText(expectedPrice + " VNĐ");
 
     }
 
 
     @OnClick(R.id.send_request)
     void sendRequest() {
-        String token = ServiceGenerator.getAccessToken();
 
-        Utils.log(TAG, token + "");
+        new AlertDialog.Builder(this)
+                .setTitle("Gửi yêu cầu vận tải")
+                .setMessage("Bạn có chắc chắn muốn gửi yêu cầu này?")
+                .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String token = ServiceGenerator.getAccessToken();
 
-        showProgressDialog();
+                        Utils.log(TAG, token + "");
 
-        // TODO -- check whether is logged in or not, if not, start login activity clear task | new task
-        if (ServiceGenerator.isLoggedIn()) {
+                        showProgressDialog();
 
-            getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
-                    startDistrictCode, arriveDistrictCode, vehicleType,
-                    expectedPrice, goodsName,
-                    startProvinceName, arriveProvinceName,
-                    startDistrictName, arriveDistrictName);
-        } else {
+                        // TODO -- check whether is logged in or not, if not, start login activity clear task | new task
+                        if (ServiceGenerator.isLoggedIn()) {
 
-            Intent intent = LoginActivity.makeIntent(this, LoginActivity.LOGIN_FIRST_TIME_CREATE_REQUEST)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-//            Utils.toast(getApplicationContext(), "Bạn chưa đăng nhập, vui lòng đăng nhập hoặc đăng kí để sử dụng dịch vụ");
-        }
+                            getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
+                                    startDistrictCode, arriveDistrictCode, vehicleType,
+                                    expectedPrice, goodsName,
+                                    startProvinceName, arriveProvinceName,
+                                    startDistrictName, arriveDistrictName);
+                        } else {
+
+                            Intent intent = LoginActivity.makeIntent(getApplicationContext(), LoginActivity.LOGIN_FIRST_TIME_CREATE_REQUEST)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    }
+                })
+                .setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_menu_send)
+                .show();
+
     }
 
     @Override
