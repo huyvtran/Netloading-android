@@ -19,6 +19,7 @@ import com.ketnoivantai.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 
 /**
  * Created by AnhVu on 2/25/16.
@@ -105,6 +106,9 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
 
     @Override
     public void onError(int status) {
+        mProgressDialog.dismiss();
+        Utils.toast(getApplicationContext(), "Đã có lỗi xảy ra");
+
     }
 
     @OnClick(R.id.accept_trip_btn)

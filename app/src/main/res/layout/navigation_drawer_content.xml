@@ -212,7 +212,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="16dp"
-                        android:text="Hỗ trợ khách hàng"
+                        android:text="Giới thiệu"
                         android:textColor="#ffffff" />
 
                 </LinearLayout>

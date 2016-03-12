@@ -97,13 +97,10 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 processing = false;
                 try {
-
-
                     JSONObject result = new JSONObject(response.body().string());
 
                     Utils.log(TAG, result.toString());
                     if (result.getString("status").equals("success")) {
-
                         // Get company list
                         Gson gson = new Gson();
                         JSONArray companiesArray = result.getJSONObject("message").getJSONArray("trips");
@@ -114,7 +111,6 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
                         // Get request id
                         Utils.log(TAG, companyTripPOJOs.size() + " ");
 
-                        /// TODO - on result
                         mView.get().onRetrySuccess(companyTripPOJOs);
 
                     } else if (result.getString("status").equals("error")){
@@ -123,7 +119,6 @@ public class PickCompanyPresenter implements ConfigurableOps<PickCompanyPresente
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
                     mView.get().onError(View.STATUS_NETWORK_ERROR);
-
                 }
             }
 

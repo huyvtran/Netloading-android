@@ -6,7 +6,7 @@ package com.ketnoivantai.utils;
 public class Constants {
 
 
-    public static final String API_BASE_URL = "http://192.168.32.113:3000";//"https://netloading-dandoh.rhcloud.com";
+    public static final String API_BASE_URL = "http://192.168.32.100:3000";//"https://netloading-dandoh.rhcloud.com";
 
     public static final String SHARED_PREFERENCE_ID_TAG = "id tag";
     public static final String MA_HUYEN_DI = "ma huyen di";

@@ -45,6 +45,16 @@
             android:name="com.ketnoivantai.view.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.ketnoivantai.view.ChangePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.ketnoivantai.view.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
 
         <activity
             android:name="com.ketnoivantai.view.RequestInformationActivity"

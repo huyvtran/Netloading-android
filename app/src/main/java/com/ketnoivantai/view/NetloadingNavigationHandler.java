@@ -46,7 +46,6 @@ public class NetloadingNavigationHandler {
 
             return;
         }
-//        Utils.log(TAG, v.getId() + " clicked on navigation drawer");
 
         if (v.getId() == R.id.navigation_manage_requests) {
             Utils.log(TAG, v.getId() + " clicked on request button");
@@ -115,6 +114,13 @@ public class NetloadingNavigationHandler {
                     Utils.log(TAG, "Error when logout");
                 }
             });
+        } else
+        if (v.getId() == R.id.navigation_manage_profile) {
+            Utils.log(TAG, "on navation show profile");
+
+            Intent intent = ProfileActivity.makeIntent(mActivity.getApplicationContext());
+            mActivity.startActivity(intent);
+
         }
 
 

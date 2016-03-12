@@ -1,6 +1,7 @@
 package com.ketnoivantai.model.webservice;
 
 import com.ketnoivantai.model.pojo.AcceptTripPOJO;
+import com.ketnoivantai.model.pojo.ChangePasswordPOJO;
 import com.ketnoivantai.model.pojo.GCMTokenPOJO;
 import com.ketnoivantai.model.pojo.RequestPOJO;
 
@@ -25,6 +26,12 @@ public interface NetloadingService {
 
     @POST("/customers/notification")
     Call<ResponseBody> sendRegistrationTokenToServer(@Body GCMTokenPOJO gcmTokenPOJO);
+
+    @POST("/customers/change_password")
+    Call<ResponseBody> changePassword(@Body ChangePasswordPOJO changePasswordPOJO);
+
+    @GET("/customers/info")
+    Call<ResponseBody> getProfileInfo();
 
 
     @POST("/requests")

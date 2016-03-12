@@ -91,18 +91,6 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
             showProgressDialog();
         }
 
-        // Get input
-        // company list
-        // TODO
-//        if (companyTripPOJOs.size() > 0) {
-//            showList(companyTripPOJOs);
-//        } else {
-//            mNotFoundLayout.setVisibility(View.VISIBLE);
-//            mCompanyListView.setVisibility(View.INVISIBLE);
-//            mHeaderRelativeLayout.setVisibility(View.INVISIBLE);
-//        }
-
-
         // request id
         requestId = getIntent().getIntExtra(REQUEST_ID_EXTRA, 0);
 
