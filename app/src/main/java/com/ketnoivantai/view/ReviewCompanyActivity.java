@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.ketnoivantai.R;
 import com.ketnoivantai.common.GenericActivity;
 import com.ketnoivantai.model.pojo.CompanyPOJO;
+import com.ketnoivantai.model.pojo.VehiclePOJO;
 import com.ketnoivantai.presenter.ReviewCompanyPresenter;
 import com.ketnoivantai.utils.Utils;
 
@@ -27,23 +29,22 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
     private static final String EXTRA_COMPANY_ID = "extra_company_id";
     private static final String EXTRA_REQUEST_ID = "extra request id";
     private static final String EXTRA_TRIP_ID = "extra trip id";
+    private static final String EXTRA_VEHICLE = "extra vehicle";
     private int mCompanyId, mRequestId, mTripId;
+    private VehiclePOJO mVehicle;
     private ProgressDialog mProgressDialog;
 
     @Bind(R.id.company_address_tv)
     TextView mAddressTextView;
 
-    @Bind(R.id.company_phone_tv)
-    TextView mPhoneTextView;
+    @Bind(R.id.vehicle_type_tv)
+    TextView mVehicleTypeTextView;
 
-    @Bind(R.id.company_fax_tv)
-    TextView mFaxTextView;
+    @Bind(R.id.vehicle_capacity_tv)
+    TextView mVehicleCapacityView;
 
-    @Bind(R.id.company_email_tv)
-    TextView mEmailTextView;
-
-    @Bind(R.id.company_website_tv)
-    TextView mWebsiteTextView;
+    @Bind(R.id.vehicle_info_tv)
+    TextView mVehicleInfoTextView;
 
     @Bind(R.id.company_name_tv)
     TextView mCompanyNameTextView;
@@ -52,9 +53,10 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
     TextView mAcceptTripButton;
 
 
-    public static Intent makeIntent(Context context, int company_id, int request_id, int trip_id) {
+    public static Intent makeIntent(Context context, int company_id, int request_id, int trip_id, VehiclePOJO vehicle) {
         return new Intent(context, ReviewCompanyActivity.class).putExtra(EXTRA_COMPANY_ID, company_id)
-                .putExtra(EXTRA_REQUEST_ID, request_id).putExtra(EXTRA_TRIP_ID, trip_id);
+                .putExtra(EXTRA_REQUEST_ID, request_id).putExtra(EXTRA_TRIP_ID, trip_id)
+                .putExtra(EXTRA_VEHICLE, vehicle);
     }
 
 
@@ -79,6 +81,7 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
         mCompanyId = getIntent().getIntExtra(EXTRA_COMPANY_ID, -1);
         mRequestId = getIntent().getIntExtra(EXTRA_REQUEST_ID, -1);
         mTripId = getIntent().getIntExtra(EXTRA_TRIP_ID, -1);
+        mVehicle = getIntent().getParcelableExtra(EXTRA_VEHICLE);
 
         mProgressDialog = new ProgressDialog(this);
 
@@ -113,10 +116,9 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
     public void updateCompanyInfo(CompanyPOJO companyInfo) {
 
         mAddressTextView.setText(companyInfo.getAddress());
-        mPhoneTextView.setText(companyInfo.getPhone());
-        mFaxTextView.setText(companyInfo.getFax());
-        mEmailTextView.setText(companyInfo.getEmail());
-        mWebsiteTextView.setText(companyInfo.getWebsite());
+        mVehicleTypeTextView.setText(mVehicle.getVehicle_type());
+        mVehicleCapacityView.setText(mVehicle.getCapacity_number() + "");
+        mVehicleInfoTextView.setText(mVehicle.getInformation());
         mCompanyNameTextView.setText(companyInfo.getName());
 
         mProgressDialog.dismiss();

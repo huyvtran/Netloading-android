@@ -123,7 +123,7 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
             startActivity(ReviewRequestActivity.makeIntent(this)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         } else {
-            startActivity(PickLocationActivity.makeIntent(this, true));
+            startActivity(PickLocationActivity.makeIntent(this, 1));
         }
 
     }

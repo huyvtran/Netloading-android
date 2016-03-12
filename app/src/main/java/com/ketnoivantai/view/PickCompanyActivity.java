@@ -17,6 +17,7 @@ import com.ketnoivantai.R;
 import com.ketnoivantai.common.GenericActivity;
 import com.ketnoivantai.model.pojo.CompanyTripPOJO;
 import com.ketnoivantai.model.pojo.RequestPOJO;
+import com.ketnoivantai.model.pojo.VehiclePOJO;
 import com.ketnoivantai.presenter.PickCompanyPresenter;
 import com.ketnoivantai.utils.Utils;
 import com.ketnoivantai.view.adapter.CompanyListAdapter;
@@ -144,10 +145,14 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     void onCompanyItemClick(int position) {
         int company_id = companyTripPOJOs.get(position).getCompany_id();
         int trip_id = companyTripPOJOs.get(position).getId();
+        VehiclePOJO vehicle = companyTripPOJOs.get(position).getVehicle();
         Utils.log(TAG, "request_id: " + requestId);
         Utils.log(TAG, "trip_id : " + trip_id);
 
-        Intent intent = ReviewCompanyActivity.makeIntent(getApplicationContext(), company_id, requestId, trip_id);
+        Intent intent = ReviewCompanyActivity.makeIntent(
+                getApplicationContext(), company_id, requestId, trip_id,
+                vehicle
+            );
         startActivity(intent);
     }
 
@@ -169,7 +174,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
         mProgressDialog.dismiss();
         Utils.toast(this, "Xoá yêu cầu vận tải thành công");
 
-        Intent intent = PickLocationActivity.makeIntent(this, true);
+        Intent intent = PickLocationActivity.makeIntent(this, 1);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
@@ -220,7 +225,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Override
     public void onRefresh() {
         Utils.log(TAG, "On refresh");
-
+        mNotFoundLayout.setVisibility(View.INVISIBLE);
         getOps().retry(requestId);
     }
 

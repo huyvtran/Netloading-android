@@ -32,7 +32,7 @@
             android:id="@+id/middle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/send_request_wrapper"
+            android:layout_above="@+id/footer"
             android:layout_below="@id/top"
             android:weightSum="7">
 
@@ -351,22 +351,50 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/send_request_wrapper"
+        <LinearLayout
+            android:id="@+id/footer"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/button_guiyeucau">
-
-            <Button
-                android:id="@+id/send_request"
-                android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:elevation="16dp"
+            android:weightSum="2">
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/modify_request_wrapper"
+                android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
-                android:background="?android:attr/selectableItemBackground"
-                android:text="Gửi yêu cầu"
-                android:textColor="#ffffff" />
-        </com.balysv.materialripple.MaterialRippleLayout>
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/modify_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/button_blue_selector"
+                    android:text="Sửa yêu cầu"
+                    android:textColor="#ffffff" />
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/send_request_wrapper"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/send_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/button_orange_selector"
+                    android:text="Gửi yêu cầu"
+                    android:textColor="#ffffff" />
+            </com.balysv.materialripple.MaterialRippleLayout>
+        </LinearLayout>
+
+
     </RelativeLayout>
     <android.support.design.widget.AppBarLayout
         android:id="@id/actionBar"

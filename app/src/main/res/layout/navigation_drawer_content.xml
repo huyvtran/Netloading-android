@@ -1,185 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="240dp"
-    android:layout_height="match_parent"
-    android:background="@color/vBlue"
-    android:orientation="vertical"
-    android:paddingTop="?attr/actionBarSize"
-    android:weightSum="2">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9"
-        android:padding="25dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/avatar_default" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.1"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:background="@color/vBlue"
         android:orientation="vertical"
-        android:weightSum="6">
-
-        <com.balysv.materialripple.MaterialRippleLayout
+        android:weightSum="2">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="0.8"
+            android:padding="25dp">
 
-            <LinearLayout
-                android:onClick="onNavigationItemClick"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/navigation_manage_orders"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/avatar_default" />
 
-                <FrameLayout
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent">
+        </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/icon_quanlydonhang" />
-                </FrameLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    android:text="Quản lý đơn hàng"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
-
-
-        <com.balysv.materialripple.MaterialRippleLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-            <LinearLayout
-                android:onClick="onNavigationItemClick"
-                android:id="@+id/navigation_manage_requests"
+            android:layout_weight="1.1"
+            android:orientation="vertical"
+            android:weightSum="6">
+
+            <com.balysv.materialripple.MaterialRippleLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingTop="8dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-                <FrameLayout
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent">
+                <LinearLayout
+                    android:onClick="onNavigationItemClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/navigation_manage_orders"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp">
 
-                    <ImageView
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_quanlydonhang" />
+                    </FrameLayout>
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/icon_quanlydonhang" />
-                </FrameLayout>
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="Quản lý đơn hàng"
+                        android:textColor="#ffffff" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    android:text="Quản lý yêu cầu"
-                    android:textColor="#ffffff" />
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
 
-            </LinearLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
 
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <LinearLayout
-                android:onClick="onNavigationItemClick"
-                android:id="@+id/navigation_manage_profile"
+            <com.balysv.materialripple.MaterialRippleLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingTop="8dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:onClick="onNavigationItemClick"
+                    android:id="@+id/navigation_manage_requests"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="8dp">
 
-                <FrameLayout
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent">
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent">
 
-                    <ImageView
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_quanlydonhang" />
+                    </FrameLayout>
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="3dp"
-                        android:src="@drawable/icon_profile" />
-                </FrameLayout>
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="Quản lý yêu cầu"
+                        android:textColor="#ffffff" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    android:text="Thông tin cá nhân"
-                    android:textColor="#ffffff" />
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
 
-            </LinearLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
-
-
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <LinearLayout
-                android:onClick="onNavigationItemClick"
+            <com.balysv.materialripple.MaterialRippleLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/navigation_sign_out"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingTop="8dp">
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:onClick="onNavigationItemClick"
+                    android:id="@+id/navigation_manage_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="8dp">
 
-                <FrameLayout
-                    android:layout_width="56dp"
-                    android:layout_height="match_parent">
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent">
 
-                    <ImageView
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            android:src="@drawable/icon_profile" />
+                    </FrameLayout>
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/icon_dangxuat" />
-                </FrameLayout>
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="Thông tin cá nhân"
+                        android:textColor="#ffffff" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="16dp"
-                    android:text="Đăng xuất"
-                    android:textColor="#ffffff" />
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:onClick="onNavigationItemClick"
+                    android:id="@+id/support_for_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="8dp">
 
-            </LinearLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            android:src="@android:drawable/ic_menu_help" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="Hỗ trợ khách hàng"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:onClick="onNavigationItemClick"
+                    android:id="@+id/intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="8dp">
+
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="3dp"
+                            android:src="@android:drawable/ic_dialog_info" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="Hỗ trợ khách hàng"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:onClick="onNavigationItemClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/navigation_sign_out"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:paddingTop="8dp">
+
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_dangxuat" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="Đăng xuất"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
-
 </LinearLayout>
+

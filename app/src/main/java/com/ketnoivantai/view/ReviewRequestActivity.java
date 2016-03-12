@@ -198,6 +198,11 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         finish();
     }
 
+    @OnClick(R.id.modify_request)
+    void onModifyClick() {
+        backToAddInfoActivity();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

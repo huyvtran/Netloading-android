@@ -1,6 +1,7 @@
 package com.ketnoivantai.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,14 +9,17 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,11 +28,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ketnoivantai.R;
+import com.ketnoivantai.model.webservice.ServiceGenerator;
 import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
 
@@ -80,7 +86,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
     private NetloadingNavigationHandler mNavigationHandler;
 
 
-    public static Intent makeIntent(Context context, boolean hasToken) {
+    public static Intent makeIntent(Context context, int hasToken) {
         return new Intent(context, PickLocationActivity.class)
                 .putExtra(EXTRA_HAS_TOKEN, hasToken)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -132,10 +138,30 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
 
 
         //
-        boolean hasToken = getIntent().getBooleanExtra(EXTRA_HAS_TOKEN, true);
-        if (!hasToken) {
+        int hasToken = getIntent().getIntExtra(EXTRA_HAS_TOKEN, 0);
+        if (hasToken == 0) {
             findViewById(R.id.navigation_sign_out)
                     .setVisibility(View.INVISIBLE);
+        } else
+        if (hasToken == 2) {
+            Bundle b = getIntent().getExtras();
+            String message = b.getString("message");
+            String title = b.getString("title");
+
+            new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setNegativeButton("ĐỒNG Ý", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                    //TODO - change icon
+                .setIcon(R.mipmap.ic_announce)
+                .show();
         }
 
         setSupportActionBar(toolbar);
@@ -268,6 +294,14 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap map) {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         this.map = map;
+
+        CameraPosition googlePlex = CameraPosition.builder()
+                .target(new LatLng(16.3556, 105.900))
+                .zoom(5)
+                .bearing(0)
+                .build();
+
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(googlePlex));
     }
 
 

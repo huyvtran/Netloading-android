@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/button_blue_selector"
                 android:padding="8dp">
 
                 <ImageView
@@ -48,13 +48,13 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_above="@id/wait_other_btn_wrapper"
-            android:background="@color/vOrange">
+            android:background="@drawable/button_orange_selector">
 
             <RelativeLayout
                 android:id="@+id/delete_request_btn"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/button_orange_selector"
                 android:padding="8dp">
 
                 <ImageView

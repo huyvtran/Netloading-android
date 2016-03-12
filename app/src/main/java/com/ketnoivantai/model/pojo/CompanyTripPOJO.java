@@ -20,6 +20,7 @@ public class CompanyTripPOJO implements Parcelable {
     private final int company_id;
     private String name = "Công ty THHH Vũ Bình Nè";
     private int price = 1500000;
+    private VehiclePOJO vehicle;
 
 
     public CompanyTripPOJO(int id, int vehicle_id, String start_date, String arrive_date, String start_address,
@@ -119,5 +120,13 @@ public class CompanyTripPOJO implements Parcelable {
 
     public int getId() {
         return id;
+    }
+
+    public VehiclePOJO getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(VehiclePOJO vehicle) {
+        this.vehicle = vehicle;
     }
 }

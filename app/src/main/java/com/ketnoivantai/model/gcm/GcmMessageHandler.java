@@ -10,6 +10,7 @@ import com.ketnoivantai.model.webservice.ServiceGenerator;
 import com.ketnoivantai.utils.Utils;
 import com.ketnoivantai.view.OrderInformationActivity;
 import com.ketnoivantai.view.PickCompanyActivity;
+import com.ketnoivantai.view.PickLocationActivity;
 import com.ketnoivantai.view.RequestInformationActivity;
 
 import android.app.NotificationManager;
@@ -35,6 +36,7 @@ public class GcmMessageHandler extends GcmListenerService {
     private static final int STATUS_ADD_TRIP_AVAILABLE = 1;
     private static final int STATUS_ACCEPT_TRIP = 2;
     private static final int STATUS_DENY_TRIP = 3;
+    private static final int STATUS_NOTIFICATION_TO_ALL = 4;
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
@@ -49,7 +51,42 @@ public class GcmMessageHandler extends GcmListenerService {
             companyAcceptNotification(data);
         } else if (status == STATUS_DENY_TRIP) {
             companyDenyNotification(data);
+        } else if (status == STATUS_NOTIFICATION_TO_ALL) {
+            showNotificationFromAdmins(data);
         }
+    }
+
+    private void showNotificationFromAdmins(Bundle data) {
+        final String message = data.getString("message");
+        final String title = data.getString("title");
+
+
+        // start activity
+        Intent intent = PickLocationActivity.makeIntent(getBaseContext(), 2)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        Bundle b = new Bundle();
+        b.putString("message", message);
+        b.putString("title", title);
+        intent.putExtras(b);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                getBaseContext(),
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        Context context = getBaseContext();
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle("Netloading thông báo")
+                .setContentText("Bấm vào để xem chi tiết.")
+                .setContentIntent(pendingIntent).setAutoCancel(true);
+
+        NotificationManager mNotificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
+
     }
 
     private void companyAcceptNotification(Bundle data) {
@@ -148,7 +185,7 @@ public class GcmMessageHandler extends GcmListenerService {
         Context context = getBaseContext();
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
-                .setContentText("Ấn vào để tìm nhà xe.")
+                .setContentText("Bấm vào để tìm nhà xe.")
                 .setContentIntent(pendingIntent).setAutoCancel(true);
 
         NotificationManager mNotificationManager = (NotificationManager) context

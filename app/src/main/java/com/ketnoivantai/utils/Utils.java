@@ -32,7 +32,7 @@ public class Utils {
 
 
     public static void backToHome(Context context) {
-        Intent intent = PickLocationActivity.makeIntent(context, true);
+        Intent intent = PickLocationActivity.makeIntent(context, 1);
         context.startActivity(intent);
     }
 

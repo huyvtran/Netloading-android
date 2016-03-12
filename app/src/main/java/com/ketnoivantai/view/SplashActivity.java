@@ -47,9 +47,9 @@ public class SplashActivity extends GenericActivity<SplashPresenter.View, Splash
         String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
         Utils.log(TAG, token);
         if (token.equals("NULL")) {
-            startActivity(PickLocationActivity.makeIntent(this, false));
+            startActivity(PickLocationActivity.makeIntent(this, 0));
         } else {
-            startActivity(PickLocationActivity.makeIntent(this, true));
+            startActivity(PickLocationActivity.makeIntent(this, 1));
         }
         finish();
     }

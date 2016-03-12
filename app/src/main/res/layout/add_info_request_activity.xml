@@ -217,14 +217,14 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/button_guiyeucau">
+            android:background="@drawable/button_orange_selector">
 
             <Button
                 android:id="@+id/btn_continue"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
-                android:background="?android:attr/selectableItemBackground"
+                android:background="@drawable/button_orange_selector"
                 android:text="TIẾP TỤC"
                 android:textColor="#ffffff"
                 android:textSize="19sp" />

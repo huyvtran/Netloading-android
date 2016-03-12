@@ -404,7 +404,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_alignParentBottom="true"
-                android:background="@color/vOrange"
+                android:background="@drawable/button_orange_selector"
                 android:text="Xóa yêu cầu"
                 android:textColor="#ffffff"/>
 
@@ -414,7 +414,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_alignParentBottom="true"
-                android:background="@color/vBlue"
+                android:background="@drawable/button_blue_selector"
                 android:text="Thử lại"
                 android:textColor="#ffffff"/>
         </LinearLayout>
