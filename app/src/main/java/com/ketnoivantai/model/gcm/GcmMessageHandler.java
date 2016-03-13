@@ -17,6 +17,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
@@ -78,9 +80,12 @@ public class GcmMessageHandler extends GcmListenerService {
         );
 
         Context context = getBaseContext();
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle("Netloading thông báo")
+                .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(title)
                 .setContentText("Bấm vào để xem chi tiết.")
+                .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent).setAutoCancel(true);
 
         NotificationManager mNotificationManager = (NotificationManager) context

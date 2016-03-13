@@ -3,6 +3,7 @@ package com.ketnoivantai.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.view.View;
 
@@ -120,7 +121,14 @@ public class NetloadingNavigationHandler {
 
             Intent intent = ProfileActivity.makeIntent(mActivity.getApplicationContext());
             mActivity.startActivity(intent);
-
+        } else
+        if (v.getId() == R.id.support_for_customer) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://netloading.vn"));
+            mActivity.startActivity(browserIntent);
+        } else
+        if (v.getId() == R.id.intro) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://netloading.vn"));
+            mActivity.startActivity(browserIntent);
         }
 
 
