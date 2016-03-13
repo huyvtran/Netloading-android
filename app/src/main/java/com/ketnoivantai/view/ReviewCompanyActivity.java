@@ -75,7 +75,7 @@ public class ReviewCompanyActivity extends GenericActivity<ReviewCompanyPresente
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        getSupportActionBar().setTitle("Thông tin nhà xe");
+        getSupportActionBar().setTitle("Thông tin chuyến xe");
 
         super.onCreate(savedInstanceState, ReviewCompanyPresenter.class, this);
 

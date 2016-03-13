@@ -208,7 +208,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_tinhtrang"/>
+                            android:src="@drawable/icon_tinhtrang"
+                            android:padding="5dp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -257,7 +258,8 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_tenhang"/>
+                            android:src="@drawable/icon_tenhang"
+                            android:padding="2dp"/>
                     </LinearLayout>
 
                     <LinearLayout

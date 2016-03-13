@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -484,6 +485,29 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         if (isChecked) vehicleType = "xeDongLanh";
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Netloading")
+                    .setMessage("Bạn có muốn đóng ứng dụng này?")
+                    .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Hủy bỏ", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
     private void ReadFileFromAssetsAndAddToList(List list, String fileName) {
         BufferedReader reader = null;
@@ -513,4 +537,5 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
             }
         }
     }
+
 }

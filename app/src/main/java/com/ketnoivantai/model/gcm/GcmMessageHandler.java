@@ -125,24 +125,14 @@ public class GcmMessageHandler extends GcmListenerService {
                         );
 
                         Context context = getBaseContext();
+                        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
                                 .setContentText("Ấn vào để xem đơn hàng")
                                 .setContentIntent(pendingIntent)
+                                .setSound(defaultSoundUri)
                                 .setAutoCancel(true);
-
-//                        NotificationCompat.InboxStyle inboxStyle =
-//                                new NotificationCompat.InboxStyle();
-//                        String[] events = new String[6];
-//                        // Sets a title for the Inbox in expanded layout
-//                        inboxStyle.setBigContentTitle("Netloading thông báo:");
-//                        // Moves events into the expanded layout
-//                        for (int i = 0; i < events.length; i++) {
-//                            inboxStyle.addLine(events[i]);
-//                        }
-//                        // Moves the expanded layout object into the notification object.
-//                        mBuilder.setStyle(inboxStyle);
-
 
                         NotificationManager mNotificationManager = (NotificationManager) context
                                 .getSystemService(Context.NOTIFICATION_SERVICE);
@@ -188,9 +178,11 @@ public class GcmMessageHandler extends GcmListenerService {
         );
 
         Context context = getBaseContext();
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
                 .setContentText("Bấm vào để tìm nhà xe.")
+                .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent).setAutoCancel(true);
 
         NotificationManager mNotificationManager = (NotificationManager) context
@@ -230,9 +222,11 @@ public class GcmMessageHandler extends GcmListenerService {
                         );
 
                         Context context = getBaseContext();
+                        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.drawable.ic_notification_netloading).setContentTitle(message)
                                 .setContentText("Ấn vào để xem lại yêu cầu.")
+                                .setSound(defaultSoundUri)
                                 .setContentIntent(pendingIntent).setAutoCancel(true);
                         NotificationManager mNotificationManager = (NotificationManager) context
                                 .getSystemService(Context.NOTIFICATION_SERVICE);

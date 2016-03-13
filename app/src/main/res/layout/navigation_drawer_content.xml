@@ -48,13 +48,14 @@
 
                     <FrameLayout
                         android:layout_width="56dp"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:padding="2dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/icon_quanlydonhang" />
+                            android:src="@drawable/icon_order" />
                     </FrameLayout>
 
                     <TextView
@@ -86,7 +87,8 @@
 
                     <FrameLayout
                         android:layout_width="56dp"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:padding="2dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -123,7 +125,8 @@
 
                     <FrameLayout
                         android:layout_width="56dp"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:padding="2dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -167,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="3dp"
-                            android:src="@android:drawable/ic_menu_help" />
+                            android:src="@mipmap/ic_support" />
                     </FrameLayout>
 
                     <TextView
@@ -197,7 +200,9 @@
 
                     <FrameLayout
                         android:layout_width="56dp"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:padding="2dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -243,7 +248,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/icon_dangxuat" />
+                            android:src="@mipmap/ic_signout"
+                            android:layout_marginLeft="5dp"/>
                     </FrameLayout>
 
                     <TextView

@@ -1,8 +1,11 @@
 package com.ketnoivantai.view;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 
 import com.ketnoivantai.NetloadingApplication;
 import com.ketnoivantai.R;
@@ -53,4 +56,14 @@ public class SplashActivity extends GenericActivity<SplashPresenter.View, Splash
         }
         finish();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }
