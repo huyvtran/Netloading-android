@@ -90,6 +90,9 @@ public class LoginPresenter implements ConfigurableOps<LoginPresenter.View> {
                         String token = result.getJSONObject("message").getString("token");
                         int id = result.getJSONObject("message").getInt("id");
 
+                        Utils.log(TAG, "token = " + token);
+                        Utils.log(TAG, "id = " + id);
+
                         ServiceGenerator.initialize(token, id);
 
                         Utils.log(TAG, token);

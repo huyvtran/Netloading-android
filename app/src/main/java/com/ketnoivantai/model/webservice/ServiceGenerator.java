@@ -119,10 +119,14 @@ public class ServiceGenerator {
                     public Response intercept(Chain chain) throws IOException {
                         Request request = chain.request();
 
+                        Utils.log(TAG, "token: " + getAccessToken());
+                        Utils.log(TAG, "id: " + id);
+
+
                         Request modifiedRequest = request.newBuilder()
+                                .addHeader("account_type", "customer")
                                 .addHeader("token", getAccessToken())
                                 .addHeader("customer_id", id + "")
-                                .addHeader("account_type", "customer")
                                 .build();
 
 
