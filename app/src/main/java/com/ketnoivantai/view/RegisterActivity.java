@@ -1,5 +1,7 @@
 package com.ketnoivantai.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -51,6 +53,12 @@ public class RegisterActivity extends GenericActivity<RegisterPresenter.View, Re
         getSupportActionBar().setTitle("Đăng ký tài khoản mới");
 
         super.onCreate(savedInstanceState, RegisterPresenter.class, this);
+    }
+
+    @OnClick(R.id.policy)
+    public void onPolicyClick() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.vn/policy.html"));
+        startActivity(browserIntent);
     }
 
 
