@@ -14,7 +14,7 @@ public class RequestPOJO implements Parcelable {
     private final int start_address;
     private final int arrive_address;
     private final String vehicle_type;
-    private final String expected_price;
+    private final String goods_description;
     private final String goods_name;
     private String start_province_name;
     private String arrive_province_name;
@@ -26,7 +26,7 @@ public class RequestPOJO implements Parcelable {
     public RequestPOJO(String pickUpDate, String goodsWeightDimension,
                        int goodsWeightNumber, int startDistrictCode,
                        int arriveDistrictCode, String vehicleType,
-                       String expectedPrice, String goodsName,
+                       String goodsDescription, String goodsName,
                        String startProvinceName, String arriveProvinceName,
                        String startDistrictName, String arriveDistrictName) {
 
@@ -36,7 +36,7 @@ public class RequestPOJO implements Parcelable {
         this.start_address = startDistrictCode;
         this.arrive_address = arriveDistrictCode;
         this.vehicle_type = vehicleType;
-        this.expected_price = expectedPrice;
+        this.goods_description = goodsDescription;
         this.goods_name = goodsName;
         this.start_province_name = startProvinceName;
         this.arrive_province_name = arriveProvinceName;
@@ -68,8 +68,8 @@ public class RequestPOJO implements Parcelable {
         return vehicle_type;
     }
 
-    public String getExpected_price() {
-        return expected_price;
+    public String getGoods_description() {
+        return goods_description;
     }
 
     public int getStatus() {
@@ -137,7 +137,7 @@ public class RequestPOJO implements Parcelable {
         dest.writeInt(this.start_address);
         dest.writeInt(this.arrive_address);
         dest.writeString(this.vehicle_type);
-        dest.writeString(this.expected_price);
+        dest.writeString(this.goods_description);
         dest.writeString(this.goods_name);
         dest.writeString(this.start_province_name);
         dest.writeString(this.arrive_province_name);
@@ -154,7 +154,7 @@ public class RequestPOJO implements Parcelable {
         this.start_address = in.readInt();
         this.arrive_address = in.readInt();
         this.vehicle_type = in.readString();
-        this.expected_price = in.readString();
+        this.goods_description = in.readString();
         this.goods_name = in.readString();
         this.start_province_name = in.readString();
         this.arrive_province_name = in.readString();
@@ -183,7 +183,7 @@ public class RequestPOJO implements Parcelable {
                 ", start_address=" + start_address +
                 ", arrive_address=" + arrive_address +
                 ", vehicle_type='" + vehicle_type + '\'' +
-                ", expected_price='" + expected_price + '\'' +
+                ", goods_description='" + goods_description + '\'' +
                 ", goods_name='" + goods_name + '\'' +
                 ", start_province_name='" + start_province_name + '\'' +
                 ", arrive_province_name='" + arrive_province_name + '\'' +

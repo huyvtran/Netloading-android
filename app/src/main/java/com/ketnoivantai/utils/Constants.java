@@ -6,7 +6,7 @@ package com.ketnoivantai.utils;
 public class Constants {
 
 
-    public static final String API_BASE_URL = "http://www.netloading.vn";//"https://netloading-dandoh.rhcloud.com/";//"http://192.168.32.109:3000";//
+    public static final String API_BASE_URL = "http://112.78.3.74";//"https://netloading-dandoh.rhcloud.com/";//"http://192.168.32.109:3000";//
 
     public static final String SHARED_PREFERENCE_ID_TAG = "id tag";
     public static final String MA_HUYEN_DI = "ma huyen di";
@@ -16,7 +16,7 @@ public class Constants {
     public static final String TEN_HUYEN_DI = "ten huyen di";
     public static final String TEN_HUYEN_DEN = "ten huyen den";
     public static final String LOAI_XE = "loai xe";
-    public static final String GOODS_EXPTECTED_PRICE = "good expted price";
+    public static final String GOODS_DESCRIPTION = "goods description";
     public static final String GOODS_PICKUP_DATE =  "good pickup date";
     public static final String GOODS_WEIGHT_NUMBER = "goods weight number";
     public static final String GOODS_NAME = "good name";

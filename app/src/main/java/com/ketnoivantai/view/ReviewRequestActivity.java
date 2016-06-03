@@ -20,10 +20,6 @@ import com.ketnoivantai.presenter.ReviewRequestPresenter;
 import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -49,8 +45,8 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     @Bind(R.id.goods_weight)
     TextView mGoodsWeightTextView;
 
-    @Bind(R.id.expected_price)
-    TextView mExpectedPriceTextView;
+    @Bind(R.id.goods_description)
+    TextView mGoodsDescriptionTextView;
 
 
     private ProgressDialog mProgressDialog;
@@ -63,7 +59,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
     private String goodsName;
     private int goodsWeightNumber;
     private String goodsWeightDimension;
-    private String expectedPrice;
+    private String goodsDescription;
     private String vehicleType;
     private int startDistrictCode;
     private int arriveDistrictCode;
@@ -114,7 +110,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
         goodsName = sharedPreferences.getString(Constants.GOODS_NAME, "");
         goodsWeightNumber = sharedPreferences.getInt(Constants.GOODS_WEIGHT_NUMBER, 0);
         goodsWeightDimension = sharedPreferences.getString(Constants.GOODS_WEIGHT_DIMENSION, "");
-        expectedPrice = sharedPreferences.getString(Constants.GOODS_EXPTECTED_PRICE, "");
+        goodsDescription = sharedPreferences.getString(Constants.GOODS_DESCRIPTION, "");
         startDistrictCode = sharedPreferences.getInt(Constants.MA_HUYEN_DI, 0);
         arriveDistrictCode = sharedPreferences.getInt(Constants.MA_HUYEN_DEN, 0);
         vehicleType = sharedPreferences.getString(Constants.LOAI_XE, "");
@@ -133,7 +129,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
 //        String goodsWeightNumberString = df.format(goodsWeightNumber);
 
         mGoodsWeightTextView.setText(Utils.formatNumber(goodsWeightNumber) + " " + goodsWeightDimension);
-        mExpectedPriceTextView.setText(expectedPrice + " VNĐ");
+        mGoodsDescriptionTextView.setText(goodsDescription);
 
     }
 
@@ -157,7 +153,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
 
                             getOps().sendRequest(pickUpDate, goodsWeightDimension, goodsWeightNumber,
                                     startDistrictCode, arriveDistrictCode, vehicleType,
-                                    expectedPrice, goodsName,
+                                    goodsDescription, goodsName,
                                     startProvinceName, arriveProvinceName,
                                     startDistrictName, arriveDistrictName);
                         } else {

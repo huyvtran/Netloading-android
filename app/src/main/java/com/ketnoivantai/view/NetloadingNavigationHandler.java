@@ -123,11 +123,11 @@ public class NetloadingNavigationHandler {
             mActivity.startActivity(intent);
         } else
         if (v.getId() == R.id.support_for_customer) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.vn/faq.html"));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/faq.html"));
             mActivity.startActivity(browserIntent);
         } else
         if (v.getId() == R.id.intro) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.vn/aboutus.html"));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/aboutus.html"));
             mActivity.startActivity(browserIntent);
         }
 

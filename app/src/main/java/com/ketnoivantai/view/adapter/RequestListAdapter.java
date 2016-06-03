@@ -69,7 +69,7 @@ public class RequestListAdapter extends BaseAdapter {
 
 
         String dtStart = requestPOJOs.get(position).getPickup_date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = format.parse(dtStart);
             String intMonth = (String) android.text.format.DateFormat.format("MM", date); //06
@@ -78,15 +78,17 @@ public class RequestListAdapter extends BaseAdapter {
 
 
             String dateString = day + "/" + intMonth + "/" + year;
-
             requestDate.setText(dateString);
 
             Utils.log("DATE", dateString);
 
         } catch (ParseException e) {
             // TODO Auto-generated catch block
+            requestDate.setText(dtStart);
             e.printStackTrace();
         }
+
+
 
 
         ((TextView)convertView.findViewById(R.id.request_name)).setText("Yêu cầu #" + requestPOJOs.get(position).getId());

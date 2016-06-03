@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  */
 public class Validator {
 
-    private static final String USERNAME_PATTERN = "^[a-z0-9_-]{6,15}$";
+    private static final String USERNAME_PATTERN = "^[a-z0-9_-]{1,15}$";
     private static Pattern usernamePattern = Pattern.compile(USERNAME_PATTERN);
 
 

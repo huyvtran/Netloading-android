@@ -53,8 +53,8 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
     @Bind(R.id.goods_name)
     EditText mGoodsNameEditText;
 
-    @Bind(R.id.expected_price)
-    EditText mExpectedPriceEditText;
+    @Bind(R.id.goods_description)
+    EditText mGoodsDescriptionEditText;
 
     @Bind(R.id.good_weight_number)
     EditText mGoodWeightNumberEditText;
@@ -91,7 +91,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setTitle("Nhập thông tin yêu cầu");
 
-        mExpectedPriceEditText.addTextChangedListener(new NumberTextWatcher(mExpectedPriceEditText));
+//        mGoodsDescriptionEditText.addTextChangedListener(new NumberTextWatcher(mGoodsDescriptionEditText));
         mGoodWeightNumberEditText.addTextChangedListener(new NumberTextWatcher(mGoodWeightNumberEditText));
 
         setDimension();
@@ -99,7 +99,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         mGoodsNameEditText.setOnFocusChangeListener(this);
         mDateTextView.setOnFocusChangeListener(this);
         mGoodWeightNumberEditText.setOnFocusChangeListener(this);
-        mExpectedPriceEditText.setOnFocusChangeListener(this);
+        mGoodsDescriptionEditText.setOnFocusChangeListener(this);
 
         initializeDefaultValue();
 
@@ -166,14 +166,15 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         String goodName = mGoodsNameEditText.getText().toString();//"Bánh kẹo";
         int goodWeightNumber = Integer.parseInt(mGoodWeightNumberEditText.getText().toString().replace(".", ""));//500;
         String date = mDateTextView.getText().toString();//"2016-02-28";
-        String expectedPrice = mExpectedPriceEditText.getText().toString();//"1000000";
+
+        String goodsDescription = mGoodsDescriptionEditText.getText().toString();
 
         /// save into preference
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.edit().putString(Constants.GOODS_NAME, goodName).apply();
         sharedPreferences.edit().putInt(Constants.GOODS_WEIGHT_NUMBER, goodWeightNumber).apply();
         sharedPreferences.edit().putString(Constants.GOODS_PICKUP_DATE, date).apply();
-        sharedPreferences.edit().putString(Constants.GOODS_EXPTECTED_PRICE, expectedPrice).apply();
+        sharedPreferences.edit().putString(Constants.GOODS_DESCRIPTION, goodsDescription).apply();
         sharedPreferences.edit().putString(Constants.GOODS_WEIGHT_DIMENSION, mDimension).apply();
 
         startActivity(ReviewRequestActivity.makeIntent(this));
@@ -184,7 +185,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         String goodName = sharedPreferences.getString(Constants.GOODS_NAME, "");
         int goodWeightNumber = sharedPreferences.getInt(Constants.GOODS_WEIGHT_NUMBER, 0);
         String date = sharedPreferences.getString(Constants.GOODS_PICKUP_DATE, "");
-        String expectedPrice = sharedPreferences.getString(Constants.GOODS_EXPTECTED_PRICE, "0");
+        String goodsDescription = sharedPreferences.getString(Constants.GOODS_DESCRIPTION, "0");
 
         mGoodsNameEditText.setText(goodName);
         mGoodWeightNumberEditText.setText(String.valueOf(goodWeightNumber));
@@ -193,14 +194,8 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         mDateTextView.setText(sdf.format(Calendar.getInstance().getTime()));
-//        mDateTextView.setText(date);
 
-//        NumberFormat nf = NumberFormat.getNumberInstance(Locale.GERMAN);
-//        DecimalFormat df = (DecimalFormat)nf;
-//
-//        expectedPrice = df.format(Integer.parseInt(expectedPrice));
-
-        mExpectedPriceEditText.setText(expectedPrice + "");
+        mGoodsDescriptionEditText.setText("");
     }
 
     @Override

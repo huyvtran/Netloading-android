@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -79,6 +80,12 @@ public class RequestListActivity extends GenericActivity<RequestListPresenter.Vi
     }
 
     private void showList(ArrayList<RequestPOJO> requestPOJOs) {
+
+        for (RequestPOJO r:
+             requestPOJOs) {
+            Log.i(TAG, r.toString());
+        }
+
 
         this.requestPOJOs = requestPOJOs;
 

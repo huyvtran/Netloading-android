@@ -35,7 +35,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
     public void sendRequest(String pickUpDate, String goodsWeightDimension,
                             int goodsWeightNumber, int startDistrictCode,
                             int arriveDistrictCode, String vehicleType,
-                            String expectedPrice, String goodsName,
+                            String goodsDescription, String goodsName,
                             String startProvinceName, String arriveProvinceName,
                             String startDistrictName, String arriveDistrictName) {
 
@@ -49,7 +49,7 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
         final RequestPOJO requestPOJO = new RequestPOJO(pickUpDate, goodsWeightDimension,
                 goodsWeightNumber, startDistrictCode,
                 arriveDistrictCode, vehicleType,
-                expectedPrice, goodsName,
+                goodsDescription, goodsName,
                 startProvinceName, arriveProvinceName,
                 startDistrictName, arriveDistrictName
         );

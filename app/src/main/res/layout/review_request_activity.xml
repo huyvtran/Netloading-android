@@ -13,7 +13,7 @@
         <FrameLayout
             android:id="@+id/top"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true">
@@ -22,7 +22,7 @@
                 android:id="@+id/request_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal|bottom"
                 android:text="Yêu cầu"
                 android:textColor="#ff8f00"
                 android:textSize="30sp" />
@@ -34,7 +34,8 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/footer"
             android:layout_below="@id/top"
-            android:weightSum="7">
+            android:weightSum="7"
+            android:layout_marginBottom="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -316,7 +317,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_gia" />
+                            android:src="@drawable/ic_detail" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -330,19 +331,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="Giá mong muốn"
+                            android:text="Mô tả chi tiết"
                             android:textColor="@color/vBlue"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/expected_price"
+                            android:id="@+id/goods_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:singleLine="true"
-                            android:text="2.000.000 VNĐ"
+                            android:maxLines="3"
+                            android:text="Hàng dễ vỡ, coi chừng nhé. Hàng to nhưng mà nhẹ. blabla asdf"
                             android:textColor="@color/vBlue"
+                            android:ellipsize="end"
                             android:textSize="16sp" />
                     </LinearLayout>
 

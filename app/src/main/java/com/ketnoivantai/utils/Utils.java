@@ -16,7 +16,7 @@ import java.util.Locale;
  */
 public class Utils {
 
-    public static boolean isDev = true;
+    public static boolean isDev = false;
     public static DecimalFormatSymbols otherSymbols;
     public static DecimalFormat df;
 

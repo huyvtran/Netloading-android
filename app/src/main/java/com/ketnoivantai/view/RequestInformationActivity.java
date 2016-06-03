@@ -60,8 +60,8 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
     @Bind(R.id.good_weight_tv)
     TextView mGoodWeightTextView;
 
-    @Bind(R.id.expected_price_tv)
-    TextView mExpectedPriceTextView;
+    @Bind(R.id.goods_description_tv)
+    TextView mGoodsDescriptionTextView;
 
     @Bind(R.id.request_title)
     TextView mRequestTitleTextView;
@@ -148,7 +148,7 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
         mGoodWeightTextView.setText(
                 Utils.formatNumber(requestInfo.getGoods_weight_number()) + " " + dimension);
 
-        mExpectedPriceTextView.setText(Utils.formatNumber(Integer.parseInt(requestInfo.getExpected_price())) + " VNĐ");
+        mGoodsDescriptionTextView.setText(requestInfo.getGoods_description());
     }
 
     private void handleStatus(RequestPOJO requestInfo) {
@@ -168,7 +168,7 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
 
     private void handlePickupDate(RequestPOJO requestInfo) {
         String dtStart = requestInfo.getPickup_date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = format.parse(dtStart);
             String intMonth = (String) android.text.format.DateFormat.format("MM", date); //06
@@ -179,6 +179,7 @@ public class RequestInformationActivity extends GenericActivity<RequestInformati
             mPickupDateTextView.setText(dateString);
         } catch (ParseException e) {
             // TODO Auto-generated catch block
+            mPickupDateTextView.setText(dtStart);
             e.printStackTrace();
         }
     }

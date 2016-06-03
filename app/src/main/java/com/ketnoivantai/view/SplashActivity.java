@@ -1,10 +1,8 @@
 package com.ketnoivantai.view;
 
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 
 import com.ketnoivantai.NetloadingApplication;
@@ -39,7 +37,7 @@ public class SplashActivity extends GenericActivity<SplashPresenter.View, Splash
                 .putString(Constants.GOODS_NAME, "")
                 .putInt(Constants.GOODS_WEIGHT_NUMBER, 0)
                 .putString(Constants.GOODS_PICKUP_DATE, "")
-                .putString(Constants.GOODS_EXPTECTED_PRICE, "0").apply();
+                .putString(Constants.GOODS_DESCRIPTION, "0").apply();
     }
 
     @Override
