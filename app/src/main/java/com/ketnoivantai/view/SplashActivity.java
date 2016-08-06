@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.ketnoivantai.NetloadingApplication;
 import com.ketnoivantai.R;
 import com.ketnoivantai.common.GenericActivity;
@@ -23,8 +25,11 @@ public class SplashActivity extends GenericActivity<SplashPresenter.View, Splash
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.splash_activity);
-
         super.onCreate(savedInstanceState, SplashPresenter.class, this);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(getApplication());
+
         resetDefaultValue();
 
         getOps().setDelayTime(3000);
