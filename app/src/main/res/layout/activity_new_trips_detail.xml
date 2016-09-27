@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBar">
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/choose_trip_layout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_orange_selector">
+
+            <Button
+                android:id="@+id/choose_trip_btn"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/button_orange_selector"
+                android:text="CHỌN"
+                android:textColor="#ffffff"
+                android:textSize="19sp" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:layout_above="@+id/choose_trip_layout">
+
+            <LinearLayout
+                android:id="@+id/new_trips_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView
+                    android:id="@+id/company_id_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mã nhà xe: 007"
+                    android:textColor="@color/vOrange"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:id="@+id/start_address_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Điểm đi: Văn Yên - Yên Bái"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/arrive_address_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Điểm đến: Sông Công - Thái Nguyên"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/start_date_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ngày đi: 17/09/2016"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/arrive_date_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ngày đến: 17/09/2016"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/vehicle_type_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Loại xe: xe tải"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/vehicle_capacity_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Tải trọng: 33.000 kg"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/plate_number_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Biển số: 38H-1234"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/vehicle_info_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Mô tả chi tiết: Đầu kéo rơ-mooc. Kích thước dùng: D12,4m.."
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/price_per_unit_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Cước thầu: 1000 VNĐ/kg"
+                    android:textColor="@color/vBlue"
+                    android:textSize="19sp" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+</RelativeLayout>

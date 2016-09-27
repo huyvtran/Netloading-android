@@ -16,11 +16,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -35,9 +33,10 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ketnoivantai.R;
-import com.ketnoivantai.model.webservice.ServiceGenerator;
 import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.PicassoTools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -123,6 +122,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         huyenDenSelected = false;
 
         SetUpSpinner();
+
 
     }
 
@@ -239,21 +239,20 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         int maHuyenDen = Integer.parseInt(maHuyenList.get(huyenDenSelectedPosition));
         Utils.log("TAG", maHuyenDi + " " + maHuyenDen);
 
-
         // Luu lai ten huyen, ten tinh, ma huyen, ma tinh cua diem den va diem di
         // Luu lai loai xe
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.edit().putInt(Constants.MA_HUYEN_DI, maHuyenDi).apply();
-        sharedPreferences.edit().putInt(Constants.MA_HUYEN_DEN, maHuyenDen).apply();
+        sharedPreferences.edit().putInt(Constants.START_DISTRICT_CODE, maHuyenDi).apply();
+        sharedPreferences.edit().putInt(Constants.ARRIVE_DISTRICT_CODE, maHuyenDen).apply();
 
 
         Utils.log(TAG,
                 tenTinhDiSelected
         );
 
-        sharedPreferences.edit().putString(Constants.TEN_TINH_DI,
+        sharedPreferences.edit().putString(Constants.START_PROVINCE_NAME,
                 tenTinhDiSelected
         ).apply();
 
@@ -261,7 +260,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
                 tenTinhDenSelected
         );
 
-        sharedPreferences.edit().putString(Constants.TEN_TINH_DEN,
+        sharedPreferences.edit().putString(Constants.ARRIVE_PROVINCE_NAME,
                 tenTinhDenSelected
         ).apply();
 
@@ -269,7 +268,7 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
                 allHuyenList.get(huyenDiSelectedPosition)
         );
 
-        sharedPreferences.edit().putString(Constants.TEN_HUYEN_DI,
+        sharedPreferences.edit().putString(Constants.START_DISTRICT_NAME,
                 allHuyenList.get(huyenDiSelectedPosition)
         ).apply();
 
@@ -277,13 +276,13 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
                 allHuyenList.get(huyenDenSelectedPosition)
         );
 
-        sharedPreferences.edit().putString(Constants.TEN_HUYEN_DEN,
+        sharedPreferences.edit().putString(Constants.ARRIVE_DISTRICT_NAME,
                 allHuyenList.get(huyenDenSelectedPosition)
         ).apply();
 
         Utils.log(TAG, vehicleType);
 
-        sharedPreferences.edit().putString(Constants.LOAI_XE,
+        sharedPreferences.edit().putString(Constants.VEHICLE_TYPE,
                 vehicleType
         ).apply();
 
@@ -538,4 +537,12 @@ public class PickLocationActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Utils.log(TAG, "on Start");
+        // clear picasso cache
+        PicassoTools.clearCache(Picasso.with(this));
+    }
 }

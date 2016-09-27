@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -10,75 +12,28 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/actionBar">
 
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/wait_other_btn_wrapper"
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/vBlue">
+            custom:pager_animation="Accordion"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="visible"
+            custom:pager_animation_span="1100"
+            android:alwaysDrawnWithCache="false"
+            android:layout_height="180dp"/>
 
-            <RelativeLayout
-                android:id="@+id/wait_other_btn"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/button_blue_selector"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_chodanhsachkhac" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="Chờ danh sách khác"
-                    android:textColor="#ffffff"
-                    android:textSize="18sp" />
-
-
-            </RelativeLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
-
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/delete_request_btn_wrapper"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_above="@id/wait_other_btn_wrapper"
-            android:background="@drawable/button_orange_selector">
-
-            <RelativeLayout
-                android:id="@+id/delete_request_btn"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/button_orange_selector"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_huygiaodich" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="Xóa yêu cầu"
-                    android:textColor="#ffffff"
-                    android:textSize="18sp" />
-            </RelativeLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
-
+        <com.daimajia.slider.library.Indicators.PagerIndicator
+            android:id="@+id/custom_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            />
 
         <RelativeLayout
             android:id="@+id/middle_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/delete_request_btn_wrapper"
-            android:layout_below="@+id/flipper">
+            android:layout_below="@+id/slider">
 
             <RelativeLayout
                 android:id="@+id/company_not_found_layout"
@@ -145,7 +100,7 @@
                     android:fillViewport="true">
 
                     <ListView
-                        android:id="@+id/pick_company_list"
+                        android:id="@+id/new_trips_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -155,31 +110,6 @@
             </android.support.v4.widget.SwipeRefreshLayout>
         </RelativeLayout>
 
-
-        <RelativeLayout
-            android:id="@id/flipper"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_alignParentTop="true">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tên công ty"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:textStyle="bold"
-                android:textColor="@color/vBlue"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phí vận chuyển (VNĐ)"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:textColor="@color/vBlue"
-                android:textStyle="bold"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
     </RelativeLayout>
 
     <android.support.design.widget.AppBarLayout
@@ -194,7 +124,25 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:visibility="invisible">
+
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:visibility="invisible">
+
+            </Spinner>
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

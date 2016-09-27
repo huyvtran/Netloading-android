@@ -52,7 +52,7 @@ public class PickCompanyActivity extends GenericActivity<PickCompanyPresenter.Vi
     @Bind(R.id.swipe_to_refresh)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    @Bind(R.id.header)
+    @Bind(R.id.flipper)
     RelativeLayout mHeaderRelativeLayout;
 
     private ArrayList<CompanyTripPOJO> companyTripPOJOs;

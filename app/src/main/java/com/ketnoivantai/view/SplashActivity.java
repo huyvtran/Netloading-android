@@ -13,6 +13,8 @@ import com.ketnoivantai.common.GenericActivity;
 import com.ketnoivantai.presenter.SplashPresenter;
 import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.PicassoTools;
 
 /**
  * Created by AnhVu on 2/28/16.
@@ -31,6 +33,9 @@ public class SplashActivity extends GenericActivity<SplashPresenter.View, Splash
         AppEventsLogger.activateApp(getApplication());
 
         resetDefaultValue();
+
+        // clear picasso cache
+//        PicassoTools.clearCache(Picasso.with(this));
 
         getOps().setDelayTime(3000);
 

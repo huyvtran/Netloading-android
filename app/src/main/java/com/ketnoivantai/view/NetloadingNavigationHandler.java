@@ -59,7 +59,6 @@ public class NetloadingNavigationHandler {
             mActivity.startActivity(intent);
         } else
         if (v.getId() == R.id.navigation_sign_out) {
-
             Utils.log(TAG, "on navation sign out");
             ServiceGenerator.getNetloadingService().logout().enqueue(new Callback<ResponseBody>() {
                 @Override
@@ -129,8 +128,11 @@ public class NetloadingNavigationHandler {
         if (v.getId() == R.id.intro) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/aboutus.html"));
             mActivity.startActivity(browserIntent);
+        } else
+        if (v.getId() == R.id.navigation_new_trips) {
+            Utils.log(TAG, "on navigation new trips");
+            Intent intent = NewTripsListActivity.makeIntent(mActivity.getApplicationContext());
+            mActivity.startActivity(intent);
         }
-
-
     }
 }

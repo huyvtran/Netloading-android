@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -102,18 +103,18 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
 
     private void loadRequestInformation() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        startProvinceName = sharedPreferences.getString(Constants.TEN_TINH_DI, "");
-        startDistrictName = sharedPreferences.getString(Constants.TEN_HUYEN_DI, "");
-        arriveProvinceName = sharedPreferences.getString(Constants.TEN_TINH_DEN, "");
-        arriveDistrictName = sharedPreferences.getString(Constants.TEN_HUYEN_DEN, "");
+        startProvinceName = sharedPreferences.getString(Constants.START_PROVINCE_NAME, "");
+        startDistrictName = sharedPreferences.getString(Constants.START_DISTRICT_NAME, "");
+        arriveProvinceName = sharedPreferences.getString(Constants.ARRIVE_PROVINCE_NAME, "");
+        arriveDistrictName = sharedPreferences.getString(Constants.ARRIVE_DISTRICT_NAME, "");
         pickUpDate = sharedPreferences.getString(Constants.GOODS_PICKUP_DATE, "");
         goodsName = sharedPreferences.getString(Constants.GOODS_NAME, "");
         goodsWeightNumber = sharedPreferences.getInt(Constants.GOODS_WEIGHT_NUMBER, 0);
         goodsWeightDimension = sharedPreferences.getString(Constants.GOODS_WEIGHT_DIMENSION, "");
         goodsDescription = sharedPreferences.getString(Constants.GOODS_DESCRIPTION, "");
-        startDistrictCode = sharedPreferences.getInt(Constants.MA_HUYEN_DI, 0);
-        arriveDistrictCode = sharedPreferences.getInt(Constants.MA_HUYEN_DEN, 0);
-        vehicleType = sharedPreferences.getString(Constants.LOAI_XE, "");
+        startDistrictCode = sharedPreferences.getInt(Constants.START_DISTRICT_CODE, 0);
+        arriveDistrictCode = sharedPreferences.getInt(Constants.ARRIVE_DISTRICT_CODE, 0);
+        vehicleType = sharedPreferences.getString(Constants.VEHICLE_TYPE, "");
 
 
         mStartAddressTextView.setText(startDistrictName + ", " + startProvinceName);
@@ -136,12 +137,15 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
 
     @OnClick(R.id.send_request)
     void sendRequest() {
-
+        Log.d(TAG, "press send_request button");
         new AlertDialog.Builder(this)
                 .setTitle("Gửi yêu cầu vận tải")
                 .setMessage("Bạn có chắc chắn muốn gửi yêu cầu này?")
                 .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        Utils.log(TAG, "press dong y button");
+                        Log.v(TAG, "den day roi");
+
                         String token = ServiceGenerator.getAccessToken();
 
                         Utils.log(TAG, token + "");
@@ -196,6 +200,7 @@ public class ReviewRequestActivity extends GenericActivity<ReviewRequestPresente
 
     @OnClick(R.id.modify_request)
     void onModifyClick() {
+        Utils.log(TAG, "press mod button");
         backToAddInfoActivity();
     }
 

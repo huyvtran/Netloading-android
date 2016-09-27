@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="88dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/vehicle_icon_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:src="@drawable/icon_xebon_blue" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/route_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Lộ trình: Hà Nội => Hồ Chí Minh askdfjas fajsdf"
+            android:textColor="@color/vOrange"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/start_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Ngày đi: 17/09/2016"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/vBlue"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/vehicle_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Loại xe: Xe tải"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/vBlue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/vehicle_capacity_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Tải trọng: 5.000 Kg"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/vBlue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/price_per_unit_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Giá trên đơn vị: 900.000 VNĐ/Kg"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/vBlue"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+

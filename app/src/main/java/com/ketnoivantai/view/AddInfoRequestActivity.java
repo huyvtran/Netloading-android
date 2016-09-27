@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -114,7 +115,7 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
 
     private void setDimension() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String vehicleType = sharedPreferences.getString(Constants.LOAI_XE, "");
+        String vehicleType = sharedPreferences.getString(Constants.VEHICLE_TYPE, "");
 
         Utils.log(TAG, vehicleType);
 
@@ -125,6 +126,9 @@ public class AddInfoRequestActivity extends LifecycleLoggingActivity implements 
             mDimension = "m3";
             mDimensionEditText.setText("m³");
         }
+        Pair<String, String> pair = Utils.ConvertToDimension(vehicleType);
+        mDimension = pair.first;
+        mDimensionEditText.setText(pair.second);
     }
 
 

@@ -78,7 +78,6 @@ public class ReviewRequestPresenter implements ConfigurableOps<ReviewRequestPres
                         int id = result.getJSONObject("message").getInt("insertId");
 //                        Utils.log(TAG, companyPOJOs.size() + " ");
 
-                        /// TODO - on result
                         mView.get().onRequestResult(id);
 
                     } else if (result.getString("status").equals("error")){

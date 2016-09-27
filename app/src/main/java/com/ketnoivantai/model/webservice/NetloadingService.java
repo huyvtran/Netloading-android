@@ -59,6 +59,7 @@ public interface NetloadingService {
     @GET("/customers/request_info/{id}")
     Call<ResponseBody> getRequestDetailById(@Path("id") int requestId);
 
-
+    @GET("/admins/get_new_trips")
+    Call<ResponseBody> getNewTrips();
 
 }

@@ -17,6 +17,7 @@ public class SplashPresenter implements ConfigurableOps<SplashPresenter.View> {
     @Override
     public void onConfiguration(View view, boolean firstTimeIn) {
         this.mView = new WeakReference<View>(view);
+
     }
 
     public void setDelayTime(int i) {

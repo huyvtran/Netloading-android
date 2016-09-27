@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.75"
             android:padding="25dp">
 
             <ImageView
@@ -26,9 +26,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.1"
+            android:layout_weight="1.2"
             android:orientation="vertical"
-            android:weightSum="6">
+            android:weightSum="7">
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:onClick="onNavigationItemClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/navigation_new_trips"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp">
+
+                    <FrameLayout
+                        android:layout_width="56dp"
+                        android:layout_height="match_parent"
+                        android:padding="2dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="2dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_xedonglanh" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:text="Tìm chuyến xe"
+                        android:textColor="#ffffff" />
+
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
 
             <com.balysv.materialripple.MaterialRippleLayout
                 android:layout_width="match_parent"
