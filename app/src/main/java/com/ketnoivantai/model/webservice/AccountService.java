@@ -7,6 +7,7 @@ import com.ketnoivantai.model.pojo.RegisterPOJO;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -22,4 +23,7 @@ public interface AccountService {
 
     @POST("/customers/forgot_password")
     Call<ResponseBody> submitEmail(@Body EmailSubmitPOJO emailSubmitPOJO);
+
+    @GET("/admins/get_new_trips")
+    Call<ResponseBody> getNewTrips();
 }

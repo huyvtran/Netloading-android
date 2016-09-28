@@ -46,6 +46,14 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
     private ArrayList<NewTripPOJO> mNewTripsPOJOs;
     private NewTripsListAdapter mNewTripsListAdapter;
 
+    private boolean isFinding = false;
+
+    @Bind(R.id.start_province_spinner)
+    Spinner mStartProvinceSpinner;
+
+    @Bind(R.id.arrive_province_spinner)
+    Spinner mArriveProvinceSpinner;
+
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, NewTripsListActivity.class);
@@ -252,12 +260,16 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
         int id = item.getItemId();
 
         if (id == R.id.action_find) {
+            if (!isFinding) {
+                mStartProvinceSpinner.setVisibility(View.VISIBLE);
+                mArriveProvinceSpinner.setVisibility(View.VISIBLE);
+            } else {
+                mStartProvinceSpinner.setVisibility(View.INVISIBLE);
+                mArriveProvinceSpinner.setVisibility(View.INVISIBLE);
+            }
 
-            Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-            Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+            isFinding = !isFinding;
 
-            spinner1.setVisibility(View.VISIBLE);
-            spinner2.setVisibility(View.VISIBLE);
 
         } else if (id == android.R.id.home) {
             Utils.backToHome(this);

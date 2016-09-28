@@ -40,6 +40,13 @@ public class NetloadingNavigationHandler {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
         String token = sharedPreferences.getString(Constants.SHARED_PREFERENCE_TOKEN_TAG, "NULL");
 
+        if (v.getId() == R.id.navigation_new_trips) {
+            Utils.log(TAG, "on navigation new trips");
+            Intent intent = NewTripsListActivity.makeIntent(mActivity.getApplicationContext());
+            mActivity.startActivity(intent);
+            return;
+        }
+
         if (token.equals("NULL")) {
             Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_NULL_TOKEN)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -128,11 +135,7 @@ public class NetloadingNavigationHandler {
         if (v.getId() == R.id.intro) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/aboutus.html"));
             mActivity.startActivity(browserIntent);
-        } else
-        if (v.getId() == R.id.navigation_new_trips) {
-            Utils.log(TAG, "on navigation new trips");
-            Intent intent = NewTripsListActivity.makeIntent(mActivity.getApplicationContext());
-            mActivity.startActivity(intent);
         }
+
     }
 }

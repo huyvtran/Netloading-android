@@ -43,7 +43,7 @@ public class NewTripsListPresenter implements ConfigurableOps<NewTripsListPresen
     }
 
     public void getNewTrips() {
-        ServiceGenerator.getNetloadingService().getNewTrips().enqueue(new Callback<ResponseBody>() {
+        ServiceGenerator.getAccountService().getNewTrips().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 processing = false;

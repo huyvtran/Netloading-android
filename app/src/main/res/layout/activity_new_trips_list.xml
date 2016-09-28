@@ -127,7 +127,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/start_province_spinner"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:visibility="invisible">
@@ -135,7 +135,7 @@
             </Spinner>
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/arrive_province_spinner"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
                 android:visibility="invisible">
