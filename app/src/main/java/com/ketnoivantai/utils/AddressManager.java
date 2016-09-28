@@ -103,4 +103,22 @@ public class AddressManager {
         return mDistrictNameList.get(districtPosition);
     }
 
+    public List<String> getProvinceNameList() {
+        return mProvinceNameList;
+    }
+
+    public int getProvincePositionFromCode(int code) {
+        Utils.log(TAG, "district code: " + code);
+
+        int districtPosition = mDistrictPosition[code];
+
+        int provinceCode = Integer.parseInt(mProvinceCodeOfDistrictPosistionList.get(districtPosition));
+
+        int provincePosition = mProvincePosition[provinceCode];
+
+        Utils.log(TAG, provincePosition + " --> province position");
+
+        return provincePosition;
+    }
+
 }

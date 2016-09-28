@@ -3,16 +3,23 @@ package com.ketnoivantai.view;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -22,12 +29,16 @@ import com.ketnoivantai.R;
 import com.ketnoivantai.common.GenericActivity;
 import com.ketnoivantai.model.pojo.NewTripPOJO;
 import com.ketnoivantai.presenter.NewTripsListPresenter;
+import com.ketnoivantai.utils.AddressManager;
 import com.ketnoivantai.utils.Utils;
 import com.ketnoivantai.view.adapter.NewTripsListAdapter;
+import com.ketnoivantai.view.adapter.StringListAdapter;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,6 +56,15 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
     private ProgressDialog mProgressDialog;
     private ArrayList<NewTripPOJO> mNewTripsPOJOs;
     private NewTripsListAdapter mNewTripsListAdapter;
+
+    private List<String> mStartProvinceName;
+    private List<String> mArriveProvinceName;
+
+    private ArrayAdapter mStartProvinceAdapter;
+    private ArrayAdapter mArriveProvinceAdapter;
+
+    private int mStartProvincePosition = -1;
+    private int mArriveProvincePosition = -1;
 
     private boolean isFinding = false;
 
@@ -104,7 +124,107 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
         //--
         setUpSlider();
 
+
+        // Set up province name list for spinner
+        setUpSpinner();
+
     }
+
+    private void setUpSpinner() {
+        Utils.log(TAG, "set up spinner");
+        mStartProvinceName = new ArrayList<>(AddressManager.getInstance(this).getProvinceNameList());;
+        mArriveProvinceName = new ArrayList<>(AddressManager.getInstance(this).getProvinceNameList());
+
+        setUpStartSpinner();
+        setUpArriveSpinner();
+
+    }
+
+    private void setUpArriveSpinner() {
+        mArriveProvinceAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, mArriveProvinceName) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View v = super.getView(position, convertView, parent);
+                if (position == getCount()) {
+                    ((TextView) v.findViewById(R.id.vText)).setText("Tỉnh đến");
+                    ((TextView) v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
+                }
+                return v;
+            }
+
+            @Override
+            public int getCount() {
+                return super.getCount() - 1; // you dont display last item. It is used as hint.
+            }
+        };
+
+        mArriveProvinceAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        mArriveProvinceSpinner.setAdapter(mArriveProvinceAdapter);
+        //spin.setOnItemSelectedListener(new PickLocationActivity.TinhSelectedEvent(type));
+        mArriveProvinceSpinner.setSelection(mArriveProvinceAdapter.getCount());
+
+        mArriveProvinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == mArriveProvinceAdapter.getCount()) return;
+
+//                Utils.toast(getApplicationContext(), "" + position);
+                mArriveProvincePosition = position;
+                getOps().filterList(getApplicationContext(), mStartProvincePosition, mArriveProvincePosition, mNewTripsPOJOs);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void setUpStartSpinner() {
+        mStartProvinceAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, mStartProvinceName) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View v = super.getView(position, convertView, parent);
+                if (position == getCount()) {
+                    ((TextView) v.findViewById(R.id.vText)).setText("Tỉnh đi");
+                    ((TextView) v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
+                }
+
+                return v;
+            }
+
+            @Override
+            public int getCount() {
+                return super.getCount() - 1; // you dont display last item. It is used as hint.
+            }
+        };
+
+        mStartProvinceAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        mStartProvinceSpinner.setAdapter(mStartProvinceAdapter);
+        //spin.setOnItemSelectedListener(new PickLocationActivity.TinhSelectedEvent(type));
+        mStartProvinceSpinner.setSelection(mStartProvinceAdapter.getCount());
+
+        mStartProvinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == mStartProvinceAdapter.getCount()) return;
+
+//                Utils.toast(getApplicationContext(), "" + position);
+                mStartProvincePosition = position;
+                getOps().filterList(getApplicationContext(), mStartProvincePosition, mArriveProvincePosition, mNewTripsPOJOs);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
 
     private void setUpSlider() {
         HashMap<String,String> url_maps = new HashMap<String, String>();
@@ -165,6 +285,14 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
     public void onRefresh() {
         Utils.log(TAG, "On refresh");
         getOps().getNewTrips();
+//        resetSpinner();
+    }
+
+    private void resetSpinner() {
+        mArriveProvinceSpinner.setSelection(mArriveProvinceAdapter.getCount());
+        mStartProvinceSpinner.setSelection(mStartProvinceAdapter.getCount());
+        mArriveProvincePosition = -1;
+        mStartProvincePosition = -1;
     }
 
     @Override
@@ -192,7 +320,14 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             showList(newTripPOJOs);
         }
 
+        getOps().filterList(getApplicationContext(), mStartProvincePosition, mArriveProvincePosition, mNewTripsPOJOs);
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onFilterSuccess(ArrayList<NewTripPOJO> filterList) {
+        mNewTripsListAdapter.setNewTripPOJOs(filterList);
+        mNewTripsListAdapter.notifyDataSetChanged();
     }
 
     private void showList(ArrayList<NewTripPOJO> newTripPOJOs) {
@@ -205,6 +340,7 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
         Utils.log(TAG, mNewTripsListAdapter.getCount() + " --> newTripsListAdapterCount");
 
         mNewTripsListView.setAdapter(mNewTripsListAdapter);
+
     }
 
     @Override
@@ -266,10 +402,12 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             } else {
                 mStartProvinceSpinner.setVisibility(View.INVISIBLE);
                 mArriveProvinceSpinner.setVisibility(View.INVISIBLE);
+
+                showProgressDialog();
+                getOps().getNewTrips();
+                resetSpinner();
             }
-
             isFinding = !isFinding;
-
 
         } else if (id == android.R.id.home) {
             Utils.backToHome(this);

@@ -1,11 +1,14 @@
 package com.ketnoivantai.presenter;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ketnoivantai.common.ConfigurableOps;
 import com.ketnoivantai.common.ContextView;
 import com.ketnoivantai.model.pojo.NewTripPOJO;
 import com.ketnoivantai.model.webservice.ServiceGenerator;
+import com.ketnoivantai.utils.AddressManager;
 import com.ketnoivantai.utils.Utils;
 
 import org.json.JSONArray;
@@ -17,6 +20,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -81,6 +85,33 @@ public class NewTripsListPresenter implements ConfigurableOps<NewTripsListPresen
                 mView.get().onError(View.STATUS_NETWORK_ERROR);
             }
         });
+    }
+
+    public void filterList(Context context, int mStartProvincePosition, int mArriveProvincePosition, ArrayList<NewTripPOJO> mNewTripsPOJOs) {
+
+        ArrayList<NewTripPOJO> filterList = new ArrayList<NewTripPOJO>();
+
+        for (NewTripPOJO item: mNewTripsPOJOs) {
+
+            int startCode = Integer.parseInt(item.getStart_address());
+            int arriveCode = Integer.parseInt(item.getArrive_address());
+
+            int startProvincePositionOfItem = AddressManager.getInstance(context).getProvincePositionFromCode(startCode);
+            int arriveProvincePositionOfItem = AddressManager.getInstance(context).getProvincePositionFromCode(arriveCode);
+
+            boolean ok1 = false;
+            boolean ok2 = false;
+
+            if (mStartProvincePosition == -1) ok1 = true;
+            if (mArriveProvincePosition == -1) ok2 = true;
+
+            if (mStartProvincePosition == startProvincePositionOfItem) ok1 = true;
+            if (mArriveProvincePosition == arriveProvincePositionOfItem) ok2 = true;
+
+            if (ok1 && ok2) filterList.add(item);
+        }
+
+        mView.get().onFilterSuccess(filterList);
 
     }
 
@@ -92,6 +123,8 @@ public class NewTripsListPresenter implements ConfigurableOps<NewTripsListPresen
 
         void onError(int status);
         void onGetTripsSuccess(ArrayList<NewTripPOJO> newTripPOJOs);
+        void onFilterSuccess(ArrayList<NewTripPOJO> filterList);
+
     }
 
 }

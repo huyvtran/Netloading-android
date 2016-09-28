@@ -124,4 +124,8 @@ public class NewTripsListAdapter extends BaseAdapter{
 
         routeTextView.setText(Html.fromHtml("<b>Lộ trình: </b>" + startProvinceName + " --> " + arriveProvinceName));
     }
+
+    public void setNewTripPOJOs(List<NewTripPOJO> newTripPOJOs) {
+        this.newTripPOJOs = newTripPOJOs;
+    }
 }
