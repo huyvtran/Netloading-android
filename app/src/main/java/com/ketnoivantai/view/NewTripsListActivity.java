@@ -3,9 +3,8 @@ package com.ketnoivantai.view;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,14 +26,13 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.ketnoivantai.R;
 import com.ketnoivantai.common.GenericActivity;
 import com.ketnoivantai.model.pojo.NewTripPOJO;
+import com.ketnoivantai.model.webservice.ServiceGenerator;
 import com.ketnoivantai.presenter.NewTripsListPresenter;
 import com.ketnoivantai.utils.AddressManager;
 import com.ketnoivantai.utils.Utils;
 import com.ketnoivantai.view.adapter.NewTripsListAdapter;
-import com.ketnoivantai.view.adapter.StringListAdapter;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +52,9 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
 
     private ProgressDialog mProgressDialog;
     private ArrayList<NewTripPOJO> mNewTripsPOJOs;
+
+    private ArrayList<NewTripPOJO> mFilterTripPOJOs;
+
     private NewTripsListAdapter mNewTripsListAdapter;
 
     private List<String> mStartProvinceName;
@@ -73,6 +73,9 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
 
     @Bind(R.id.arrive_province_spinner)
     Spinner mArriveProvinceSpinner;
+
+    @Bind(R.id.title_tv)
+    TextView mTitleTextView;
 
 
     public static Intent makeIntent(Context context) {
@@ -102,7 +105,7 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        getSupportActionBar().setTitle("Danh sách chuyến xe");
+//        getSupportActionBar().setTitle("Danh sách chuyến xe");
 
         super.onCreate(savedInstanceState, NewTripsListPresenter.class, this);
 
@@ -128,6 +131,8 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
         // Set up province name list for spinner
         setUpSpinner();
 
+
+        Utils.log(TAG, "is login1: " + ServiceGenerator.isLoggedIn());
     }
 
     private void setUpSpinner() {
@@ -154,12 +159,20 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             }
 
             @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View v = super.getDropDownView(position, convertView, parent);
+                ((TextView) v.findViewById(android.R.id.text1)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.vGray));
+                return v;
+            }
+
+            @Override
             public int getCount() {
                 return super.getCount() - 1; // you dont display last item. It is used as hint.
             }
         };
 
-        mArriveProvinceAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        mArriveProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mArriveProvinceSpinner.setPopupBackgroundResource(R.color.vWhite);
         mArriveProvinceSpinner.setAdapter(mArriveProvinceAdapter);
         //spin.setOnItemSelectedListener(new PickLocationActivity.TinhSelectedEvent(type));
         mArriveProvinceSpinner.setSelection(mArriveProvinceAdapter.getCount());
@@ -196,12 +209,22 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             }
 
             @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View v = super.getDropDownView(position, convertView, parent);
+                ((TextView) v.findViewById(android.R.id.text1)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.vGray));
+                v.setMinimumWidth(130);
+                return v;
+
+            }
+
+            @Override
             public int getCount() {
                 return super.getCount() - 1; // you dont display last item. It is used as hint.
             }
         };
 
-        mStartProvinceAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        mStartProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mStartProvinceSpinner.setPopupBackgroundResource(R.color.vWhite);
         mStartProvinceSpinner.setAdapter(mStartProvinceAdapter);
         //spin.setOnItemSelectedListener(new PickLocationActivity.TinhSelectedEvent(type));
         mStartProvinceSpinner.setSelection(mStartProvinceAdapter.getCount());
@@ -252,7 +275,7 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             textSliderView
 //                    .description(name)
                     .image(url_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
 
             //add your extra information
@@ -266,7 +289,8 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
 
     @OnItemClick(R.id.new_trips_list)
     void OnNewTripsItemClick(int position) {
-        NewTripPOJO tripPOJO = mNewTripsPOJOs.get(position);
+        NewTripPOJO tripPOJO = mFilterTripPOJOs.get(position);
+
 
         Intent intent = NewTripsDetailActivity.makeIntent(getApplicationContext(), tripPOJO);
         startActivity(intent);
@@ -326,6 +350,7 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
 
     @Override
     public void onFilterSuccess(ArrayList<NewTripPOJO> filterList) {
+        this.mFilterTripPOJOs = filterList;
         mNewTripsListAdapter.setNewTripPOJOs(filterList);
         mNewTripsListAdapter.notifyDataSetChanged();
     }
@@ -372,7 +397,7 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-            Utils.backToHome(this);
+            backToHome();
 
             return true;
         }
@@ -399,9 +424,11 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             if (!isFinding) {
                 mStartProvinceSpinner.setVisibility(View.VISIBLE);
                 mArriveProvinceSpinner.setVisibility(View.VISIBLE);
+                mTitleTextView.setVisibility(View.INVISIBLE);
             } else {
                 mStartProvinceSpinner.setVisibility(View.INVISIBLE);
                 mArriveProvinceSpinner.setVisibility(View.INVISIBLE);
+                mTitleTextView.setVisibility(View.VISIBLE);
 
                 showProgressDialog();
                 getOps().getNewTrips();
@@ -410,9 +437,17 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             isFinding = !isFinding;
 
         } else if (id == android.R.id.home) {
-            Utils.backToHome(this);
+            backToHome();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void backToHome() {
+        int hasToken = 0;
+        if (ServiceGenerator.isLoggedIn()) hasToken = 1;
+
+        Intent intent = PickLocationActivity.makeIntent(getApplicationContext(), hasToken);
+        startActivity(intent);
     }
 }

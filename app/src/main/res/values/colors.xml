@@ -8,4 +8,6 @@
     <color name="gray">#6c6c6c</color>
     <color name="vBlueLight">#00a3ff</color>
     <color name="vOrangeLight">#ffad4b</color>
+    <color name="vWhite">#ffffff</color>
+    <color name="vGray">#595959</color>
 </resources>

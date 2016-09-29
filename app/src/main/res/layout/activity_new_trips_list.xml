@@ -126,21 +126,36 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <Spinner
-                android:id="@+id/start_province_spinner"
-                android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:visibility="invisible">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Spinner
+                    android:id="@+id/start_province_spinner"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:visibility="invisible">
 
-            </Spinner>
+                </Spinner>
 
-            <Spinner
-                android:id="@+id/arrive_province_spinner"
-                android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:visibility="invisible">
+                <Spinner
+                    android:id="@+id/arrive_province_spinner"
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/start_province_spinner"
+                    android:visibility="invisible">
 
-            </Spinner>
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/title_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/vWhite"
+                    android:text="Danh sách chuyến xe"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"/>
+            </RelativeLayout>
+
 
         </android.support.v7.widget.Toolbar>
 
