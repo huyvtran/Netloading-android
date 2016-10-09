@@ -29,65 +29,12 @@
             android:gravity="center"
             />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/middle_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/slider">
-
-            <RelativeLayout
-                android:id="@+id/company_not_found_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="invisible">
-
-                <LinearLayout
-                    android:id="@+id/middle_linear"
-                    android:layout_width="match_parent"
-                    android:layout_height="128dp"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rất xin lỗi!"
-                        android:textColor="@color/vOrange"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Đang tìm kiếm nhà xe phù hợp"
-                        android:textColor="@color/vOrange"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Vui lòng kéo xuống để thử lại"
-                        android:textColor="@color/vOrange"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@id/middle_linear"
-                    android:gravity="center"
-                    android:padding="56dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_not_found" />
-
-
-                </LinearLayout>
-            </RelativeLayout>
+            android:layout_below="@+id/slider"
+            android:orientation="vertical">
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_to_refresh"
@@ -108,15 +55,14 @@
                 </ScrollView>
 
             </android.support.v4.widget.SwipeRefreshLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 
     <android.support.design.widget.AppBarLayout
         android:id="@id/actionBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -124,24 +70,26 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:theme="@style/ToolbarColoredBackArrow"
+            app:popupTheme="@style/AppTheme">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <Spinner
                     android:id="@+id/start_province_spinner"
-                    android:layout_width="130dp"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
+                    android:theme="@style/AppTheme"
                     android:visibility="invisible">
-
                 </Spinner>
 
                 <Spinner
                     android:id="@+id/arrive_province_spinner"
-                    android:layout_width="130dp"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:layout_toRightOf="@id/start_province_spinner"
+                    android:theme="@style/AppTheme"
                     android:visibility="invisible">
 
                 </Spinner>

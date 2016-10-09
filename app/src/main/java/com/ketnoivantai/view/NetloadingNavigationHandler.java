@@ -47,6 +47,18 @@ public class NetloadingNavigationHandler {
             return;
         }
 
+        if (v.getId() == R.id.support_for_customer) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/faq.html"));
+            mActivity.startActivity(browserIntent);
+            return;
+        }
+
+        if (v.getId() == R.id.intro) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/aboutus.html"));
+            mActivity.startActivity(browserIntent);
+            return;
+        }
+
         if (token.equals("NULL")) {
             Intent intent = LoginActivity.makeIntent(mActivity, LoginActivity.LOGIN_NULL_TOKEN)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -127,14 +139,6 @@ public class NetloadingNavigationHandler {
 
             Intent intent = ProfileActivity.makeIntent(mActivity.getApplicationContext());
             mActivity.startActivity(intent);
-        } else
-        if (v.getId() == R.id.support_for_customer) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/faq.html"));
-            mActivity.startActivity(browserIntent);
-        } else
-        if (v.getId() == R.id.intro) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.netloading.com.vn/aboutus.html"));
-            mActivity.startActivity(browserIntent);
         }
 
     }

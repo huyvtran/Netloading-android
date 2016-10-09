@@ -4,12 +4,18 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.ketnoivantai.R;
 import com.ketnoivantai.common.GenericActivity;
 import com.ketnoivantai.model.gcm.RegistrationIntentService;
+import com.ketnoivantai.model.webservice.ServiceGenerator;
 import com.ketnoivantai.presenter.LoginPresenter;
 import com.ketnoivantai.utils.Utils;
 
@@ -48,6 +54,14 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_home);
+//        getSupportActionBar().setTitle("Đăng nhập");
 
         super.onCreate(savedInstanceState, LoginPresenter.class, this);
 
@@ -139,4 +153,33 @@ public class LoginActivity extends GenericActivity<LoginPresenter.View, LoginPre
             Utils.toast(this, "Sai mật khẩu hoặc tên đăng nhập");
         }
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == android.R.id.home) {
+//            backToHome();
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+
+    private void backToHome() {
+        Intent intent = PickLocationActivity.makeIntent(getApplicationContext(), 0);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            backToHome();
+
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 }

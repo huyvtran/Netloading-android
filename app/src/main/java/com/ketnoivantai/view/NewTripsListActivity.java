@@ -142,7 +142,6 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
 
         setUpStartSpinner();
         setUpArriveSpinner();
-
     }
 
     private void setUpArriveSpinner() {
@@ -155,13 +154,7 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
                     ((TextView) v.findViewById(R.id.vText)).setText("Tỉnh đến");
                     ((TextView) v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
                 }
-                return v;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                View v = super.getDropDownView(position, convertView, parent);
-                ((TextView) v.findViewById(android.R.id.text1)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.vGray));
+                ((TextView) v.findViewById(R.id.vText)).setTextSize(14);
                 return v;
             }
 
@@ -171,18 +164,14 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             }
         };
 
-        mArriveProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mArriveProvinceSpinner.setPopupBackgroundResource(R.color.vWhite);
+        mArriveProvinceAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         mArriveProvinceSpinner.setAdapter(mArriveProvinceAdapter);
-        //spin.setOnItemSelectedListener(new PickLocationActivity.TinhSelectedEvent(type));
         mArriveProvinceSpinner.setSelection(mArriveProvinceAdapter.getCount());
 
         mArriveProvinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == mArriveProvinceAdapter.getCount()) return;
-
-//                Utils.toast(getApplicationContext(), "" + position);
                 mArriveProvincePosition = position;
                 getOps().filterList(getApplicationContext(), mStartProvincePosition, mArriveProvincePosition, mNewTripsPOJOs);
             }
@@ -204,17 +193,8 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
                     ((TextView) v.findViewById(R.id.vText)).setText("Tỉnh đi");
                     ((TextView) v.findViewById(R.id.vText)).setHint(getItem(getCount())); //"Hint to be displayed"
                 }
-
+                ((TextView) v.findViewById(R.id.vText)).setTextSize(14);
                 return v;
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView, ViewGroup parent) {
-                View v = super.getDropDownView(position, convertView, parent);
-                ((TextView) v.findViewById(android.R.id.text1)).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.vGray));
-                v.setMinimumWidth(130);
-                return v;
-
             }
 
             @Override
@@ -223,10 +203,8 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             }
         };
 
-        mStartProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mStartProvinceSpinner.setPopupBackgroundResource(R.color.vWhite);
+        mStartProvinceAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         mStartProvinceSpinner.setAdapter(mStartProvinceAdapter);
-        //spin.setOnItemSelectedListener(new PickLocationActivity.TinhSelectedEvent(type));
         mStartProvinceSpinner.setSelection(mStartProvinceAdapter.getCount());
 
         mStartProvinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -234,8 +212,6 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == mStartProvinceAdapter.getCount()) return;
-
-//                Utils.toast(getApplicationContext(), "" + position);
                 mStartProvincePosition = position;
                 getOps().filterList(getApplicationContext(), mStartProvincePosition, mArriveProvincePosition, mNewTripsPOJOs);
             }
@@ -246,7 +222,6 @@ public class NewTripsListActivity extends GenericActivity<NewTripsListPresenter.
             }
         });
     }
-
 
 
     private void setUpSlider() {
