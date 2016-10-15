@@ -2,10 +2,7 @@ package com.ketnoivantai;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
-import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
 
 /**

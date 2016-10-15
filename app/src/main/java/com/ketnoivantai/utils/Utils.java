@@ -6,7 +6,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
-import com.ketnoivantai.view.PickLocationActivity;
+import com.ketnoivantai.customers.view.PickLocationActivity;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -66,4 +66,6 @@ public class Utils {
         if (vehicleType.equals("xeBon")) return "Xe bồn";
         return null;
     }
+
+
 }

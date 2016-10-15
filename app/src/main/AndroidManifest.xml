@@ -25,7 +25,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.ketnoivantai.view.SplashActivity"
+            android:name=".customers.view.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <!--MAIN-->
@@ -36,7 +36,7 @@
         </activity>
 
         <activity
-            android:name="com.ketnoivantai.view.LoginActivity"
+            android:name=".customers.view.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -44,54 +44,54 @@
         </activity>
 
         <activity
-            android:name=".view.NewTripsListActivity"
+            android:name=".customers.view.NewTripsListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
         <activity
-            android:name="com.ketnoivantai.view.RegisterActivity"
+            android:name=".customers.view.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.ketnoivantai.view.ChangePasswordActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name="com.ketnoivantai.view.ProfileActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-
-        <activity
-            android:name="com.ketnoivantai.view.RequestInformationActivity"
+            android:name=".customers.view.ChangePasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.ketnoivantai.view.OrderInformationActivity"
+            android:name=".customers.view.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity
+            android:name=".customers.view.RequestInformationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.ketnoivantai.view.ForgotPasswordActivity"
+            android:name=".customers.view.OrderInformationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.ketnoivantai.view.RequestListActivity"
+            android:name=".customers.view.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.ketnoivantai.view.OrderListActivity"
+            android:name=".customers.view.RequestListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.ketnoivantai.view.PickLocationActivity"
+            android:name=".customers.view.OrderListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".customers.view.PickLocationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -99,40 +99,40 @@
 
 
         <activity
-            android:name="com.ketnoivantai.view.AddInfoRequestActivity"
+            android:name=".customers.view.AddInfoRequestActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name="com.ketnoivantai.view.NewTripsDetailActivity"
+            android:name=".customers.view.NewTripsDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
 
         <activity
-            android:name="com.ketnoivantai.view.ReviewRequestActivity"
+            android:name=".customers.view.ReviewRequestActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
         <activity
-            android:name="com.ketnoivantai.view.PickCompanyActivity"
+            android:name=".customers.view.PickCompanyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name="com.ketnoivantai.view.ReviewCompanyActivity"
+            android:name=".customers.view.ReviewCompanyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <service
-            android:name="com.ketnoivantai.model.gcm.RegistrationIntentService"
+            android:name=".customers.model.gcm.RegistrationIntentService"
             android:exported="false" />
 
         <service
-            android:name="com.ketnoivantai.model.gcm.MyInstanceIDListenerService"
+            android:name=".customers.model.gcm.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
@@ -152,7 +152,7 @@
         </receiver>
 
         <service
-            android:name="com.ketnoivantai.model.gcm.GcmMessageHandler"
+            android:name=".customers.model.gcm.GcmMessageHandler"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
