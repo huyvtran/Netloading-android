@@ -76,4 +76,60 @@ public class Company {
     public int getBudget_bonus() {
         return budget_bonus;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setBusiness_id(String business_id) {
+        this.business_id = business_id;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setBudget(String budget) {
+        this.budget = budget;
+    }
+
+    public void setBudget_request(int budget_request) {
+        this.budget_request = budget_request;
+    }
+
+    public void setBudget_bonus(int budget_bonus) {
+        this.budget_bonus = budget_bonus;
+    }
 }

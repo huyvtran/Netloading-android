@@ -6,7 +6,7 @@ package com.ketnoivantai.utils;
 public class Constants {
 
 
-    public static final String API_BASE_URL = "http://112.78.3.74";// "http://192.168.43.43:3000";
+    public static final String API_BASE_URL = "http://0.0.0.0:3000";// "http://192.168.43.43:3000";
 
     public static final String SHARED_PREFERENCE_ID_TAG = "id tag";
     public static final String START_DISTRICT_CODE = "ma huyen di";
@@ -22,4 +22,5 @@ public class Constants {
     public static final String GOODS_NAME = "good name";
     public static final String GOODS_WEIGHT_DIMENSION = "goods weight dimension";
     public static final String SHARED_PREFERENCE_TOKEN_TAG = "shared prefrence token tag";
+    public static final String NO_ERROR = "";
 }
