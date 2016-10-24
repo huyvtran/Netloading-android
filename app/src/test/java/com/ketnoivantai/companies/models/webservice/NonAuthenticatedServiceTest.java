@@ -3,9 +3,7 @@ package com.ketnoivantai.companies.models.webservice;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ketnoivantai.companies.models.entities.Company;
-import com.ketnoivantai.companies.models.webservice.json.GenericResult;
 import com.ketnoivantai.companies.models.webservice.json.LoginResult;
-import com.ketnoivantai.utils.Constants;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,14 +16,14 @@ import static org.junit.Assert.*;
 /**
  * Created by Dandoh on 10/22/16.
  */
-public class CompaniesAccountServiceTest {
+public class NonAuthenticatedServiceTest {
 
 
-    CompaniesAccountService mCompaniesAccountService;
+    NonAuthenticatedService mNonAuthenticatedService;
 
     @Before
     public void setUp() throws Exception {
-        mCompaniesAccountService = ServiceGenerator.getCompaniesAccountService();
+        mNonAuthenticatedService = ServiceGenerator.getNonAuthenticatedService();
     }
 
     @After
@@ -38,7 +36,7 @@ public class CompaniesAccountServiceTest {
         Company company = new Company();
         company.setUsername("dandoh");
         company.setPassword("dandoh");
-        Response<LoginResult> res = mCompaniesAccountService.login(company).execute();
+        Response<LoginResult> res = mNonAuthenticatedService.login(company).execute();
 
         assertEquals(res.body().getError(), "");
         assertNotEquals(res.body().getToken(), null);
@@ -49,7 +47,7 @@ public class CompaniesAccountServiceTest {
         Company company = new Company();
         company.setUsername("asd");
         company.setPassword("213fasf");
-        Response<LoginResult> res = mCompaniesAccountService.login(company).execute();
+        Response<LoginResult> res = mNonAuthenticatedService.login(company).execute();
 
         assertNotEquals(res.body().getError(), "");
     }

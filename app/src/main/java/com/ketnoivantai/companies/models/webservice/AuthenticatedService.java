@@ -17,7 +17,7 @@ import retrofit2.http.Path;
  * Created by AnhVu on 10/15/16.
  */
 
-public interface CompaniesService {
+public interface AuthenticatedService {
 
     /**
      ******************** Vehicle ******************************

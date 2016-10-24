@@ -12,7 +12,7 @@ import retrofit2.http.POST;
  * Created by Dandoh on 10/22/16.
  */
 
-public interface CompaniesAccountService {
+public interface NonAuthenticatedService {
     // login
     @POST("/companies/sessions")
     Call<LoginResult> login(@Body Company company);

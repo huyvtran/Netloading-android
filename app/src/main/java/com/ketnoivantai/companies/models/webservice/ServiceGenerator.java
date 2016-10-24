@@ -1,27 +1,11 @@
 package com.ketnoivantai.companies.models.webservice;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.SystemClock;
-import android.preference.PreferenceManager;
-
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.ketnoivantai.NetloadingApplication;
-import com.ketnoivantai.customers.model.webservice.AccountService;
-import com.ketnoivantai.customers.model.webservice.NetloadingService;
-import com.ketnoivantai.customers.view.LoginActivity;
 import com.ketnoivantai.utils.Constants;
 import com.ketnoivantai.utils.Utils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.Iterator;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -31,10 +15,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.R.attr.key;
-import static android.R.attr.zAdjustment;
-import static android.R.id.message;
-import static com.ketnoivantai.customers.model.webservice.ServiceGenerator.isLoggedIn;
+import static android.R.attr.id;
 
 /**
  * Created by Dandoh on 2/10/16.
@@ -43,8 +24,6 @@ public class ServiceGenerator {
 
 
     private static final String TAG = "ServiceGenerator";
-
-    private static int id;
 
     /**
      * LOG all http request through a generic OkHttpClient
@@ -178,6 +157,8 @@ public class ServiceGenerator {
         return accessToken;
     }
 
+    private static int id;
+
     public static int getId() {
         return id;
     }
@@ -191,24 +172,24 @@ public class ServiceGenerator {
      * Services
      */
 
-    private static CompaniesAccountService mCompaniesAccountService =
-            createService(CompaniesAccountService.class);
+    private static NonAuthenticatedService mNonAuthenticatedService =
+            createService(NonAuthenticatedService.class);
 
 
-    public static CompaniesAccountService getCompaniesAccountService() {
-        return mCompaniesAccountService;
+    public static NonAuthenticatedService getNonAuthenticatedService() {
+        return mNonAuthenticatedService;
     }
 
 
 
 
-    private static CompaniesService mCompaniesService;
+    private static AuthenticatedService mAuthenticatedService;
 
-    public static CompaniesService getCompaniesService() {
-        if (mCompaniesService == null) {
-            mCompaniesService = createService(CompaniesService.class, builder(), getAuthenticatedHttpClient());
+    public static AuthenticatedService getAuthenticatedService() {
+        if (mAuthenticatedService == null) {
+            mAuthenticatedService = createService(AuthenticatedService.class, builder(), getAuthenticatedHttpClient());
         }
 
-        return mCompaniesService;
+        return mAuthenticatedService;
     }
 }
