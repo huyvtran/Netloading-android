@@ -24,6 +24,7 @@ public class Utils {
     public static void log(String tag, String message) {
         if (isDev) {
             Log.i(tag, message);
+            System.out.println(message);
         }
     }
 

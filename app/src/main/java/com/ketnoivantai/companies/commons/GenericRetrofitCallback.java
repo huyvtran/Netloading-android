@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.ketnoivantai.NetloadingApplication;
 import com.ketnoivantai.R;
-import com.ketnoivantai.companies.models.webservice.json.GenericResultJSON;
+import com.ketnoivantai.companies.models.webservice.json.GenericResult;
 import com.ketnoivantai.utils.Utils;
 
 import retrofit2.Call;
@@ -14,7 +14,7 @@ import retrofit2.Response;
 /**
  * Created by Dandoh on 3/23/16.
  */
-public abstract class GenericRetrofitCallback<T extends GenericResultJSON> implements Callback<T> {
+public abstract class GenericRetrofitCallback<T extends GenericResult> implements Callback<T> {
 
 
     private static final String TAG = "RESPONSE : ";
@@ -25,11 +25,10 @@ public abstract class GenericRetrofitCallback<T extends GenericResultJSON> imple
         Utils.log(TAG, response.code() + " ");
         if (response.body() != null) {
             T result = response.body();
-            Utils.log(TAG, result.toString());
-            if (result.getStatus().equals("error")) {
-                onError(result.getError());
-            } else {
+            if (result.getError().equals("")) {
                 onSucceed(result);
+            } else {
+                onError(result.getError());
             }
         } else {
             onError(mContext.getString(R.string.network_error_string));
